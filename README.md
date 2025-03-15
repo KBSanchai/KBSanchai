@@ -1,3 +1,4 @@
+# banner.gif
 # Hi I am Sanchai.K.B
 # 💫 About Me:
 🔭 I’m currently a Computer Science Engineering Student<br>🚀 Aspiring Computer Science and Engineering student specializing in Artificial Intelligence and Machine Learning, with a strong foundation in coding and problem-solving.<br>🔍 Skilled in leveraging programming languages, data structures, and machine learning frameworks to create innovative solutions.<br>⚡ Seeking opportunities to apply AI/ML knowledge and strengthen expertise in real-world applications.
