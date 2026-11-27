@@ -33,9 +33,45 @@ h1 .outline{-webkit-text-stroke:1px rgba(255,245,240,.8)}
 .email{color:#ff4b35;border-color:#ff4b35}
 .tag{border-color:#493431}
 @media(prefers-reduced-motion:reduce){*{animation:none!important}}
+
+/* Editorial creative-technologist layout inspired by the reference portfolio */
+.hero{min-height:100svh;padding:112px 0 30px;display:flex;align-items:center}
+.hero-editorial{width:min(1180px,calc(100% - 44px));}
+.hero-meta,.hero-foot{display:flex;justify-content:space-between;gap:15px;font:9px var(--mono);letter-spacing:.12em;color:#a9a19b;border-bottom:1px solid #39302e;padding:13px 0}
+.hero-main{display:grid;grid-template-columns:1fr 1fr;gap:38px;align-items:center;padding:45px 0 38px}
+.editorial-title{font-size:clamp(54px,7.8vw,104px);line-height:.86;letter-spacing:-.095em;margin:25px 0 28px;font-weight:800}
+.stroke-word{color:transparent;-webkit-text-stroke:1px #eee7e3}
+.red-word{color:#ff4b35}.period{color:#f1f3eb}
+.hero-copy .intro{max-width:475px}
+.hero-art{height:510px;position:relative;overflow:hidden;background:linear-gradient(145deg,#202631,#0a0b10 70%);border:1px solid #51403e;isolation:isolate}
+.art-grid{position:absolute;inset:0;background:linear-gradient(90deg,transparent 49.8%,#ffffff0b 50%,transparent 50.2%),linear-gradient(0deg,transparent 49.8%,#ffffff0b 50%,transparent 50.2%);background-size:60px 60px;opacity:.45}
+.moon-disc{position:absolute;width:235px;height:235px;border-radius:50%;right:12%;top:8%;background:radial-gradient(circle at 35% 30%,#fff,#d5dce6 48%,#8b97aa 75%,#4b5360);box-shadow:0 0 70px #dce5f333}
+.blade{position:absolute;width:130%;height:4px;background:linear-gradient(90deg,transparent,#f5f0eb 20%,#ff4b35 70%,transparent);left:-10%;top:67%;transform:rotate(-28deg);box-shadow:0 0 18px #ff4b3580}
+.swordsman{position:absolute;right:13%;bottom:-5%;width:56%;height:75%;filter:drop-shadow(0 12px 18px #000)}
+.swordsman .body{position:absolute;bottom:0;left:14%;width:78%;height:74%;background:linear-gradient(110deg,#343945,#090a0e 65%);clip-path:polygon(25% 0,72% 0,100% 100%,0 100%)}
+.swordsman .head{position:absolute;z-index:2;top:8%;left:38%;width:29%;height:24%;border-radius:45% 45% 42% 42%;background:linear-gradient(120deg,#d6b8aa,#8b6b68)}
+.swordsman .hair{position:absolute;z-index:3;top:3%;left:32%;width:43%;height:24%;background:#08090d;clip-path:polygon(0 50%,8% 0,28% 28%,42% 0,60% 25%,83% 0,100% 65%,76% 55%,65% 100%,42% 62%,20% 100%)}
+.swordsman .sash{position:absolute;z-index:4;left:20%;top:38%;width:90%;height:12%;background:#e5e1dd;transform:rotate(-20deg);clip-path:polygon(0 20%,100% 0,78% 100%,12% 80%)}
+.art-stamp{position:absolute;left:7%;top:8%;font:42px serif;color:#ff4b35;line-height:.9;border:1px solid #ff4b3580;padding:9px 12px;text-align:center}
+.art-stamp small{font:8px var(--mono);letter-spacing:.2em}
+.art-caption{position:absolute;bottom:0;left:0;right:0;padding:17px 20px;background:linear-gradient(transparent,#08090bed);font:9px/1.8 var(--mono);letter-spacing:.1em;color:#c5c0bd}
+.art-caption b{color:#ff4b35;font-weight:400}
+.hero-foot{border-top:1px solid #39302e;border-bottom:0}
+.ticker{background:#ff4b35;color:#0a0b0a;border:0;padding:14px 0}
+.ticker i{color:#0a0b0a}
+.head h2{font-weight:800}
+.project{overflow:hidden}
+.project:after{content:"↗";position:absolute;right:23px;bottom:20px;color:#ff4b35;font:19px var(--mono);opacity:.8}
+@media(max-width:760px){.hero-main{grid-template-columns:1fr;gap:30px;padding:30px 0}.hero-art{height:380px;grid-row:1}.editorial-title{font-size:clamp(56px,13vw,88px)}.hero-meta,.hero-foot{font-size:8px}}
+@media(max-width:540px){.hero{padding-top:88px}.hero-art{height:320px}.hero-meta span:last-child{display:none}.hero-foot{font-size:7px}.hero-editorial{width:calc(100% - 30px)}}
 </style></head><body>
 <header class="top" id="top"><nav class="wrap"><a class="brand" href="#home">SANCHAI<b>.</b></a><button class="menu" id="menu" aria-expanded="false">MENU +</button><div class="links" id="links"><a href="#about">ABOUT</a><a href="#work">PROJECTS</a><a href="#skills">SKILLS</a><a href="#journey">JOURNEY</a><a class="cta" href="#contact">LET'S TALK ↗</a></div></nav></header>
-<main><section class="hero" id="home"><div class="wrap hero-grid"><div class="reveal"><div class="status"><i></i> SOUL REAPER MODE · AI / ML · FULL-STACK</div><div class="eyebrow">HELLO, I'M SANCHAI K B</div><h1>Ideas into<br><span class="outline">limitless</span><br><span class="lime">power.</span></h1><p class="intro">I’m a Computer Science student focused on <strong>AI, machine learning, and thoughtful software</strong> — building useful things from offline AI tools to computer-vision systems.</p><div class="actions"><a class="btn primary" href="#work">EXPLORE MY WORK ↘</a><a class="btn" href="#contact">GET IN TOUCH ↗</a></div></div><div class="art reveal"><div class="art-note">SPIRIT PRESSURE<br><b>LOCAL AI / COMPUTER VISION</b></div><div class="orb"><div class="core"></div></div><div class="art-label">BANKAI: BUILD MODE<b>01 — 04 / SELECTED WORK</b></div></div></div></section>
+<main><section class="hero" id="home"><div class="hero-editorial wrap">
+<div class="hero-meta"><span>NO. 001 — SOUL REAPER / CREATIVE DEVELOPER</span><span>CHENNAI, IN · 2026</span></div>
+<div class="hero-main">
+<div class="hero-copy reveal"><div class="eyebrow">AI / ML ENGINEER IN THE MAKING</div><h1 class="editorial-title">I BUILD<br><span class="stroke-word">INTELLIGENT</span><br><span class="red-word">THINGS<span class="period">.</span></span></h1><p class="intro">I'm <strong>Sanchai K B</strong> — a computer science student exploring the space between artificial intelligence, creative technology, and meaningful products.</p><div class="actions"><a class="btn primary" href="#work">EXPLORE SELECTED WORK ↘</a><a class="btn" href="#about">GET TO KNOW ME ↗</a></div></div>
+<div class="hero-art reveal"><div class="art-grid"></div><div class="moon-disc"></div><div class="blade"></div><div class="swordsman"><span class="hair"></span><span class="head"></span><span class="body"></span><span class="sash"></span></div><div class="art-stamp">卍<br><small>BANKAI</small></div><div class="art-caption">SOUL SOCIETY / FIELD NOTES<br><b>CREATIVITY IS A FORM OF POWER.</b></div></div>
+</div><div class="hero-foot"><span>THINK. DESIGN. DEVELOP. CREATE.</span><span>SCROLL TO EXPLORE ↓</span></div></div></section>
 <div class="ticker"><div><span>ARTIFICIAL INTELLIGENCE <i>✳</i></span><span>COMPUTER VISION <i>✳</i></span><span>FULL-STACK DEVELOPMENT <i>✳</i></span><span>LOCAL-FIRST AI <i>✳</i></span><span>REAL-WORLD IMPACT <i>✳</i></span><span>ARTIFICIAL INTELLIGENCE <i>✳</i></span><span>COMPUTER VISION <i>✳</i></span><span>FULL-STACK DEVELOPMENT <i>✳</i></span><span>LOCAL-FIRST AI <i>✳</i></span><span>REAL-WORLD IMPACT <i>✳</i></span></div></div>
 <section class="content" id="about"><div class="wrap"><div class="head reveal"><div><div class="eyebrow">01 / A LITTLE ABOUT ME</div><h2>Curious by nature.<br>Builder by choice.</h2></div><p>I like working at the intersection of emerging technology and practical, human-centred products.</p></div><div class="about-grid"><div class="reveal"><div class="small">THE SHORT VERSION</div><div class="year">’27</div><div class="small">B.Tech · AI & Machine Learning<br>SRM Institute of Science and Technology</div></div><div class="reveal"><div class="about-copy">I’m a Computer Science and Engineering student who enjoys turning complex ideas into <strong>clear, useful experiences.</strong> From fine-tuning compact language models to building computer-vision applications, I’m drawn to technology that solves real problems — not just demos them.</div><div class="subgrid"><div><div class="small">WHAT DRIVES ME</div><p>Experimentation, clean engineering, and making AI useful beyond the cloud.</p></div><div><div class="small">BASED IN</div><p>Chennai, India · Open to learning and collaboration.</p></div></div></div></div></div></section>
 <section class="content" id="work"><div class="wrap"><div class="head reveal"><div><div class="eyebrow">02 / SELECTED WORK</div><h2>Things I've<br>been building.</h2></div><p>Projects where software, machine learning, and real-world use cases meet.</p></div><div class="projects">
