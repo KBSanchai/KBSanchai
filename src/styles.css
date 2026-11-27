@@ -1,3 +1,4 @@
+@import url('https://fonts.googleapis.com/css2?family=Bangers&family=IBM+Plex+Mono:wght@400;500;600&family=Inter:wght@400;500;600;700;800;900&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@500;600;700;800;900&family=DM+Mono:wght@400;500&family=Manrope:wght@400;500;600;700;800&display=swap');
 :root{font-family:Manrope,sans-serif;color:#f3f0ec;background:#08090d;font-synthesis:none;text-rendering:optimizeLegibility;--red:#f04435;--paper:#f3f0ec;--muted:#a09b99;--line:#373337;--mono:'DM Mono',monospace;--display:'Barlow Condensed',sans-serif;--max:1420px}
 *{box-sizing:border-box}
@@ -411,7 +412,6 @@ button{font:inherit}
 /* ==========================================================
    MANGA EDITION — paper, ink, screentone and panel geometry
    ========================================================== */
-@import url('https://fonts.googleapis.com/css2?family=Bangers&family=IBM+Plex+Mono:wght@400;500;600&family=Inter:wght@400;500;600;700;800;900&display=swap');
 :root{
  --paper:#f2f0ea;
  --paper-bright:#fbfaf6;
