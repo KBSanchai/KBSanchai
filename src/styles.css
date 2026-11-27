@@ -848,3 +848,51 @@ body:before{
 @media(prefers-reduced-motion:reduce){
   .project-art.project-art-supplied img.project-uploaded-art{transition:none!important}
 }
+
+
+/* COLOR + BANKAI STATE FIX: supplied artwork must retain its original colours */
+.hero-state-stage{
+  isolation:isolate!important;
+  background:#f0eee8!important;
+}
+.hero-state-stage:after{display:none!important}
+.hero-state-image{
+  z-index:1!important;
+  filter:none!important;
+  -webkit-filter:none!important;
+  mix-blend-mode:normal!important;
+  object-fit:contain!important;
+}
+.hero-state-before{
+  z-index:1!important;
+  opacity:1!important;
+  visibility:visible!important;
+  filter:none!important;
+  -webkit-filter:none!important;
+}
+.hero-state-bankai{
+  z-index:2!important;
+  opacity:0!important;
+  visibility:visible!important;
+  filter:none!important;
+  -webkit-filter:none!important;
+}
+body.bankai-mode .hero-state-before{
+  opacity:0!important;
+  filter:none!important;
+  -webkit-filter:none!important;
+}
+body.bankai-mode .hero-state-bankai{
+  opacity:1!important;
+  filter:none!important;
+  -webkit-filter:none!important;
+}
+.project-art.project-art-supplied img.project-uploaded-art{
+  filter:none!important;
+  -webkit-filter:none!important;
+  mix-blend-mode:normal!important;
+}
+.project-art.project-art-supplied img.project-uploaded-normal{opacity:1}
+.project-art.project-art-supplied img.project-uploaded-bankai{opacity:0}
+body.bankai-mode .project-art.project-art-supplied img.project-uploaded-normal{opacity:0!important}
+body.bankai-mode .project-art.project-art-supplied img.project-uploaded-bankai{opacity:1!important}
