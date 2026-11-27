@@ -1,101 +1,82 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useMemo, useState } from "react";
 import "./styles.css";
-
-const links = {
-  github: "https://github.com/KBSanchai",
-  docgen: "https://github.com/KBSanchai",
-  agroClassifier: "https://github.com/KBSanchai/crop-insect-classifier",
-  agroDashboard: "https://github.com/KBSanchai/Agro-Visionaries-by-Asteri-PVT",
-  agroAssistant: "https://github.com/KBSanchai/AI-Agro-Assistant",
-  image: "https://github.com/KBSanchai/Image-Classification-App-with-DIP-Enhancements-Ollama-and-PDF-Export",
-  cattleBreed: "https://github.com/KBSanchai",
-  cattleRag: "https://github.com/KBSanchai/Cattle-and-Buffalo-RAG-LLM-Chartbot-with-ollama-and-FastAPI",
-  chatbot: "https://github.com/KBSanchai/LLM-Chatbot-with-MySQL",
-  theater: "https://github.com/KBSanchai/Smart-Theater-Management-System",
-  cicd: "https://github.com/KBSanchai/cicd-k8s-demo",
-  blueGreen: "https://github.com/KBSanchai/blue-green-demo",
-  healthcare: "https://github.com/KBSanchai/healthcare-devsecops"
-};
-const projects = [
-  { n:"01", title:"DocGen", type:"OFFLINE AI / DESKTOP", date:"JUN — AUG 2026", desc:"A local-first Windows desktop app that automates business document workflows. Built PO field extraction with PDF/DOCX parsing, Tesseract OCR and an on-device Ollama model, plus template-driven PDF/DOCX generation and workflow modules.", stack:["Electron","React","TypeScript","FastAPI","Ollama","SQLite"], symbol:"文", color:"red", href:links.docgen, linkLabel:"GITHUB PROFILE" },
-  { n:"02", title:"Intelligent Pesticide & Fertilizer System", type:"COMPUTER VISION / AGRITECH", date:"PROJECT", desc:"Classifies plant diseases and crop insects using computer vision and deep learning, then supports targeted sprinkling based on detected conditions instead of blanket spraying.", stack:["Python","Computer Vision","Deep Learning","IoT","ResNet18"], symbol:"葉", color:"green", href:links.agroClassifier, linkLabel:"VIEW SOURCE CODE" },
-  { n:"03", title:"Image Classification App", type:"COMPUTER VISION / GENERATIVE AI", date:"PROJECT", desc:"A Streamlit app combining digital image processing filters, OpenCLIP image classification, Ollama (LLaMA 3.2) explanations and PDF report export.", stack:["Python","Streamlit","PyTorch","OpenCLIP","OpenCV","Ollama"], symbol:"映", color:"white", href:links.image, linkLabel:"VIEW SOURCE CODE" },
-  { n:"04", title:"Cattle Breed Detection", type:"MOBILE AI / COMPUTER VISION", date:"PROJECT", desc:"A cross-platform Flutter app for image-based cattle breed identification, using a TensorFlow model served through FastAPI with Firebase integration.", stack:["Flutter","TensorFlow","Firebase","FastAPI"], symbol:"牛", color:"red", href:links.cattleBreed, linkLabel:"GITHUB PROFILE" },
-  { n:"05", title:"AI Chatbot — MySQL", type:"LOCAL LLM / DATABASE", date:"PROJECT", desc:"A locally hosted conversational SQL assistant with authentication. It translates natural-language questions into SQL, queries MySQL and summarizes the results using LangChain and Ollama.", stack:["Python","Streamlit","LangChain","Ollama","MySQL"], symbol:"対", color:"white", href:links.chatbot, linkLabel:"VIEW SOURCE CODE" },
-  { n:"06", title:"Cattle & Buffalo RAG Chatbot", type:"OFFLINE AI / RAG", date:"PROJECT", desc:"A local document-grounded assistant for cattle and buffalo breed information, using Chroma for retrieval, Ollama embeddings and a FastAPI endpoint.", stack:["Python","LangChain","Chroma","Ollama","FastAPI"], symbol:"牛", color:"green", href:links.cattleRag, linkLabel:"VIEW SOURCE CODE" },
-  { n:"07", title:"Precision Agriculture Dashboard", type:"WEB APP / AGRITECH", date:"INTERNSHIP PROJECT", desc:"A drone-based precision agriculture dashboard with crop-health analytics, NDVI stress detection and an AI chatbot.", stack:["React","TypeScript","Vite","Precision Agriculture","NDVI"], symbol:"農", color:"green", href:links.agroDashboard, linkLabel:"VIEW SOURCE CODE" },
-  { n:"08", title:"Agro AI Assistant", type:"WEB APP / COMPUTER VISION", date:"PROJECT", desc:"An AI-powered agriculture dashboard for crop disease diagnosis, structured treatment guidance, weather correlation, plant tracking, analytics and secure authentication.", stack:["React","Vite","Supabase","Gemini","Hugging Face","Docker"], symbol:"🌱", color:"green", href:links.agroAssistant, linkLabel:"VIEW SOURCE CODE" },
-  { n:"09", title:"Smart Theater Management System", type:"WEB APP / MANAGEMENT", date:"PROJECT", desc:"A theater ticket-booking and management project with a Jenkins pipeline in the repository.", stack:["React","TypeScript","Vite","Jenkins"], symbol:"映", color:"white", href:links.theater, linkLabel:"VIEW SOURCE CODE" },
-  { n:"10", title:"CI/CD Kubernetes Demo", type:"DEVOPS / KUBERNETES", date:"DEVOPS PROJECT", desc:"A containerized Node.js application with Docker, a Jenkins pipeline and Kubernetes deployment manifests.", stack:["Node.js","Docker","Jenkins","Kubernetes"], symbol:"⌘", color:"red", href:links.cicd, linkLabel:"VIEW SOURCE CODE" },
-  { n:"11", title:"Blue-Green Deployment Pipeline", type:"DEVOPS / DEPLOYMENT", date:"DEVOPS PROJECT", desc:"A blue-green application deployment setup with separate blue and green app versions, Kubernetes manifests, scripts and a Jenkins pipeline.", stack:["Jenkins","Docker","Kubernetes","Blue-Green"], symbol:"⇄", color:"white", href:links.blueGreen, linkLabel:"VIEW SOURCE CODE" },
-  { n:"12", title:"Healthcare DevSecOps Pipeline", type:"DEVSECOPS / CLOUD", date:"DEVOPS PROJECT", desc:"A containerized healthcare API with a Jenkins delivery pipeline, Kubernetes deployment, OWASP Dependency-Check and automated tests.", stack:["Python","Docker","Jenkins","Kubernetes","OWASP","Pytest"], symbol:"✚", color:"red", href:links.healthcare, linkLabel:"VIEW SOURCE CODE" }
+const GH="https://github.com/KBSanchai";
+const projects=[
+{id:"docgen",no:"01",title:"DocGen",sub:"Offline AI document automation",desc:"A local-first Windows desktop app for business document workflows. Extracts purchase-order fields with PDF/DOCX parsing, Tesseract OCR and an on-device Ollama model, then generates documents from templates.",stack:["Electron","React","TypeScript","FastAPI","Ollama","SQLite"],cat:"AI & AUTOMATION",year:"2026",repo:"",label:"Repository not publicly linked",mark:"文",theme:"ember"},
+{id:"agro-dashboard",no:"02",title:"Precision Agriculture Dashboard",sub:"Drone-based crop intelligence",desc:"A drone-focused agriculture dashboard built during an internship, combining crop-health analytics, NDVI stress detection and an AI chatbot for field insights.",stack:["React","TypeScript","Vite","NDVI","Agriculture AI"],cat:"FULL-STACK",year:"2025",repo:"https://github.com/KBSanchai/Agro-Visionaries-by-Asteri-PVT",label:"View repository",mark:"農",theme:"moss"},
+{id:"crop-classifier",no:"03",title:"Intelligent Pesticide & Fertilizer System",sub:"Computer vision for precision spraying",desc:"A computer-vision and deep-learning system for classifying plant diseases and crop insects, with IoT-based targeted sprinkling according to detected conditions.",stack:["Python","ResNet18","Computer Vision","Deep Learning","IoT"],cat:"AI & ML",year:"2025",repo:"https://github.com/KBSanchai/crop-insect-classifier",label:"View model repository",mark:"葉",theme:"moss"},
+{id:"agro-ai",no:"04",title:"Agro AI Assistant",sub:"Crop diagnosis and treatment guidance",desc:"An AI-powered agriculture dashboard for crop disease diagnosis, treatment recommendations, weather correlation, plant tracking, analytics and secure authentication.",stack:["React","Vite","Supabase","Gemini","Hugging Face","Docker"],cat:"FULL-STACK",year:"2026",repo:"https://github.com/KBSanchai/AI-Agro-Assistant",label:"View repository",mark:"芽",theme:"moss"},
+{id:"image",no:"05",title:"Image Classification App",sub:"DIP, OpenCLIP and AI explanations",desc:"A Streamlit application that applies image-processing filters, classifies images using OpenCLIP, generates explanations with Ollama and exports PDF reports.",stack:["Python","Streamlit","PyTorch","OpenCLIP","OpenCV","Ollama"],cat:"AI & ML",year:"2025",repo:"https://github.com/KBSanchai/Image-Classification-App-with-DIP-Enhancements-Ollama-and-PDF-Export",label:"View source code",mark:"映",theme:"ice"},
+{id:"cattle",no:"06",title:"Cattle Breed Detection",sub:"Image-based mobile identification",desc:"A cross-platform Flutter application for image-based cattle-breed identification, using a TensorFlow model served through FastAPI with Firebase integration.",stack:["Flutter","TensorFlow","Firebase","FastAPI"],cat:"AI & ML",year:"2025",repo:"",label:"Repository not publicly linked",mark:"牛",theme:"ice"},
+{id:"cattle-rag",no:"07",title:"Cattle & Buffalo RAG Assistant",sub:"A local knowledge-grounded chatbot",desc:"A retrieval-augmented assistant for cattle and buffalo breed information, using a document knowledge base, vector search, Ollama embeddings and a FastAPI service.",stack:["Python","LangChain","Chroma","Ollama","FastAPI"],cat:"AI & AUTOMATION",year:"2025",repo:"https://github.com/KBSanchai/Cattle-and-Buffalo-RAG-LLM-Chartbot-with-ollama-and-FastAPI",label:"View source code",mark:"牛",theme:"ember"},
+{id:"sql",no:"08",title:"SQL Chatbot with MySQL",sub:"Natural language to database queries",desc:"A conversational SQL application with login and signup, translating natural-language questions into SQL, querying MySQL and summarising results with LangChain and Ollama.",stack:["Python","LangChain","Ollama","Streamlit","MySQL"],cat:"AI & AUTOMATION",year:"2025",repo:"https://github.com/KBSanchai/LLM-Chatbot-with-MySQL",label:"View source code",mark:"問",theme:"ice"},
+{id:"theater",no:"09",title:"Smart Theater Management System",sub:"Theater ticketing and management",desc:"A theater ticket-booking and management project, with a Jenkins pipeline included in the repository.",stack:["Web Development","Jenkins","CI/CD"],cat:"FULL-STACK",year:"2025",repo:"https://github.com/KBSanchai/Smart-Theater-Management-System",label:"View repository",mark:"映",theme:"ember"},
+{id:"cicd",no:"10",title:"CI/CD Kubernetes Demo",sub:"Containerised app delivery",desc:"A Node.js application packaged with Docker and delivered through a Jenkins pipeline, with Kubernetes deployment manifests.",stack:["Node.js","Docker","Jenkins","Kubernetes"],cat:"DEVOPS",year:"2025",repo:"https://github.com/KBSanchai/cicd-k8s-demo",label:"View repository",mark:"⌘",theme:"ice"},
+{id:"bluegreen",no:"11",title:"Blue-Green Deployment Pipeline",sub:"Safer application releases",desc:"A deployment demonstration with separate blue and green application versions, Kubernetes manifests, deployment scripts and Jenkins automation.",stack:["Jenkins","Docker","Kubernetes","Blue-Green"],cat:"DEVOPS",year:"2025",repo:"https://github.com/KBSanchai/blue-green-demo",label:"View repository",mark:"⇄",theme:"moss"},
+{id:"healthcare",no:"12",title:"Healthcare DevSecOps Pipeline",sub:"Security integrated into delivery",desc:"A containerised healthcare API with a Jenkins pipeline, Kubernetes deployment, automated tests and OWASP Dependency-Check.",stack:["Python","Docker","Jenkins","Kubernetes","OWASP","Pytest"],cat:"DEVOPS",year:"2025",repo:"https://github.com/KBSanchai/healthcare-devsecops",label:"View repository",mark:"✚",theme:"ember"},
+{id:"ollama",no:"13",title:"Ollama Models",sub:"Local model experiments",desc:"A public repository for Ollama model-related work. Its README currently contains limited project detail.",stack:["Ollama","Local LLMs"],cat:"AI & AUTOMATION",year:"2025",repo:"https://github.com/KBSanchai/ollama-models",label:"View repository",mark:"◉",theme:"ice"}
 ];
-const skillGroups = [
-  ["LANGUAGES",["C","C++","Java","Python"]],
-  ["FRONTEND / BACKEND",["React.js","Node.js","Tailwind CSS","Next.js","REST APIs"]],
-  ["CLOUD / DEVOPS / DATABASES",["AWS","Google Cloud","Docker","MySQL","Supabase"]],
-  ["AI / MACHINE LEARNING",["LLM APIs","Multi-Agent Systems","Generative AI"]],
-  ["TOOLS",["Git","GitHub","Figma","VS Code"]]
+const skills=[
+["LANGUAGES",["C","C++","Java","Python"]],
+["FRONTEND & BACKEND",["React.js","Node.js","Tailwind CSS","Next.js","REST APIs"]],
+["CLOUD, DEVOPS & DATABASES",["AWS","Google Cloud","Docker","MySQL","Supabase"]],
+["AI & MACHINE LEARNING",["LLM APIs","Multi-Agent Systems","Generative AI"]],
+["TOOLS",["Git","GitHub","Figma","VS Code"]]
 ];
-const experience = [
-  ["JUN — AUG 2026","Software Intern","ACA Technologies · Chennai, India","Built DocGen, a local-first Windows desktop app with Electron, React, TypeScript and FastAPI. Implemented PO extraction using PDF/DOCX parsing, Tesseract OCR and Ollama; developed document generation and trainer, intern and finance modules with SMTP email."],
-  ["MAY — JUN 2025","Software Intern","Stabilitas Pvt Ltd · Tirupati, India","Built a drone-based precision agriculture dashboard with crop health analytics, NDVI stress detection and an AI chatbot."]
+const jobs=[
+["JUN — AUG 2026","Software Intern","ACA Technologies · Chennai, India","Built DocGen, a local-first Windows desktop app with Electron, React, TypeScript and FastAPI. Implemented purchase-order extraction using PDF/DOCX parsing, Tesseract OCR and Ollama; developed template-driven document generation and trainer, intern and finance modules with SMTP email."],
+["MAY — JUN 2025","Software Intern","Stabilitas Pvt Ltd · Tirupati, India","Built a drone-based precision agriculture dashboard with crop-health analytics, NDVI stress detection and an AI chatbot."]
 ];
-const education = [
-  ["2023 — 2027","B.Tech in Computer Science and Engineering (AI & ML)","SRM Institute of Science and Technology · Chennai, India"],
-  ["2017 — 2023","CBSE","Maharishi International Residential School · Kanchipuram, India"]
+const education=[
+["2023 — 2027","B.Tech in Computer Science and Engineering (AI & ML)","SRM Institute of Science and Technology · Chennai, India"],
+["2017 — 2023","CBSE","Maharishi International Residential School · Kanchipuram, India"]
 ];
-const certs = [
-  ["Salesforce Certified Agentforce Specialist","DEC 2025","Credential ID: 7204077"],
-  ["Cloud-Based CRM and SaaS with Internship — TechForce Academy Australia","AUG — NOV 2025",""],
-  ["AWS Academy Graduate — Data Engineering","2026",""],
-  ["Generative AI Foundations","2026",""],
-  ["Google Cloud Computing Foundations Certificate","2026",""],
-  ["Google Cloud Engineering Certificate","2026",""]
+const certs=[
+["Salesforce Certified Agentforce Specialist","DEC 2025","Credential ID: 7204077"],
+["Cloud-Based CRM and SaaS with Internship — TechForce Academy Australia","AUG — NOV 2025",""],
+["AWS Academy Graduate — Data Engineering","2026",""],
+["Generative AI Foundations","2026",""],
+["Google Cloud Computing Foundations Certificate","2026",""],
+["Google Cloud Engineering Certificate","2026",""]
 ];
-const achievements = [
-  ["3rd Place — SRM SDG Hackathon","NOV 2024","School of Computing, SRMIST"],
-  ["TechXcelerate Hackathon","MAR 2025","BITS Pilani, Hyderabad Campus"],
-  ["IdeaSpark Hackathon","MAR 2025","Founders Club, SRMIST, Chennai"],
-  ["HACKRIX ’25 Open Innovation Hackathon","OCT 2025","Department of Computational Intelligence & Techvantage, SRMIST"]
+const awards=[
+["3rd Place — SRM SDG Hackathon","NOV 2024","School of Computing, SRMIST"],
+["TechXcelerate Hackathon","MAR 2025","BITS Pilani, Hyderabad Campus"],
+["IdeaSpark Hackathon","MAR 2025","Founders Club, SRMIST, Chennai"],
+["HACKRIX ’25 Open Innovation Hackathon","OCT 2025","Department of Computational Intelligence & Techvantage, SRMIST"]
 ];
+const filters=["ALL","AI & ML","AI & AUTOMATION","FULL-STACK","DEVOPS"];
 function App(){
-  const [menu,setMenu]=useState(false);
-  const [active,setActive]=useState("ALL");
-  useEffect(()=>{
-    const onScroll=()=>document.body.classList.toggle("is-scrolled",window.scrollY>20);
-    window.addEventListener("scroll",onScroll,{passive:true});
-    return ()=>window.removeEventListener("scroll",onScroll);
-  },[]);
-  const filtered=active==="ALL"?projects:projects.filter(p=>p.type.includes(active));
-  return <>
-    <header className="site-header"><a className="wordmark" href="#home">SANCHAI<span>®</span></a>
-      <button className="menu-toggle" onClick={()=>setMenu(!menu)}>{menu?"CLOSE −":"MENU +"}</button>
-      <nav className={menu?"nav-links open":"nav-links"}>{[["ABOUT","#about"],["WORK","#work"],["ARSENAL","#skills"],["JOURNEY","#journey"]].map(([t,l])=><a key={t} href={l} onClick={()=>setMenu(false)}>{t}</a>)}<a className="nav-contact" href="#contact" onClick={()=>setMenu(false)}>LET'S TALK ↗</a></nav>
-    </header>
-    <main id="home">
-      <section className="hero"><div className="hero-top"><span>PORTFOLIO / 2026</span><span>AI ENGINEERING · CREATIVE TECHNOLOGY</span></div>
-        <div className="hero-grid"><div className="hero-copy"><div className="eyebrow"><i/> SOFTWARE · AI / ML · PRODUCT BUILDER</div>
-          <h1>MAKING<br/><span className="outline">IDEAS</span><br/><span className="accent">INTELLIGENT.</span></h1>
-          <p>I'm <b>Sanchai K B</b> — a Computer Science and Engineering student specialising in AI & Machine Learning, building useful software across AI, full-stack development and automation.</p>
-          <div className="hero-actions"><a className="button button-red" href="#work">EXPLORE MY WORK <span>↘</span></a><a className="button button-ghost" href="mailto:kbsanchai12@gmail.com">CONTACT ME <span>↗</span></a></div>
-          <div className="hero-social"><a href={links.github} target="_blank" rel="noreferrer">GITHUB ↗</a><a href="mailto:kbsanchai12@gmail.com">EMAIL ↗</a><a href="tel:+919150672408">PHONE ↗</a></div>
-        </div>
-        <div className="hero-visual"><div className="visual-index">SOUL SOCIETY<br/><b>CREATIVE DIVISION</b></div><div className="moon"/><div className="cityline"/><div className="hero-figure"><div className="figure-hair"/><div className="figure-head"/><div className="figure-body"/><div className="figure-sash"/></div><div className="blade-line"/><div className="kanji">斬<br/><small>BANKAI</small></div><div className="visual-bottom"><span>斬魄刀 / BUILDING WITH PURPOSE</span><span>NO. 001</span></div></div></div>
-        <div className="hero-bottom"><span>THINK DEEPLY. BUILD BOLDLY.</span><a href="#about">SCROLL TO DISCOVER ↓</a></div>
-      </section>
-      <div className="marquee"><div>{Array.from({length:2},(_,i)=><span key={i}>ARTIFICIAL INTELLIGENCE <b>✳</b> COMPUTER VISION <b>✳</b> FULL-STACK DEVELOPMENT <b>✳</b> GENERATIVE AI <b>✳</b> </span>)}</div></div>
-      <section className="section about" id="about"><div className="section-kicker">01 / PROFILE</div><div className="about-grid"><h2>CURIOUS<br/>BY NATURE.<br/><em>BUILDER</em><br/>BY CHOICE.</h2><div className="about-content"><p className="large-copy">I build practical software with a focus on <em>AI, automation and thoughtful engineering.</em> I enjoy taking ideas from experimentation to working applications — from local-first AI tools to computer-vision systems.</p><div className="about-facts"><div><span>EDUCATION</span><b>B.Tech — CSE (AI & ML)</b><small>SRM Institute of Science and Technology · 2023–2027</small></div><div><span>LOCATION</span><b>Chennai, India</b><small>English · Tamil · Hindi</small></div></div><div className="profile-links"><a href={links.github} target="_blank" rel="noreferrer">GITHUB PROFILE ↗</a><a href="mailto:kbsanchai12@gmail.com">KBSANCHAI12@GMAIL.COM ↗</a></div></div></div></section>
-      <section className="section work" id="work"><div className="section-kicker">02 / PROJECTS <span>SELECTED FROM RESUME</span></div><div className="section-heading"><h2>WORK THAT<br/><em>SPEAKS.</em></h2><p>Five projects spanning offline AI, computer vision, image processing, mobile applications and natural-language interfaces.</p></div>
-        <div className="filters">{["ALL","AI","COMPUTER VISION","OFFLINE AI","DEVOPS","WEB APP"].map(f=><button className={active===f?"selected":""} onClick={()=>setActive(f)} key={f}>{f}</button>)}</div>
-        <div className="project-grid">{filtered.map(p=><article className={"project-card "+p.color} key={p.n}><div className="project-top"><span>PROJECT / {p.n}</span><span>{p.date}</span></div><div className="project-symbol">{p.symbol}</div><div className="project-type">{p.type}</div><h3>{p.title}</h3><p>{p.desc}</p><div className="stack">{p.stack.map(s=><span key={s}>{s}</span>)}</div><a className="project-link" href={p.href} target="_blank" rel="noreferrer">{p.linkLabel} ↗</a></article>)}</div>
-      </section>
-      <section className="section skills" id="skills"><div className="section-kicker">03 / TECHNICAL SKILLS</div><div className="section-heading"><h2>TOOLS OF<br/><em>THE TRADE.</em></h2><p>Technologies and tools listed in my resume.</p></div><div className="skill-list">{skillGroups.map(([name,items])=><div className="skill-row" key={name}><h3>{name}</h3><div>{items.map(s=><span key={s}>{s}</span>)}</div></div>)}</div></section>
-      <section className="section journey" id="journey"><div className="section-kicker">04 / EXPERIENCE & EDUCATION</div><div className="section-heading"><h2>LEARNING<br/><em>BY BUILDING.</em></h2><p>Professional experience and academic foundations.</p></div><div className="timeline">{experience.map(([date,title,place,desc])=><div className="timeline-row" key={title}><span className="timeline-date">{date}</span><div><h3>{title}</h3><b className="timeline-company">{place}</b><p>{desc}</p></div></div>)}</div><div className="education-list"><div className="section-kicker">EDUCATION</div>{education.map(([date,title,place])=><div className="timeline-row" key={title}><span className="timeline-date">{date}</span><div><h3>{title}</h3><b className="timeline-company">{place}</b></div></div>)}</div></section>
-      <section className="section recognition"><div className="section-kicker">05 / CERTIFICATIONS & ACHIEVEMENTS</div><h2>ALWAYS<br/><em>LEVELING UP.</em></h2><div className="cert-grid">{certs.map(([name,date,detail],i)=><div className="cert-item" key={name}><span>0{i+1}</span><div><b>{name}</b><small>{detail}</small></div><time>{date}</time></div>)}</div><div className="award-list"><div className="section-kicker">HACKATHONS & RECOGNITION</div>{achievements.map(([name,date,place])=><div className="award" key={name}><span>{date}</span><p><b>{name}</b><br/>{place}</p></div>)}</div></section>
-      <section className="contact-section" id="contact"><div className="contact-inner"><div className="section-kicker">06 / GET IN TOUCH</div><h2>HAVE A GOOD<br/>IDEA? LET'S<br/><em>MAKE IT REAL.</em></h2><div className="contact-bottom"><p>Interested in AI, software engineering, or building something useful together? Let's connect.</p><div className="contact-links"><a href="mailto:kbsanchai12@gmail.com">KBSANCHAI12@GMAIL.COM ↗</a><a href="tel:+919150672408">+91 91506 72408 ↗</a><a href={links.github} target="_blank" rel="noreferrer">GITHUB PROFILE ↗</a></div></div><div className="contact-kanji">終</div></div></section>
-    </main>
-    <footer><span>© {new Date().getFullYear()} SANCHAI K B</span><span>ENGLISH · TAMIL · HINDI</span><a href="#home">BACK TO TOP ↑</a></footer>
-  </>;
+ const [menu,setMenu]=useState(false),[filter,setFilter]=useState("ALL"),[progress,setProgress]=useState(0);
+ const visible=useMemo(()=>filter==="ALL"?projects:projects.filter(p=>p.cat===filter),[filter]);
+ useEffect(()=>{
+  const update=()=>{const total=document.documentElement.scrollHeight-window.innerHeight;setProgress(total>0?window.scrollY/total*100:0);document.body.classList.toggle("is-scrolled",window.scrollY>24)};
+  window.addEventListener("scroll",update,{passive:true});update();return()=>window.removeEventListener("scroll",update);
+ },[]);
+ useEffect(()=>{
+  const observer=new IntersectionObserver(entries=>entries.forEach(e=>{if(e.isIntersecting){e.target.classList.add("is-visible");observer.unobserve(e.target)}}),{threshold:.1});
+  document.querySelectorAll(".reveal:not(.is-visible)").forEach(n=>observer.observe(n));
+  return()=>observer.disconnect();
+ },[filter]);
+ const close=()=>setMenu(false);
+ return <>
+  <div className="scroll-progress" style={{width:progress+"%"}}/>
+  <header className="site-header"><a className="wordmark" href="#home" onClick={close}>SANCHAI<span>®</span></a><button className="menu-toggle" aria-expanded={menu} onClick={()=>setMenu(!menu)}>{menu?"CLOSE −":"MENU +"}</button><nav className={menu?"nav-links open":"nav-links"} aria-label="Main navigation">{[["ABOUT","#about"],["PROJECTS","#work"],["SKILLS","#skills"],["JOURNEY","#journey"]].map(([t,h])=><a key={t} href={h} onClick={close}>{t}</a>)}<a className="nav-contact" href="#contact" onClick={close}>LET'S TALK ↗</a></nav></header>
+  <main id="home">
+   <section className="hero"><div className="hero-grain"/><div className="hero-meta"><span>PORTFOLIO / 2026</span><span>SOFTWARE · AI / ML · CREATIVE TECHNOLOGY</span></div>
+    <div className="hero-layout"><div className="hero-copy"><div className="eyebrow"><i/> COMPUTER SCIENCE · AI & MACHINE LEARNING</div><h1>TURNING<br/><span className="outline">IDEAS INTO</span><br/><span className="red-word">INTELLIGENCE.</span></h1><p className="hero-intro">I'm <strong>Sanchai K B</strong> — a Computer Science and Engineering student building at the intersection of artificial intelligence, software engineering and meaningful products.</p><div className="hero-actions"><a className="button button-red" href="#work">EXPLORE MY WORK <span>↘</span></a><a className="button button-ghost" href="mailto:kbsanchai12@gmail.com">LET'S CONNECT <span>↗</span></a></div><div className="hero-social"><a href={GH} target="_blank" rel="noreferrer">GITHUB ↗</a><a href="mailto:kbsanchai12@gmail.com">EMAIL ↗</a><a href="tel:+919150672408">PHONE ↗</a></div></div>
+     <div className="hero-scene" aria-label="Stylised Soul Society night scene with a swordsman silhouette"><div className="scene-stars"/><div className="scene-moon"/><div className="scene-cloud cloud-one"/><div className="scene-cloud cloud-two"/><div className="scene-castle castle-back"><i/><i/><i/><i/><b/></div><div className="scene-castle castle-front"><i/><i/><i/><b/></div><div className="scene-mountains"/><div className="scene-city"><i/><i/><i/><i/><i/><i/><i/><i/><i/><i/><i/><i/></div><div className="scene-swordsman"><div className="sword-hair"/><div className="sword-head"/><div className="sword-neck"/><div className="sword-robe"/><div className="sword-sash"/><div className="sword-cloak"/><div className="sword-blade"/></div><div className="scene-energy energy-one"/><div className="scene-energy energy-two"/><div className="scene-kanji"><span>斬</span><small>BANKAI</small></div><div className="scene-caption"><span>SOUL SOCIETY / FIELD NOTES</span><b>CREATIVITY IS A FORM OF POWER.</b></div><div className="scene-coordinate">35°40' N / 139°45' E</div></div>
+    </div><div className="hero-bottom"><span>THINK DEEPLY. BUILD BOLDLY.</span><a href="#about">SCROLL TO DISCOVER <b>↓</b></a></div><div className="hero-vertical">THE NEXT IDEA IS ALWAYS LOADING</div>
+   </section>
+   <div className="marquee"><div>{Array.from({length:2},(_,i)=><span key={i}>ARTIFICIAL INTELLIGENCE <b>✳</b> COMPUTER VISION <b>✳</b> GENERATIVE AI <b>✳</b> FULL-STACK DEVELOPMENT <b>✳</b> LOCAL-FIRST SOFTWARE <b>✳</b> </span>)}</div></div>
+   <section className="section about-section" id="about"><div className="section-label reveal"><span>01 / THE PERSON BEHIND THE PIXELS</span><span>PROFILE</span></div><div className="about-layout"><div className="about-title reveal"><p className="eyebrow">A LITTLE ABOUT ME</p><h2>CURIOUS<br/>BY NATURE.<br/><em>BUILDER</em><br/>BY CHOICE.</h2><div className="about-japanese">探求 · 創造 · 進化</div></div><div className="about-content reveal"><p className="about-statement">I turn complex ideas into <em>clear, useful experiences.</em></p><p className="about-body">From building local-first AI tools to developing computer-vision systems and full-stack applications, I enjoy taking ideas from experimentation to software people can actually use.</p><div className="about-details"><div><span>EDUCATION</span><strong>B.Tech — CSE (AI & ML)</strong><small>SRM Institute of Science and Technology · 2023–2027</small></div><div><span>BASED IN</span><strong>Chennai, India</strong><small>English · Tamil · Hindi</small></div></div><div className="about-links"><a href={GH} target="_blank" rel="noreferrer">GITHUB PROFILE ↗</a><a href="mailto:kbsanchai12@gmail.com">KBSANCHAI12@GMAIL.COM ↗</a></div></div></div><div className="stat-strip reveal"><div><strong>13</strong><span>PROJECTS FEATURED</span></div><div><strong>02</strong><span>INTERNSHIPS</span></div><div><strong>04</strong><span>HACKATHON HIGHLIGHTS</span></div><div><strong>05+</strong><span>AI / SOFTWARE DOMAINS</span></div></div></section>
+   <section className="section projects-section" id="work"><div className="section-label reveal"><span>02 / SELECTED WORK</span><span>PROJECT ARCHIVE · 2024—2026</span></div><div className="section-heading reveal"><h2>BUILT WITH<br/><em>INTENTION.</em></h2><p>A collection of AI experiments, software products and engineering projects. Open a repository to explore the implementation.</p></div><div className="filter-row reveal" role="group" aria-label="Filter projects">{filters.map(x=><button key={x} className={filter===x?"filter active":"filter"} onClick={()=>setFilter(x)}>{x}</button>)}</div><div className="projects-grid">{visible.map(p=><article className={"project-card reveal theme-"+p.theme} key={p.id}><div className="project-art"><div className="project-art-orbit"/><span className="project-art-mark">{p.mark}</span><span className="project-art-no">{p.no} / 13</span><span className="project-art-line"/></div><div className="project-info"><div className="project-meta"><span>{p.cat}</span><span>{p.year}</span></div><h3>{p.title}</h3><p className="project-subtitle">{p.sub}</p><p className="project-description">{p.desc}</p><div className="project-stack">{p.stack.map(tag=><span key={tag}>{tag}</span>)}</div>{p.repo?<a className="project-link" href={p.repo} target="_blank" rel="noreferrer">{p.label} <span>↗</span></a>:<span className="project-private">{p.label}</span>}</div></article>)}</div><div className="all-repos reveal"><span>MORE CODE, EXPERIMENTS & NOTES</span><a href="https://github.com/KBSanchai?tab=repositories" target="_blank" rel="noreferrer">EXPLORE ALL GITHUB REPOSITORIES ↗</a></div></section>
+   <section className="section skills-section" id="skills"><div className="section-label reveal"><span>03 / TECHNICAL ARSENAL</span><span>TOOLS & TECHNOLOGIES</span></div><div className="section-heading reveal"><h2>TOOLS OF<br/><em>THE TRADE.</em></h2><p>A growing toolkit for prototyping ideas, building intelligent systems and shipping working software.</p></div><div className="skills-list">{skills.map(([name,items],i)=><div className="skill-row reveal" key={name}><div className="skill-number">0{i+1}</div><h3>{name}</h3><div className="skill-chips">{items.map(x=><span key={x}>{x}</span>)}</div></div>)}</div></section>
+   <section className="section journey-section" id="journey"><div className="section-label reveal"><span>04 / THE JOURNEY</span><span>EXPERIENCE & EDUCATION</span></div><div className="section-heading reveal"><h2>LEARNING<br/><em>BY BUILDING.</em></h2><p>Professional experience, academic foundations and the moments that made the journey memorable.</p></div><div className="timeline">{jobs.map((j,i)=><div className="timeline-item reveal" key={j[2]}><div className="timeline-date">{j[0]}</div><div className="timeline-content"><span>INTERNSHIP / 0{i+1}</span><h3>{j[1]}</h3><h4>{j[2]}</h4><p>{j[3]}</p></div><div className="timeline-symbol">職</div></div>)}</div><div className="education-block reveal"><div className="eyebrow">EDUCATION</div>{education.map(e=><div className="education-row" key={e[1]}><span>{e[0]}</span><div><h3>{e[1]}</h3><p>{e[2]}</p></div></div>)}</div></section>
+   <section className="section honours-section"><div className="section-label reveal"><span>05 / RECOGNITION</span><span>CERTIFICATIONS & ACHIEVEMENTS</span></div><div className="honours-layout"><div className="honours-heading reveal"><h2>ALWAYS<br/><em>LEVELING UP.</em></h2><p>Stay curious. Keep learning. Make the next version better.</p></div><div className="honours-content"><div className="eyebrow reveal">CERTIFICATIONS</div><div className="cert-list">{certs.map(([name,date,detail],i)=><div className="cert-row reveal" key={name}><span>0{i+1}</span><div><strong>{name}</strong>{detail&&<small>{detail}</small>}</div><time>{date}</time></div>)}</div><div className="eyebrow achievement-label reveal">HACKATHONS & ACHIEVEMENTS</div><div className="achievement-list">{awards.map(([name,date,place],i)=><div className="achievement-row reveal" key={name}><span>{date}</span><div><strong>{name}</strong><small>{place}</small></div>{i===0&&<b className="achievement-rank">03</b>}</div>)}</div></div></div></section>
+   <section className="contact-section" id="contact"><div className="contact-backdrop"><div className="contact-sun"/><div className="contact-kanji">終</div></div><div className="contact-inner"><div className="section-label reveal"><span>06 / YOUR MOVE</span><span>OPEN TO WHAT'S NEXT</span></div><p className="eyebrow reveal">HAVE A GOOD IDEA?</p><h2 className="reveal">LET'S MAKE<br/><em>IT REAL.</em></h2><div className="contact-bottom reveal"><p>Interested in AI, software engineering or building something useful together? I'd love to hear from you.</p><div className="contact-links"><a href="mailto:kbsanchai12@gmail.com">KBSANCHAI12@GMAIL.COM ↗</a><a href="tel:+919150672408">+91 91506 72408 ↗</a><a href={GH} target="_blank" rel="noreferrer">GITHUB PROFILE ↗</a></div></div></div></section>
+  </main>
+  <footer className="site-footer"><a className="footer-logo" href="#home">SANCHAI<span>®</span></a><span>CHENNAI, INDIA · ENGLISH / TAMIL / HINDI</span><a href="#home">BACK TO TOP ↑</a><small>© {new Date().getFullYear()} SANCHAI K B · BUILT WITH CURIOSITY</small></footer>
+ </>;
 }
 export default App;
