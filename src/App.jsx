@@ -1,6 +1,6 @@
 import React, { useEffect, useMemo, useState } from "react";
 import "./styles.css";
-import { GuardianArt, Crest } from "./GuardianArt.jsx";
+import { GuardianArt, Crest, BleachPortrait, BleachSigil } from "./GuardianArt.jsx";
 const GH="https://github.com/KBSanchai";
 const projects=[
 {id:"docgen",no:"01",title:"DocGen",sub:"Offline AI document automation",desc:"A local-first Windows desktop app for business document workflows. Extracts purchase-order fields with PDF/DOCX parsing, Tesseract OCR and an on-device Ollama model, then generates documents from templates.",stack:["Electron","React","TypeScript","FastAPI","Ollama","SQLite"],cat:"AI & AUTOMATION",year:"2026",repo:"",label:"Repository not publicly linked",mark:"文",theme:"ember"},
@@ -47,6 +47,14 @@ const awards=[
 ["HACKRIX ’25 Open Innovation Hackathon","OCT 2025","Department of Computational Intelligence & Techvantage, SRMIST"]
 ];
 const filters=["ALL","AI & ML","AI & AUTOMATION","FULL-STACK","DEVOPS"];
+const bleachCast=[
+ {id:"ichigo",name:"Ichigo Kurosaki",rank:"THE SUBSTITUTE SOUL REAPER",note:"A human who stepped into the world of Soul Reapers."},
+ {id:"aizen",name:"Sōsuke Aizen",rank:"THE FORMER CAPTAIN",note:"A composed strategist whose power changed the balance of Soul Society."},
+ {id:"rukia",name:"Rukia Kuchiki",rank:"SOUL REAPER",note:"The encounter that opened the door to the Soul Society."},
+ {id:"byakuya",name:"Byakuya Kuchiki",rank:"CAPTAIN · SIXTH DIVISION",note:"A captain defined by discipline, precision and family duty."},
+ {id:"kenpachi",name:"Kenpachi Zaraki",rank:"CAPTAIN · ELEVENTH DIVISION",note:"A battle-loving captain who lives for the challenge."},
+ {id:"yoruichi",name:"Yoruichi Shihōin",rank:"FORMER CAPTAIN · STEALTH FORCE",note:"A master of speed, strategy and close combat."}
+];
 const guardianById={docgen:"archivist","agro-dashboard":"harvest","crop-classifier":"lens","agro-ai":"harvest",image:"lens",cattle:"lens","cattle-rag":"echo",sql:"echo",cicd:"forge",bluegreen:"forge",healthcare:"forge"};
 const skillCrest={"LANGUAGES":"AI & ML","FRONTEND & BACKEND":"FULL-STACK","CLOUD, DEVOPS & DATABASES":"DEVOPS","AI & MACHINE LEARNING":"AI & ML","TOOLS":"FULL-STACK"};
 function App(){
@@ -73,6 +81,23 @@ function App(){
     </div><div className="hero-bottom"><span>THINK DEEPLY. BUILD BOLDLY.</span><a href="#about">SCROLL TO DISCOVER <b>↓</b></a></div><div className="hero-vertical">THE NEXT IDEA IS ALWAYS LOADING</div>
    </section>
    <div className="marquee"><div>{Array.from({length:2},(_,i)=><span key={i}>ARTIFICIAL INTELLIGENCE <b>✳</b> COMPUTER VISION <b>✳</b> GENERATIVE AI <b>✳</b> FULL-STACK DEVELOPMENT <b>✳</b> LOCAL-FIRST SOFTWARE <b>✳</b> </span>)}</div></div>
+   <section className="bleach-archive section" id="soul-archive">
+    <div className="section-label reveal"><span>SOUL SOCIETY / CHARACTER ARCHIVE</span><span>UNOFFICIAL FAN TRIBUTE</span></div>
+    <div className="archive-heading reveal"><div><p className="eyebrow">THE WORLD OF BLEACH</p><h2>SOULS THAT<br/><em>LEFT A MARK.</em></h2></div><p>A personal tribute to the characters, divisions and symbols of the Bleach universe. This fan section is separate from my original portfolio characters and software projects.</p></div>
+    <div className="bleach-symbol-strip reveal">
+      <div><BleachSigil name="gotei"/><span>GOTEI 13</span></div>
+      <div><BleachSigil name="zanpakuto"/><span>ZANPAKUTŌ</span></div>
+      <div><BleachSigil name="hollow"/><span>HOLLOW MASK</span></div>
+      <div><BleachSigil name="hogyoku"/><span>HŌGYOKU</span></div>
+    </div>
+    <div className="bleach-cast-grid">
+      {bleachCast.map((character,index)=><article className="bleach-card reveal" key={character.id}>
+        <div className="bleach-card-art"><span className="bleach-card-number">0{index+1} / SOUL FILE</span><BleachPortrait name={character.id} awakened={bankai}/><span className="bleach-card-seal">斬</span></div>
+        <div className="bleach-card-copy"><span className="bleach-rank">{character.rank}</span><h3>{character.name}</h3><p>{character.note}</p></div>
+      </article>)}
+    </div>
+    <p className="bleach-disclaimer">BLEACH CHARACTERS AND RELATED NAMES BELONG TO THEIR RESPECTIVE RIGHTS HOLDERS. THIS IS AN UNOFFICIAL FAN-MADE TRIBUTE SECTION.</p>
+   </section>
    <section className="section about-section" id="about"><div className="section-label reveal"><span>01 / THE PERSON BEHIND THE PIXELS</span><span>PROFILE</span></div><div className="about-layout"><div className="about-title reveal"><p className="eyebrow">A LITTLE ABOUT ME</p><h2>CURIOUS<br/>BY NATURE.<br/><em>BUILDER</em><br/>BY CHOICE.</h2><div className="about-japanese">探求 · 創造 · 進化</div></div><div className="about-content reveal"><p className="about-statement">I turn complex ideas into <em>clear, useful experiences.</em></p><p className="about-body">From building local-first AI tools to developing computer-vision systems and full-stack applications, I enjoy taking ideas from experimentation to software people can actually use.</p><div className="about-details"><div><span>EDUCATION</span><strong>B.Tech — CSE (AI & ML)</strong><small>SRM Institute of Science and Technology · 2023–2027</small></div><div><span>BASED IN</span><strong>Chennai, India</strong><small>English · Tamil · Hindi</small></div></div><div className="about-links"><a href={GH} target="_blank" rel="noreferrer">GITHUB PROFILE ↗</a><a href="mailto:kbsanchai12@gmail.com">KBSANCHAI12@GMAIL.COM ↗</a></div></div></div><div className="stat-strip reveal"><div><strong>13</strong><span>PROJECTS FEATURED</span></div><div><strong>02</strong><span>INTERNSHIPS</span></div><div><strong>04</strong><span>HACKATHON HIGHLIGHTS</span></div><div><strong>05+</strong><span>AI / SOFTWARE DOMAINS</span></div></div></section>
    <section className="section projects-section" id="work"><div className="section-label reveal"><span>02 / SELECTED WORK</span><span>PROJECT ARCHIVE · 2024—2026</span></div><div className="section-heading reveal"><h2>BUILT WITH<br/><em>INTENTION.</em></h2><p>A collection of AI experiments, software products and engineering projects. Open a repository to explore the implementation.</p></div><div className="filter-row reveal" role="group" aria-label="Filter projects">{filters.map(x=><button key={x} className={filter===x?"filter active":"filter"} onClick={()=>setFilter(x)}>{x!=="ALL"&&<Crest type={x} size={16}/>}<span>{x}</span></button>)}</div><div className="projects-grid">{visible.map(p=><article className={"project-card reveal theme-"+p.theme} key={p.id}><div className="project-art"><div className="project-art-orbit"/><Crest type={p.cat} size={27} className="project-crest"/><span className="project-art-mark">{p.mark}</span><span className="project-art-no">{p.no} / 13</span><span className="project-art-line"/>{guardianById[p.id]&&<GuardianArt type={guardianById[p.id]} awakened={bankai} className="guardian-slide project-guardian"/>}</div><div className="project-info"><div className="project-meta"><span>{p.cat}</span><span>{p.year}</span></div><h3>{p.title}</h3><p className="project-subtitle">{p.sub}</p><p className="project-description">{p.desc}</p><div className="project-stack">{p.stack.map(tag=><span key={tag}>{tag}</span>)}</div>{p.repo?<a className="project-link" href={p.repo} target="_blank" rel="noreferrer">{p.label} <span>↗</span></a>:<span className="project-private">{p.label}</span>}</div></article>)}</div><div className="all-repos reveal"><span>MORE CODE, EXPERIMENTS & NOTES</span><a href="https://github.com/KBSanchai?tab=repositories" target="_blank" rel="noreferrer">EXPLORE ALL GITHUB REPOSITORIES ↗</a></div></section>
    <section className="section skills-section" id="skills"><div className="section-label reveal"><span>03 / TECHNICAL ARSENAL</span><span>TOOLS & TECHNOLOGIES</span></div><div className="section-heading reveal"><h2>TOOLS OF<br/><em>THE TRADE.</em></h2><p>A growing toolkit for prototyping ideas, building intelligent systems and shipping working software.</p></div><div className="skills-list">{skills.map(([name,items],i)=><div className="skill-row reveal" key={name}><div className="skill-number"><span>0{i+1}</span><Crest type={skillCrest[name]} size={27}/></div><h3>{name}</h3><div className="skill-chips">{items.map(x=><span key={x}>{x}</span>)}</div></div>)}</div></section>
