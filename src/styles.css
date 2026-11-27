@@ -719,3 +719,16 @@ body:before{
 @media(prefers-reduced-motion:reduce){
  .project-art img.bleach-project-character,.project-art .project-art-line{transition:none!important}
 }
+
+/* KON CUSTOM CURSOR — use the uploaded mascot on desktop pointers */
+@media (hover: hover) and (pointer: fine) {
+  html, body,
+  *:not(input):not(textarea):not([contenteditable="true"]) {
+    cursor: url("/KBSanchai/kon-cursor.png") 29 5, auto !important;
+  }
+  a, button, select, summary, label[for], [role="button"],
+  .filter, .bankai-toggle, .menu-toggle,
+  input[type="button"], input[type="submit"], input[type="reset"] {
+    cursor: url("/KBSanchai/kon-cursor.png") 29 5, pointer !important;
+  }
+}
