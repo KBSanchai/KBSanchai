@@ -1,4 +1,4 @@
 import { defineConfig } from "vite";
 
-// This is a project Pages site at /KBSanchai/, not the account root.
-export default defineConfig({ base: "/KBSanchai/", build: { outDir: "dist" } });
+// Relative asset URLs work on the GitHub Pages project path.
+export default defineConfig({ base: "./", build: { outDir: "dist" } });
