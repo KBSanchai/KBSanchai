@@ -155,3 +155,102 @@ export function Crest({type,size=22,className=""}) {
   };
   return <svg className={"category-crest "+className} width={size} height={size} viewBox="0 0 32 32" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true" focusable="false">{paths[type] || paths["AI & ML"]}</svg>;
 }
+
+function IchigoPortrait(){
+ return <svg {...shared}>
+  <g strokeLinejoin="round">
+   <path d="M53 218 79 106q15-25 40-24h37q39 2 52 28l24 108z" fill="#111318" stroke="#77777c" strokeWidth="3"/>
+   <path d="m111 99 27 35 27-35 13 119h-80z" fill="#f0ede5" stroke="#777" strokeWidth="2"/>
+   <path d="M118 48q4-34 39-34 39 2 43 40l-15 58q-30 34-61 0z" fill="#c98f77" stroke="#302426" strokeWidth="3"/>
+   <path d="M107 60 92 34l26 8-4-29 32 20 12-29 18 29 23-18-2 35 24-5-15 34-16-15-8 31-19-24-18 20-15-25-13 18-13-33z" fill="#ef7732" stroke="#6f321c" strokeWidth="3"/>
+   <path d="M114 76q14-9 27 0m27 0q13-9 25 0" fill="none" stroke="#302426" strokeWidth="3"/>
+   <path d="M138 89q15 8 28-1" fill="none" stroke="#754c45" strokeWidth="2"/>
+   <path d="M160 129 185 111 202 127 178 153z" fill="#151820" stroke="#aaa" strokeWidth="2"/>
+   <path d="M28 205 195 12" stroke="#d7d9dd" strokeWidth="8"/>
+   <path d="M18 216 190 14" stroke="#555e68" strokeWidth="2"/>
+   <path d="m184 16 13-12 7 15-10 11z" fill="#b3bac4" stroke="#e8e6df" strokeWidth="2"/>
+  </g>
+ </svg>
+}
+function AizenPortrait(){
+ return <svg {...shared}>
+  <g strokeLinejoin="round">
+   <path d="M38 220 64 105q17-28 48-28h34q44 2 59 35l22 108z" fill="#e5e2db" stroke="#9c9b97" strokeWidth="3"/>
+   <path d="M100 107 137 145 174 107l17 113H82z" fill="#26272e" stroke="#6d6b66" strokeWidth="2"/>
+   <path d="M103 49q5-36 39-36 39 2 42 42l-15 57q-28 30-55 0z" fill="#c6967d" stroke="#352b2b" strokeWidth="3"/>
+   <path d="M97 53q-6-39 42-45 44 3 51 44-43-19-93 4z" fill="#6f4937" stroke="#3c2a24" strokeWidth="3"/>
+   <path d="M105 62q24-10 41 0m13 0q15-10 26-1" fill="none" stroke="#342c2a" strokeWidth="2"/>
+   <path d="M108 67h31v15h-31zm51 0h26v15h-26z" fill="none" stroke="#464a52" strokeWidth="3"/>
+   <path d="M139 73h20" stroke="#464a52" strokeWidth="3"/>
+   <path d="M136 93q14 9 27 0" fill="none" stroke="#81584e" strokeWidth="2"/>
+   <path d="M61 114q-24 26-10 82m147-85q31 29 18 86" fill="none" stroke="#eee" strokeWidth="7"/>
+  </g>
+ </svg>
+}
+function RukiaPortrait(){
+ return <svg {...shared}>
+  <g strokeLinejoin="round">
+   <path d="M57 220 81 112q14-29 48-29h27q34 1 49 31l20 106z" fill="#151a20" stroke="#777" strokeWidth="3"/>
+   <path d="M112 100 139 135 166 100l13 120H98z" fill="#e8e5df" stroke="#aaa" strokeWidth="2"/>
+   <path d="M110 48q1-31 31-34 37 1 39 38l-13 51q-23 27-45 0z" fill="#d0a18b" stroke="#493735" strokeWidth="3"/>
+   <path d="M101 53q-4-47 43-47 47 4 47 55l-10 38-17-33-16 8-15-15-18 27-14-6z" fill="#171b22" stroke="#090c10" strokeWidth="3"/>
+   <path d="M113 70h13m35 0h12" stroke="#23262b" strokeWidth="3"/>
+   <path d="M136 88q9 6 18 0" stroke="#885d55" strokeWidth="2" fill="none"/>
+   <path d="M75 124q-16 44 0 78m113-78q17 42 2 76" fill="none" stroke="#f2f0e9" strokeWidth="8"/>
+  </g>
+ </svg>
+}
+function ByakuyaPortrait(){
+ return <svg {...shared}>
+  <g strokeLinejoin="round">
+   <path d="M43 220 68 108q13-28 51-29h36q42 2 59 34l21 107z" fill="#141820" stroke="#6c7780" strokeWidth="3"/>
+   <path d="M111 102 140 143 171 102l14 118H96z" fill="#ece8df" stroke="#aaa" strokeWidth="2"/>
+   <path d="M111 48q2-36 32-36 35 2 38 41l-14 55q-22 27-45 0z" fill="#c99a87" stroke="#403030" strokeWidth="3"/>
+   <path d="M101 48q-13-22 3-35m-2 1q20-16 38-5m-31 7q-3 18-2 34m55-37q17 21 20 47l-9 68m-2-93q20 17 19 57l-15 76m-61-123q-12 34-8 72" fill="none" stroke="#14171c" strokeWidth="7"/>
+   <path d="M107 28h17m29 0h20" stroke="#d0d5dc" strokeWidth="3"/>
+   <path d="M108 67h14m38 0h14" stroke="#20242b" strokeWidth="3"/>
+   <path d="M132 88q10 5 19 0" stroke="#80594e" strokeWidth="2" fill="none"/>
+   <path d="M99 118q39 17 81 0" stroke="#d8d9dc" strokeWidth="8" fill="none"/>
+  </g>
+ </svg>
+}
+function KenpachiPortrait(){
+ return <svg {...shared}>
+  <g strokeLinejoin="round">
+   <path d="M38 220 63 107q17-29 53-29h34q42 2 57 35l22 107z" fill="#16191c" stroke="#6e7070" strokeWidth="3"/>
+   <path d="M111 101 140 139 169 101l15 119H96z" fill="#eee9dc" stroke="#aaa" strokeWidth="2"/>
+   <path d="M111 48q4-35 34-36 37 1 42 42l-13 55q-28 27-53 0z" fill="#b9826f" stroke="#392c2b" strokeWidth="3"/>
+   <path d="M101 50 92 23l21 8-3-23 26 17 12-23 16 26 26-15-9 34-17-5-13 25-16-18-17 21-13-18-12 15z" fill="#121518" stroke="#080a0c" strokeWidth="3"/>
+   <path d="M126 72h13m28 0h13" stroke="#211b1a" strokeWidth="3"/>
+   <path d="m128 93 24 7m-16-11 7 18" stroke="#7b3330" strokeWidth="2"/>
+   <path d="M104 54 90 26m95 28 13-25" stroke="#d6b46b" strokeWidth="2"/>
+   <circle cx="91" cy="26" r="4" fill="#e8c476"/><circle cx="198" cy="29" r="4" fill="#e8c476"/>
+  </g>
+ </svg>
+}
+function YoruichiPortrait(){
+ return <svg {...shared}>
+  <g strokeLinejoin="round">
+   <path d="M48 220 72 111q15-31 52-31h32q38 2 55 35l21 105z" fill="#282534" stroke="#6c596f" strokeWidth="3"/>
+   <path d="M108 100 139 138 169 100l16 120H94z" fill="#d6b27d" stroke="#947149" strokeWidth="2"/>
+   <path d="M110 49q4-36 34-38 37 1 40 41l-14 55q-26 28-51 0z" fill="#986e59" stroke="#392d2c" strokeWidth="3"/>
+   <path d="M102 54q-4-48 46-46 48 6 48 58l-20 23-8-42-16 17-13-25-18 34-12 18z" fill="#342b45" stroke="#161525" strokeWidth="3"/>
+   <path d="M107 66h16m36 0h16" stroke="#25202a" strokeWidth="3"/>
+   <path d="M133 89q13 9 25-1" fill="none" stroke="#81584e" strokeWidth="2"/>
+   <path d="M93 123 68 180m108-55 32 54" fill="none" stroke="#bc9868" strokeWidth="8"/>
+  </g>
+ </svg>
+}
+export function BleachPortrait({name,awakened=false}){
+ const drawings={ichigo:<IchigoPortrait/>,aizen:<AizenPortrait/>,rukia:<RukiaPortrait/>,byakuya:<ByakuyaPortrait/>,kenpachi:<KenpachiPortrait/>,yoruichi:<YoruichiPortrait/>};
+ return <div className={"bleach-portrait bleach-"+name+(awakened?" awakened":"")} aria-hidden="true">{React.cloneElement(drawings[name]||drawings.ichigo,{"aria-hidden":"true",focusable:"false"})}</div>;
+}
+export function BleachSigil({name}){
+ const symbols={
+ zanpakuto:<><path d="M16 2 19 7 16 24 13 7z"/><path d="M10 25h12m-6-4v8"/></>,
+ hollow:<><path d="M7 6 16 2l9 4 2 13-11 11L5 19z"/><path d="M10 13q3-4 6 0 3-4 6 0l-6 9z"/></>,
+ hogyoku:<><path d="M16 2 27 12 20 29 12 29 5 12z"/><circle cx="16" cy="16" r="5"/></>,
+ gotei:<><circle cx="16" cy="16" r="12"/><path d="M16 5v22M5 16h22M9 9l14 14m0-14L9 23"/><circle cx="16" cy="16" r="3"/></>
+ };
+ return <svg className="bleach-sigil" viewBox="0 0 32 32" aria-hidden="true" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinejoin="round">{symbols[name]||symbols.gotei}</svg>;
+}
