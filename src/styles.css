@@ -389,3 +389,20 @@ button{font:inherit}
 .bankai-mode .hero-state-bankai{opacity:1;transform:scale(1)}
 @media(max-width:760px){.hero-state-image{object-position:center 30%}}
 @media(prefers-reduced-motion:reduce){.hero-state-image{transition:none!important}}
+
+
+/* Uploaded character artwork stays clipped within each project's fixed art panel */
+.project-art{overflow:hidden;isolation:isolate}
+.project-art img.bleach-project-character{
+ position:absolute;z-index:4;right:0;bottom:0;
+ display:block;width:62%;height:100%;max-width:62%;max-height:100%;
+ object-fit:contain;object-position:right bottom;box-sizing:border-box;
+ filter:drop-shadow(0 7px 12px #0009);transform-origin:bottom right;
+ transition:transform .35s ease,filter .35s ease;pointer-events:none;
+}
+.project-card:hover .project-art img.bleach-project-character{transform:scale(1.025)}
+.bankai-mode .project-art img.bleach-project-character{filter:drop-shadow(0 0 8px #f0443566)}
+@media(max-width:560px){
+ .project-art img.bleach-project-character{width:62%;height:100%;max-width:62%;max-height:100%}
+}
+@media(prefers-reduced-motion:reduce){.project-art img.bleach-project-character{transition:none!important}}
