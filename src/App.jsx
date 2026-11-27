@@ -6,14 +6,14 @@ const links = {
   docgen: "https://github.com/KBSanchai",
   agro: "https://github.com/KBSanchai/crop-insect-classifier",
   image: "https://github.com/KBSanchai/Image-Classification-App-with-DIP-Enhancements-Ollama-and-PDF-Export",
-  cattle: "https://github.com/Sanjay1712KSK/Cattle-Breed-Detection",
+  cattle: "https://github.com/KBSanchai",
   chatbot: "https://github.com/KBSanchai/LLM-Chatbot-with-MySQL"
 };
 const projects = [
   { n:"01", title:"DocGen", type:"OFFLINE AI / DESKTOP", date:"JUN — AUG 2026", desc:"A local-first Windows desktop app that automates business document workflows. Built PO field extraction with PDF/DOCX parsing, Tesseract OCR and an on-device Ollama model, plus template-driven PDF/DOCX generation and workflow modules.", stack:["Electron","React","TypeScript","FastAPI","Ollama","SQLite"], symbol:"文", color:"red", href:links.docgen, linkLabel:"GITHUB PROFILE" },
   { n:"02", title:"Intelligent Pesticide & Fertilizer Sprinkling System", type:"COMPUTER VISION / IOT", date:"PROJECT", desc:"Classifies plant diseases and crop insects using computer vision and deep learning, then supports targeted sprinkling based on detected conditions instead of blanket spraying.", stack:["Python","Computer Vision","Deep Learning","IoT"], symbol:"葉", color:"green", href:links.agro, linkLabel:"VIEW CLASSIFIER REPO" },
   { n:"03", title:"Image Classification App", type:"DIP / OPENCLIP / GENERATIVE AI", date:"PROJECT", desc:"A Streamlit app combining digital image processing filters, OpenCLIP image classification, Ollama (LLaMA 3.2) explanations and PDF report export.", stack:["Python","Streamlit","PyTorch","OpenCLIP","OpenCV","Ollama"], symbol:"映", color:"white", href:links.image, linkLabel:"VIEW SOURCE CODE" },
-  { n:"04", title:"Cattle Breed Detection", type:"MOBILE AI / COMPUTER VISION", date:"PROJECT", desc:"A cross-platform Flutter app for image-based cattle breed identification, using a TensorFlow model served through FastAPI with Firebase integration.", stack:["Flutter","TensorFlow","Firebase","FastAPI"], symbol:"牛", color:"red", href:links.cattle, linkLabel:"VIEW SOURCE CODE" },
+  { n:"04", title:"Cattle Breed Detection", type:"MOBILE AI / COMPUTER VISION", date:"PROJECT", desc:"A cross-platform Flutter app for image-based cattle breed identification, using a TensorFlow model served through FastAPI with Firebase integration.", stack:["Flutter","TensorFlow","Firebase","FastAPI"], symbol:"牛", color:"red", href:links.cattle, linkLabel:"GITHUB PROFILE" },
   { n:"05", title:"AI Chatbot", type:"LOCAL LLM / DATABASE", date:"PROJECT", desc:"A locally hosted Gradio chatbot powered by TinyLLaMA and connected to MySQL to query stored data through natural-language prompts.", stack:["Python","Gradio","TinyLLaMA","MySQL"], symbol:"対", color:"white", href:links.chatbot, linkLabel:"VIEW SOURCE CODE" }
 ];
 const skillGroups = [
