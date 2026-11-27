@@ -1,2 +1,5 @@
 import { defineConfig } from "vite";
-export default defineConfig({ base: "/KBSanchai/", build: { outDir: "dist" } });
+
+// This repository is the account's GitHub Pages user site,
+// so assets must be served from the domain root.
+export default defineConfig({ base: "/", build: { outDir: "dist" } });
