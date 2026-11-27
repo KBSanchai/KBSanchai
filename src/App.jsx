@@ -47,7 +47,7 @@ const suppliedProjectArt={
  "agro-dashboard":{normal:"03-agriculture-normal.webp",bankai:"03-agriculture-bankai.webp"},
  "crop-classifier":{normal:"04-sign-language-normal.webp",bankai:"04-sign-language-bankai.webp"},
  "agro-ai":{normal:"05-driver-monitoring-normal.webp",bankai:"05-driver-monitoring-bankai.webp"},
- image:{normal:"07-image-classification-normal.webp",bankai:"07-image-classification-bankai.webp"},
+ image:{normal:"07-image-classification-normal-v2.webp",bankai:"07-image-classification-bankai-v2.webp"},
  "cattle-rag":{normal:"06-cattle-rag-normal.webp",bankai:"06-cattle-rag-bankai.webp"},
  sql:{normal:"11-sql-chatbot-normal.webp",bankai:"11-sql-chatbot-bankai.webp"},
  theater:{normal:"08-cinevault-normal.webp",bankai:"08-cinevault-bankai.webp"}
