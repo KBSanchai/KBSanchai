@@ -262,3 +262,105 @@ button{font:inherit}
  *,*:before,*:after{scroll-behavior:auto!important;animation-duration:.01ms!important;animation-iteration-count:1!important;transition-duration:.01ms!important}
  .reveal{opacity:1;transform:none}
 }
+
+/* ORIGINAL GUARDIAN ATLAS — inline vector art, no external image payloads */
+.bankai-toggle{display:inline-flex;align-items:center;gap:8px;border:1px solid #8a4840;background:#140e10;color:#f4ddd2;padding:10px 13px;font:9px var(--mono);letter-spacing:.12em;white-space:nowrap;cursor:pointer;transition:background .25s,border-color .25s,color .25s,box-shadow .25s}
+.bankai-toggle:hover,.bankai-toggle.active{border-color:#ff8268;color:#fff0df;box-shadow:0 0 18px #ff4b3540}
+.bankai-toggle.active{background:linear-gradient(110deg,#6b211d,#251316)}
+.bankai-sigil{color:#ff795f;font-size:13px}
+.bankai-toggle.active .bankai-sigil{animation:sigilPulse 1.4s ease-in-out infinite}
+@keyframes sigilPulse{50%{transform:rotate(90deg) scale(1.25);text-shadow:0 0 12px #ff735b}}
+/* Ren's original cartographer-warrior silhouette and moonlit gate */
+.stone-gate{position:absolute;z-index:3;left:3%;top:10%;width:38%;height:83%;border:11px solid #71808b38;border-bottom:0;border-radius:48% 48% 0 0;box-shadow:inset 8px 0 0 #d9e1e00a,0 0 30px #0004}
+.stone-gate:before{content:"";position:absolute;left:-14px;right:-14px;top:13%;height:12px;background:#87929a35;box-shadow:0 8px 0 #070a0d80,0 16px 0 #9ca4a522}
+.stone-gate i{position:absolute;bottom:0;width:10px;height:100%;background:#9aa5ad24}
+.stone-gate i:first-child{left:15%}.stone-gate i:nth-child(2){right:15%}
+.stone-gate b{position:absolute;bottom:0;left:50%;height:85%;width:42%;transform:translateX(-50%);border:2px solid #c7d2d322;border-bottom:0;border-radius:50% 50% 0 0}
+.scene-lantern{position:absolute;z-index:7;width:24px;height:34px;background:linear-gradient(90deg,#6c281e,#e18e55 50%,#5b241e);border:1px solid #efc18a;box-shadow:0 0 20px #f19b5b65,0 0 38px #f19b5b27;clip-path:polygon(15% 0,85% 0,100% 18%,90% 84%,50% 100%,10% 84%,0 18%)}
+.scene-lantern:before{content:"";position:absolute;left:50%;top:-18px;height:18px;width:1px;background:#b9a98a}
+.scene-lantern:after{content:"";position:absolute;inset:5px 8px;background:#ffe3a7;opacity:.75;filter:blur(4px)}
+.lantern-left{left:9%;top:41%;animation:lanternFloat 6s ease-in-out infinite}
+.lantern-right{right:8%;top:34%;transform:scale(.75);animation:lanternFloat 7s ease-in-out infinite reverse}
+@keyframes lanternFloat{50%{translate:0 -10px}}
+.hero-ren{position:absolute;z-index:8;right:9%;bottom:-3%;width:min(60%,430px);height:88%;display:flex;align-items:flex-end;justify-content:center;filter:drop-shadow(0 20px 20px #000b)}
+.guardian-art{position:relative;display:block;line-height:0;pointer-events:none}
+.guardian-art svg{display:block;width:100%;height:100%;overflow:visible}
+.guardian-ren{width:100%;height:100%}
+.scene-ink-slash{position:absolute;z-index:9;left:-5%;top:62%;width:117%;height:8px;background:linear-gradient(90deg,transparent,#f5eee3 18%,#ff6654 62%,transparent);transform:rotate(-24deg);opacity:.55;filter:drop-shadow(0 0 9px #ff4b3580)}
+.scene-caption,.scene-coordinate{z-index:12}
+.scene-kanji{z-index:12}
+.hero-scene:after{content:"";position:absolute;z-index:11;inset:0;pointer-events:none;background:radial-gradient(ellipse at 75% 52%,transparent 15%,#07090d42 85%),repeating-linear-gradient(0deg,transparent 0 3px,#fff1 4px);opacity:.24}
+.scene-energy{z-index:10}
+/* Category crests are consistent across filters, work cards and skill groups */
+.category-crest{display:inline-block;flex:0 0 auto;vertical-align:middle;color:var(--red);filter:drop-shadow(0 0 4px #f0443525)}
+.filter{display:inline-flex;align-items:center;gap:8px}
+.filter.active .category-crest{color:#090909}
+.project-crest{position:absolute;z-index:5;left:15px;top:14px;color:#f2e6d7;width:28px;height:28px;opacity:.88}
+.project-art-mark{z-index:2;opacity:.5}
+.project-art-no{z-index:6}
+.project-art-line{z-index:3}
+.project-guardian{position:absolute;z-index:4;right:3%;bottom:-18px;width:min(72%,235px);height:190px;display:flex;align-items:flex-end;justify-content:center;filter:drop-shadow(0 10px 14px #0009)}
+.guardian-slide{opacity:0;transform:translateX(42px);transition:opacity .75s ease,transform .85s cubic-bezier(.18,.72,.2,1),filter .4s}
+.project-card.is-visible .guardian-slide{opacity:1;transform:translateX(0)}
+.project-card:nth-child(odd).is-visible .guardian-slide{transition-delay:.12s}
+.theme-ember .project-guardian{filter:drop-shadow(0 7px 16px #f0443520)}
+.theme-moss .project-guardian{filter:drop-shadow(0 7px 16px #8bac5a25)}
+.theme-ice .project-guardian{filter:drop-shadow(0 7px 16px #a2d0e125)}
+.project-crest,.project-art-mark,.project-art-no{pointer-events:none}
+.skill-number{display:flex;align-items:center;gap:12px}
+.skill-number .category-crest{color:#d7c2ab}
+.skill-row:nth-child(2) .category-crest{color:#8ac3c2}
+.skill-row:nth-child(3) .category-crest{color:#8eb6e2}
+.skill-row:nth-child(4) .category-crest{color:#e8a092}
+.skill-row:nth-child(5) .category-crest{color:#c9b2e6}
+/* Scroll arrival and BANKAI awakening */
+.guardian-art.is-awakened{filter:drop-shadow(0 0 8px #f04435a0) drop-shadow(0 0 20px #f0443565)}
+.bankai-mode .guardian-art.is-awakened svg{animation:awakenedFloat 3.5s ease-in-out infinite}
+.bankai-mode .hero-scene{box-shadow:0 30px 90px #000b,0 0 75px #f0443530,inset 0 0 60px #f0443510}
+.bankai-mode .hero-scene .scene-ink-slash{height:13px;opacity:1;box-shadow:0 0 20px #ff4b35a0}
+.bankai-mode .scene-lantern{box-shadow:0 0 24px #ffbd6cbb,0 0 52px #f0443577}
+.bankai-mode .stone-gate{border-color:#e2b8a25c;box-shadow:inset 0 0 26px #f0443520,0 0 32px #f0443520}
+.bankai-mode .marquee{box-shadow:0 0 22px #f0443555}
+.bankai-mode .bankai-toggle{background:linear-gradient(100deg,#8c241e,#3c1117);color:#fff2e7;border-color:#ff8c70;box-shadow:0 0 20px #f0443566}
+.bankai-mode .bankai-toggle .bankai-sigil{color:#fff0d5}
+@keyframes awakenedFloat{0%,100%{translate:0 0}50%{translate:0 -5px}}
+/* Low-cost drifting embers and manga-panel framing */
+.hero-scene .scene-stars:after{content:"";position:absolute;inset:0;background-image:radial-gradient(2px 2px at 16% 78%,#ffbc8a 98%,transparent),radial-gradient(1px 1px at 73% 66%,#ff886e 98%,transparent),radial-gradient(2px 2px at 85% 86%,#ffbc8a 98%,transparent),radial-gradient(1px 1px at 43% 91%,#ff886e 98%,transparent);animation:emberBlink 4s ease-in-out infinite alternate}
+@keyframes emberBlink{from{opacity:.25}to{opacity:.9}}
+.project-card{border-radius:2px}
+.project-art{border-bottom:1px solid #ffffff17}
+.project-art:after{content:"";position:absolute;inset:0;pointer-events:none;background:radial-gradient(circle at 17% 25%,#ffffff0a 0 1px,transparent 2px),radial-gradient(circle at 72% 65%,#ffffff09 0 1px,transparent 2px);background-size:9px 9px;opacity:.55}
+.project-info{position:relative}
+.project-info:before{content:"";position:absolute;right:0;top:0;width:32px;height:32px;border-top:1px solid #b9a98a44;border-right:1px solid #b9a98a44}
+.bankai-mode .project-card.is-visible .project-guardian{filter:drop-shadow(0 0 8px #ff8d6d99) drop-shadow(0 0 18px #f0443577)}
+@media(max-width:1050px){
+ .bankai-toggle{padding:9px 10px;font-size:8px}
+ .hero-ren{right:3%;width:63%}
+ .project-guardian{width:76%;height:180px;right:0}
+}
+@media(max-width:760px){
+ .site-header{gap:12px}
+ .bankai-toggle{margin-left:auto}
+ .hero-ren{width:70%;height:78%;right:0}
+ .project-guardian{width:70%;height:170px}
+ .stone-gate{width:47%;left:-5%}
+}
+@media(max-width:560px){
+ .site-header{padding-right:14px}
+ .bankai-toggle{font-size:7px;padding:8px 9px;gap:5px;letter-spacing:.06em}
+ .bankai-sigil{font-size:11px}
+ .hero-ren{width:75%;height:76%;right:-2%;bottom:-1%}
+ .scene-lantern{transform:scale(.72)}
+ .lantern-left{left:5%;top:38%}
+ .lantern-right{right:4%;top:34%}
+ .scene-kanji{left:5%;top:7%;transform:scale(.82);transform-origin:top left}
+ .scene-coordinate{display:none}
+ .project-art{height:178px}
+ .project-guardian{width:66%;height:170px;right:0;bottom:-20px}
+ .guardian-slide{transform:translateX(25px)}
+ .skill-number{gap:7px}
+}
+@media(prefers-reduced-motion:reduce){
+ .guardian-slide,.bankai-mode .guardian-art.is-awakened svg,.scene-lantern,.scene-energy,.scene-stars:after{animation:none!important;transition:none!important}
+ .guardian-slide{opacity:1;transform:none}
+}
