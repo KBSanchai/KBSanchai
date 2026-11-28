@@ -1,4 +1,4 @@
-import React, { useEffect, useMemo, useState } from "react";
+import React, { useEffect, useMemo, useRef, useState } from "react";
 import "./styles.css";
 import { GuardianArt, Crest } from "./GuardianArt.jsx";
 const GH="https://github.com/KBSanchai";
@@ -68,22 +68,73 @@ const bleachProjectArt={
 const skillCrest={"LANGUAGES":"AI & ML","FRONTEND & BACKEND":"FULL-STACK","CLOUD, DEVOPS & DATABASES":"DEVOPS","AI & MACHINE LEARNING":"AI & ML","TOOLS":"FULL-STACK"};
 function App(){
  const [menu,setMenu]=useState(false),[filter,setFilter]=useState("ALL"),[progress,setProgress]=useState(0),[bankai,setBankai]=useState(false);
+ const scrollTrack=useRef(null);
  const visible=useMemo(()=>filter==="ALL"?projects:projects.filter(p=>p.cat===filter),[filter]);
  useEffect(()=>{
-  const update=()=>{const total=document.documentElement.scrollHeight-window.innerHeight;setProgress(total>0?window.scrollY/total*100:0);document.body.classList.toggle("is-scrolled",window.scrollY>24)};
-  window.addEventListener("scroll",update,{passive:true});update();return()=>window.removeEventListener("scroll",update);
+  const track=scrollTrack.current;
+  const update=()=>{
+   const wide=window.innerWidth>=1000&&track;
+   if(wide){
+    const total=track.scrollWidth-track.clientWidth;
+    setProgress(total>0?track.scrollLeft/total*100:0);
+    document.body.classList.toggle("is-scrolled",track.scrollLeft>20);
+   }else{
+    const total=document.documentElement.scrollHeight-window.innerHeight;
+    setProgress(total>0?window.scrollY/total*100:0);
+    document.body.classList.toggle("is-scrolled",window.scrollY>24);
+   }
+  };
+  track?.addEventListener("scroll",update,{passive:true});
+  window.addEventListener("scroll",update,{passive:true});
+  window.addEventListener("resize",update);
+  update();
+  return()=>{
+   track?.removeEventListener("scroll",update);
+   window.removeEventListener("scroll",update);
+   window.removeEventListener("resize",update);
+  };
  },[]);
  useEffect(()=>{
-  const observer=new IntersectionObserver(entries=>entries.forEach(e=>{if(e.isIntersecting){e.target.classList.add("is-visible");observer.unobserve(e.target)}}),{threshold:.1});
+  const root=window.innerWidth>=1000?scrollTrack.current:null;
+  const observer=new IntersectionObserver(entries=>entries.forEach(e=>{if(e.isIntersecting){e.target.classList.add("is-visible");observer.unobserve(e.target)}}),{root,threshold:.08});
   document.querySelectorAll(".reveal:not(.is-visible)").forEach(n=>observer.observe(n));
   return()=>observer.disconnect();
  },[filter]);
+ useEffect(()=>{
+  const track=scrollTrack.current;
+  if(!track)return;
+  const wide=()=>window.innerWidth>=1000;
+  const onWheel=e=>{
+   if(!wide()||e.ctrlKey||Math.abs(e.deltaY)<Math.abs(e.deltaX))return;
+   const panel=e.target.closest("main#home > .section, main#home > .contact-section");
+   if(panel&&panel.scrollHeight>panel.clientHeight+2){
+    const canScrollDown=e.deltaY>0&&panel.scrollTop+panel.clientHeight<panel.scrollHeight-1;
+    const canScrollUp=e.deltaY<0&&panel.scrollTop>1;
+    if(canScrollDown||canScrollUp)return;
+   }
+   e.preventDefault();
+   track.scrollLeft+=e.deltaY;
+  };
+  const onKey=e=>{
+   if(!wide()||!["ArrowRight","ArrowLeft"].includes(e.key))return;
+   const tag=document.activeElement?.tagName;
+   if(["A","BUTTON","INPUT","TEXTAREA","SELECT"].includes(tag))return;
+   e.preventDefault();
+   track.scrollBy({left:(e.key==="ArrowRight"?1:-1)*window.innerWidth*.72,behavior:"smooth"});
+  };
+  track.addEventListener("wheel",onWheel,{passive:false});
+  window.addEventListener("keydown",onKey);
+  return()=>{
+   track.removeEventListener("wheel",onWheel);
+   window.removeEventListener("keydown",onKey);
+  };
+ },[]);
  useEffect(()=>{document.body.classList.toggle("bankai-mode",bankai);return()=>document.body.classList.remove("bankai-mode")},[bankai]);
  const close=()=>setMenu(false);
  return <>
   <div className="scroll-progress" style={{width:progress+"%"}}/>
   <header className="site-header"><a className="wordmark" href="#home" onClick={close}>SANCHAI<span>®</span></a><button className="menu-toggle" aria-expanded={menu} onClick={()=>setMenu(!menu)}>{menu?"CLOSE −":"MENU +"}</button><nav className={menu?"nav-links open":"nav-links"} aria-label="Main navigation">{[["ABOUT","#about"],["PROJECTS","#work"],["SKILLS","#skills"],["JOURNEY","#journey"]].map(([t,h])=><a key={t} href={h} onClick={close}>{t}</a>)}<a className="nav-contact" href="#contact" onClick={close}>LET'S TALK ↗</a></nav><button className={"bankai-toggle"+(bankai?" active":"")} type="button" aria-pressed={bankai} onClick={()=>setBankai(v=>!v)}><span className="bankai-sigil">✦</span>{bankai?"BANKAI ON":"BANKAI MODE"}</button></header>
-  <main id="home">
+  <main id="home" ref={scrollTrack} tabIndex={0} aria-label="Portfolio handscroll">
    <section className="hero"><div className="hero-grain"/><div className="hero-meta"><span>VOLUME 01 / 2026</span><span>MANGA NOTES · SOFTWARE · AI / ML</span></div>
     <div className="hero-layout"><div className="hero-copy"><div className="eyebrow"><i/> COMPUTER SCIENCE · AI & MACHINE LEARNING</div><h1>TURNING<br/><span className="outline">IDEAS INTO</span><br/><span className="red-word">INTELLIGENCE.</span></h1><p className="hero-intro">I'm <strong>Sanchai K B</strong> — a Computer Science and Engineering student building at the intersection of artificial intelligence, software engineering and meaningful products.</p><div className="hero-actions"><a className="button button-red" href="#work">EXPLORE MY WORK <span>↘</span></a><a className="button button-ghost" href="mailto:kbsanchai12@gmail.com">LET'S CONNECT <span>↗</span></a></div><div className="hero-social"><a href={GH} target="_blank" rel="noreferrer">GITHUB ↗</a><a href="mailto:kbsanchai12@gmail.com">EMAIL ↗</a><a href="tel:+919150672408">PHONE ↗</a></div></div>
      <div className="hero-scene" aria-hidden="true"><div className="hero-state-stage"><img className="hero-state-image hero-state-before" src={portfolioImage("01-hero-normal.webp")} alt="" fetchPriority="high"/><img className="hero-state-image hero-state-bankai" src={portfolioImage("01-hero-bankai.webp")} alt="" fetchPriority="high"/></div></div>
