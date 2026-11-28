@@ -164,7 +164,7 @@ function App(){
   const cursor=document.createElement("div");
   cursor.className="fire-cursor";
   cursor.setAttribute("aria-hidden","true");
-  cursor.innerHTML='<span class="fire-cursor-tail"></span><svg class="fire-cursor-pointer" viewBox="0 0 32 42" aria-hidden="true"><path d="M3 2 L3 34 L11 25 L17 40 L22 38 L16 23 L29 23 Z" fill="#fffaf0" stroke="#21151a" stroke-width="1.8" stroke-linejoin="round"/></svg>';
+  cursor.innerHTML='<span class="fire-cursor-tail"></span><svg class="fire-cursor-pointer" viewBox="0 0 32 42" aria-hidden="true"><path d="M3 2 L3 34 L11 25 L17 40 L22 38 L16 23 L29 23 Z" fill="#fffaf0" stroke="#21151a" stroke-width="1.8" stroke-linejoin="round"/></svg><svg class="fire-cursor-hand" viewBox="0 0 32 36" aria-hidden="true"><path d="M10 19V8.5c0-2.2 3.1-2.2 3.1 0v8.1-11c0-2.2 3.1-2.2 3.1 0v10.8-9.3c0-2.1 3.1-2.1 3.1 0v9.1-7.2c0-2.1 3.1-2.1 3.1 0v10.1c0 6.1-3.8 10.2-9.1 10.2h-1.2c-3.5 0-5.9-1.8-7-4.8L3 20.7c-.8-1.8 1.6-3.2 2.9-1.8L10 24z" fill="#fffaf0" stroke="#21151a" stroke-width="1.6" stroke-linejoin="round"/></svg>';
   document.body.appendChild(cursor);
   let targetX=0,targetY=0,currentX=0,currentY=0,lastSpark=0,raf=0;
   const sparks=new Set();
