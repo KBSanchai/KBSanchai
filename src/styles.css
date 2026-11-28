@@ -3203,3 +3203,123 @@ body.bankai-mode .skills-section .skill-number .category-crest{
     line-height:1.2;
   }
 }
+
+
+/* FLOATING SCROLL NAVIGATOR — always-visible previous/next controls */
+.scroll-navigator{
+  position:fixed;
+  z-index:1800;
+  top:50%;
+  right:clamp(10px,1.5vw,22px);
+  transform:translateY(-50%);
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  justify-content:center;
+  gap:9px;
+  width:48px;
+  padding:10px 7px 9px;
+  color:#43382c;
+  background:#f3eedfeF;
+  border:1px solid #b6a486;
+  box-shadow:3px 4px 0 #5b403022,0 10px 28px #1c120d1c;
+  backdrop-filter:blur(12px);
+}
+.scroll-nav-button{
+  display:grid;
+  place-items:center;
+  width:32px;
+  height:32px;
+  padding:0;
+  color:#f8f0df;
+  background:#8e2028;
+  border:1px solid #68161d;
+  box-shadow:2px 2px 0 #bfa985;
+  font:700 18px/1 var(--sans);
+  cursor:pointer;
+  transition:transform .18s ease,background .18s ease,box-shadow .18s ease;
+}
+.scroll-nav-button:hover{
+  transform:translateY(-2px);
+  background:#5b161e;
+  box-shadow:3px 4px 0 #bfa985;
+}
+.scroll-nav-button:active{transform:translateY(1px);box-shadow:none}
+.scroll-nav-button:focus-visible{
+  outline:2px solid #b72b2d;
+  outline-offset:3px;
+}
+.scroll-nav-meter{
+  position:relative;
+  width:4px;
+  height:62px;
+  overflow:hidden;
+  background:#cdbfa6;
+  border-radius:99px;
+}
+.scroll-nav-meter span{
+  position:absolute;
+  left:0;right:0;bottom:0;
+  display:block;
+  min-height:4px;
+  background:#a42a2b;
+  border-radius:99px;
+  transition:height .16s linear;
+}
+.scroll-nav-percent{
+  color:#8e2028;
+  font:700 8px var(--mono);
+  letter-spacing:.02em;
+  font-variant-numeric:tabular-nums;
+}
+.scroll-navigator small{
+  color:#776951;
+  writing-mode:vertical-rl;
+  font:700 7px var(--mono);
+  letter-spacing:.12em;
+}
+body.bankai-mode .scroll-navigator{
+  color:#f6e9e7;
+  background:#160d14eF;
+  border-color:#78303a;
+  box-shadow:3px 4px 0 #3a111b,0 10px 28px #0008;
+}
+body.bankai-mode .scroll-nav-button{
+  color:#fff;
+  background:#d82035;
+  border-color:#ff5360;
+  box-shadow:2px 2px 0 #641523;
+}
+body.bankai-mode .scroll-nav-button:hover{background:#a91a2c}
+body.bankai-mode .scroll-nav-meter{background:#49212c}
+body.bankai-mode .scroll-nav-meter span{background:#ff5360}
+body.bankai-mode .scroll-nav-percent{color:#ff6873}
+body.bankai-mode .scroll-navigator small{color:#c6a9ac}
+@media(max-width:999px){
+  .scroll-navigator{
+    top:auto;
+    right:14px;
+    bottom:max(16px,env(safe-area-inset-bottom));
+    transform:none;
+    width:auto;
+    min-width:48px;
+    padding:7px;
+    gap:6px;
+    border-radius:3px;
+  }
+  .scroll-nav-button{width:36px;height:36px;font-size:19px}
+  .scroll-nav-meter{height:34px;width:3px}
+  .scroll-navigator small{display:none}
+  .scroll-nav-percent{font-size:8px}
+}
+@media(max-width:390px){
+  .scroll-navigator{
+    right:9px;
+    bottom:max(12px,env(safe-area-inset-bottom));
+    padding:6px;
+  }
+  .scroll-nav-button{width:34px;height:34px}
+}
+@media(prefers-reduced-motion:reduce){
+  .scroll-nav-button,.scroll-nav-meter span{transition:none!important}
+}
