@@ -3778,3 +3778,57 @@ body.bankai-mode .ink-brush-canvas.is-fading{opacity:0}
 .command-bottom{display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap;margin-top:12px;padding:14px 20px;border-top:1px solid #ffffff20;color:#958b80;font:8px var(--mono);letter-spacing:.1em}
 @media(max-width:760px){.command-trigger{display:none}.project-tools{align-items:stretch}.project-search{width:100%}.project-tools .filter-row{gap:6px}.field-notes-modal,.command-panel{max-height:88vh}.modal-footer{align-items:flex-start;flex-direction:column}.modal-kanji{right:18px;top:60px}}
 @media(prefers-reduced-motion:reduce){.experience-backdrop,.field-notes-modal,.command-panel{animation:none!important}.project-quickview,.command-item,.command-trigger{transition:none!important}}
+
+
+/* SOUL SOCIETY FIELD GUIDE — persistent achievements and playable Reishi Hunt */
+.field-guide-launcher{position:fixed;right:22px;bottom:22px;z-index:2147482000}
+.field-guide-button{display:flex;align-items:center;gap:10px;padding:11px 14px;border:1px solid #c5a36b88;background:linear-gradient(135deg,#17151aee,#09090cee);color:#e7d2aa;box-shadow:0 8px 35px #0008,0 0 22px #c69b4a14;backdrop-filter:blur(12px);font:9px var(--mono);letter-spacing:.13em;cursor:pointer;transition:transform .2s,border-color .2s,box-shadow .2s}
+.field-guide-button:hover,.field-guide-button.active{transform:translateY(-3px);border-color:#e3bf79;box-shadow:0 12px 35px #0009,0 0 26px #c69b4a2b}
+.guide-sigil{font:19px serif;color:#e3bf79}.field-guide-button b{padding-left:9px;border-left:1px solid #ffffff2a;color:#f1e4c7;font-size:9px}
+.field-guide-panel{position:fixed;right:22px;bottom:78px;z-index:2147482400;width:min(410px,calc(100vw - 28px));max-height:min(78vh,760px);overflow:auto;padding:22px;border:1px solid #b58b586b;background:radial-gradient(ellipse at 100% 0%,#8e30231c,transparent 44%),linear-gradient(155deg,#19171b,#090a0e 78%);color:#f3f0ec;box-shadow:0 28px 90px #000c;backdrop-filter:blur(18px);animation:guideRise .28s cubic-bezier(.2,.7,.2,1) both}
+@keyframes guideRise{from{opacity:0;transform:translateY(12px) scale(.985)}to{opacity:1;transform:translateY(0) scale(1)}}
+.guide-head{display:flex;align-items:flex-start;justify-content:space-between;gap:12px;padding-bottom:14px;border-bottom:1px solid #ffffff20}
+.guide-head .eyebrow{margin:0;color:#c9a46a;font-size:8px;letter-spacing:.16em}
+.guide-head h3{margin:7px 0 0;font:700 26px/.95 var(--display);letter-spacing:.02em}
+.guide-head>button{width:30px;height:30px;border:1px solid #6e5947;background:transparent;color:#f3f0ec;font-size:19px;cursor:pointer}
+.guide-intro{margin:14px 0;color:#a9a19a;font-size:11px;line-height:1.7}
+.guide-progress{height:4px;overflow:hidden;background:#ffffff16}
+.guide-progress>span{display:block;height:100%;background:linear-gradient(90deg,#9e252c,#e0b66c);box-shadow:0 0 12px #d6a95b88;transition:width .35s ease}
+.guide-progress-label{display:flex;justify-content:space-between;margin:8px 0 12px;color:#938a81;font:8px var(--mono);letter-spacing:.14em}
+.guide-progress-label b{color:#e5c78e}
+.guide-achievements{display:grid;gap:6px}
+.guide-achievement{display:grid;grid-template-columns:34px 1fr 18px;align-items:center;gap:10px;padding:9px 10px;border:1px solid #ffffff13;background:#ffffff04;opacity:.58;transition:opacity .2s,border-color .2s,background .2s}
+.guide-achievement.earned{opacity:1;border-color:#c49c5c55;background:#d7ad6410}
+.guide-achievement-icon{display:grid;place-items:center;width:31px;height:31px;border:1px solid #a98b5b44;color:#c4a46f;font:16px serif}
+.guide-achievement.earned .guide-achievement-icon{border-color:#e0bb76;color:#f1d79e;box-shadow:inset 0 0 13px #d4a85425,0 0 12px #d4a85419}
+.guide-achievement strong{display:block;color:#e7ded1;font-size:10px;font-weight:700}
+.guide-achievement small{display:block;margin-top:3px;color:#928981;font-size:9px;line-height:1.45}
+.guide-achievement>b{color:#d9b779;text-align:center;font:15px var(--mono)}
+.guide-game{margin-top:15px;padding:13px;border:1px solid #bd95554a;background:linear-gradient(140deg,#b58b5810,#ffffff03)}
+.guide-game-top{display:flex;align-items:center;justify-content:space-between}
+.guide-game-top .eyebrow{margin:0;color:#b99561;font-size:8px;letter-spacing:.15em}
+.guide-game-top h4{margin:4px 0 0;color:#f2e5d1;font:700 20px/1 var(--display);letter-spacing:.07em}
+.guide-timer{color:#e8c98e;font:12px var(--mono)}
+.guide-game>p{margin:10px 0;color:#a69b91;font-size:10px;line-height:1.6}
+.reishi-arena{position:relative;display:grid;place-items:center;height:112px;overflow:hidden;border:1px dashed #b18c5a55;background:radial-gradient(ellipse at center,#b88c3417,transparent 68%),repeating-linear-gradient(0deg,transparent 0 22px,#ffffff08 23px),repeating-linear-gradient(90deg,transparent 0 22px,#ffffff08 23px)}
+.reishi-arena.playing{background-color:#b38b4b0a}
+.reishi-start{padding:10px 15px;border:1px solid #c9a568;background:#c9a56812;color:#f0d9a9;font:9px var(--mono);letter-spacing:.14em;cursor:pointer;transition:background .2s,transform .2s}
+.reishi-start:hover{transform:scale(1.04);background:#c9a56827}
+.reishi-target{position:absolute;display:grid;place-items:center;width:36px;height:36px;transform:translate(-50%,-50%);border:1px solid #f4d99b88;border-radius:50%;background:radial-gradient(circle,#ffe9ac88,#d2a04a25 55%,transparent 72%);color:#ffe9b7;font-size:24px;text-shadow:0 0 12px #ffe4a1;filter:drop-shadow(0 0 8px #f2c76d);cursor:crosshair;animation:reishiPulse .7s ease-in-out infinite alternate}
+@keyframes reishiPulse{from{scale:.86;filter:drop-shadow(0 0 5px #f2c76d)}to{scale:1.14;filter:drop-shadow(0 0 13px #f2c76d)}}
+.guide-game-meta{display:flex;justify-content:space-between;gap:10px;margin-top:8px;color:#82786f;font:8px var(--mono);letter-spacing:.1em}
+.guide-game-meta b{color:#e3c58e}
+.guide-reset{display:block;margin:13px 0 0 auto;padding:5px 0;border:0;background:transparent;color:#746c65;font:8px var(--mono);letter-spacing:.12em;cursor:pointer}
+.guide-reset:hover{color:#e2c38d}
+.secret-backdrop{z-index:2147482700}
+.secret-scroll{position:relative;width:min(100%,500px);overflow:hidden;padding:clamp(28px,6vw,52px);border:1px solid #c5a16c99;background:radial-gradient(ellipse at 85% 15%,#b12e3025,transparent 48%),linear-gradient(145deg,#f1e6d1,#d6c3a4);color:#251e1b;box-shadow:0 30px 100px #000c;animation:modalRise .4s cubic-bezier(.2,.7,.2,1) both}
+.secret-scroll:before,.secret-scroll:after{content:"";position:absolute;left:0;right:0;height:8px;background:repeating-linear-gradient(90deg,#a48d6a 0 2px,transparent 2px 10px);opacity:.45}
+.secret-scroll:before{top:0}.secret-scroll:after{bottom:0}
+.secret-scroll .eyebrow{position:relative;color:#92252b;font-size:9px;letter-spacing:.15em}
+.secret-scroll h2{position:relative;margin:22px 0;font:800 clamp(56px,12vw,90px)/.8 var(--display);letter-spacing:-.03em}
+.secret-scroll h2 em{color:#9e252c;font-style:normal}
+.secret-scroll>p:not(.eyebrow){position:relative;max-width:40ch;color:#51443a;font-size:13px;line-height:1.9}
+.secret-kanji{position:absolute;right:15px;top:10px;color:#942c2b12;font:170px/1 serif}
+.secret-scroll .button{position:relative;margin-top:15px}
+@media(max-width:600px){.field-guide-launcher{right:12px;bottom:12px}.field-guide-panel{right:10px;bottom:68px;width:calc(100vw - 20px);max-height:78vh;padding:17px}.field-guide-button{padding:10px 12px}.guide-achievement{padding:8px}.secret-scroll{padding:34px 25px}}
+@media(prefers-reduced-motion:reduce){.field-guide-panel,.secret-scroll{animation:none!important}.reishi-target{animation:none!important}.guide-progress>span{transition:none!important}}
