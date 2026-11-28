@@ -169,17 +169,24 @@ function App(){
   cursor.alt="";
   cursor.draggable=false;
   cursor.setAttribute("aria-hidden","true");
+  cursor.onload=()=>document.documentElement.classList.add("kon-cursor-active");
+  cursor.onerror=()=>{
+   document.documentElement.classList.remove("kon-cursor-active");
+   cursor.remove();
+  };
   document.body.appendChild(cursor);
+  let pointerSeen=false;
   const onMove=e=>{
    if(e.pointerType==="touch")return;
+   pointerSeen=true;
    cursor.style.transform="translate3d("+(e.clientX-18)+"px,"+(e.clientY-16)+"px,0)";
-   cursor.classList.toggle("is-interactive",!!e.target.closest("a,button,[role='button'],.project-card,.filter"));
+   cursor.classList.toggle("is-interactive",!!(e.target instanceof Element && e.target.closest("a,button,[role='button'],.project-card,.filter")));
    cursor.classList.add("is-visible");
   };
   const onDown=()=>cursor.classList.add("is-pressed");
   const onUp=()=>cursor.classList.remove("is-pressed");
   const onLeave=()=>cursor.classList.remove("is-visible");
-  const onEnter=()=>cursor.classList.add("is-visible");
+  const onEnter=()=>{if(pointerSeen)cursor.classList.add("is-visible");};
   window.addEventListener("pointermove",onMove,{passive:true});
   window.addEventListener("pointerdown",onDown);
   window.addEventListener("pointerup",onUp);
@@ -191,6 +198,7 @@ function App(){
    window.removeEventListener("pointerup",onUp);
    document.removeEventListener("mouseleave",onLeave);
    document.removeEventListener("mouseenter",onEnter);
+   document.documentElement.classList.remove("kon-cursor-active");
    cursor.remove();
   };
  },[]);
