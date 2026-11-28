@@ -3688,7 +3688,7 @@ body.bankai-mode .ink-brush-canvas.is-fading{opacity:0}
 .kon-cursor.is-interactive{filter:drop-shadow(0 4px 6px #f0443566);}
 .kon-cursor.is-pressed{filter:drop-shadow(0 2px 2px #24150f66);}
 @media(hover:hover) and (pointer:fine){
- html body,html body *:not(input):not(textarea):not([contenteditable="true"]){cursor:none!important}
+ html.kon-cursor-active body,html.kon-cursor-active body *:not(input):not(textarea):not([contenteditable="true"]){cursor:none!important}
 }
 @media(hover:none),(pointer:coarse){
  .kon-cursor{display:none!important}
