@@ -3886,3 +3886,25 @@ body.bankai-mode .field-notes-image-bankai{opacity:.9}
 .nav-links .nav-contact{border-color:#b99b6a!important;background:#d7c5a4!important;color:#5b3026!important}
 .nav-links .nav-contact:hover,.nav-links .nav-contact.is-active{background:#c8ad82!important}
 @media(max-width:760px){.nav-links{background:linear-gradient(180deg,#f7f0df,#e6d9bf)!important}.nav-links .nav-glide{background:linear-gradient(135deg,#7e302b,#54201f)!important}}
+
+/* READABILITY PASS — increase micro typography and fix active nav contrast */
+.nav-links>a{font-size:11px!important;font-weight:700;letter-spacing:.105em;padding-left:clamp(13px,1.5vw,21px);padding-right:clamp(13px,1.5vw,21px)}
+.nav-links>a.is-active,.nav-links>a:hover,.nav-links>a:focus-visible{color:#fff4df!important;text-shadow:0 1px 2px #2a1111}
+.nav-links .nav-contact{font-size:10px!important;color:#6b3328!important}
+.nav-links .nav-contact:hover,.nav-links .nav-contact.is-active{color:#fff4df!important}
+.nav-links .nav-glide{z-index:0!important}
+.nav-links>a{z-index:1}
+.filter{font-size:11px;letter-spacing:.07em}
+.project-meta,.project-stack span,.project-quickview,.project-link,.project-private{font-size:10px}
+.project-stack span{padding:6px 9px}
+.eyebrow{font-size:10px;letter-spacing:.13em}
+.section-heading p{font-size:14px;line-height:1.8}
+.about-details span{font-size:10px}
+.about-details small{font-size:11px}
+.stat-strip span{font-size:9px}
+.modal-topline,.modal-stack-label,.modal-footer{font-size:10px}
+.command-hint,.command-bottom,.command-item>span{font-size:10px}
+.command-item small{font-size:12px}
+.garage-topline,.garage-bottomline{font-size:10px}
+@media(max-width:1100px) and (min-width:761px){.nav-links>a{font-size:10px!important;padding:0 10px}}
+@media(max-width:760px){.nav-links>a{font-size:12px!important;min-height:44px}.nav-links .nav-contact{font-size:11px!important}}
