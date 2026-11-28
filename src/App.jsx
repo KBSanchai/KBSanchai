@@ -70,12 +70,12 @@ function App(){
  const [menu,setMenu]=useState(false),[filter,setFilter]=useState("ALL"),[progress,setProgress]=useState(0),[bankai,setBankai]=useState(false),[bankaiTransition,setBankaiTransition]=useState("");
  const [commandOpen,setCommandOpen]=useState(false),[commandQuery,setCommandQuery]=useState(""),[projectQuery,setProjectQuery]=useState(""),[activeProject,setActiveProject]=useState(null);
  const [questOpen,setQuestOpen]=useState(false),[questActive,setQuestActive]=useState(false),[questSeconds,setQuestSeconds]=useState(12),[reishiCount,setReishiCount]=useState(0),[reishiTarget,setReishiTarget]=useState({x:48,y:48}),[secretOpen,setSecretOpen]=useState(false);
- const [questMarks,setQuestMarks]=useState(()=>{try{return JSON.parse(localStorage.getItem("sanchai-field-guide")||"[]")}catch{return []}});
+ const [questMarks,setQuestMarks]=useState(()=>{try{const saved=JSON.parse(localStorage.getItem("sanchai-field-guide")||"[]");return Array.isArray(saved)?saved:[]}catch{return []}});
  const scrollTrack=useRef(null),logoTapRef=useRef({count:0,time:0});
  const visible=useMemo(()=>projects.filter(p=>(filter==="ALL"||p.cat===filter)&&(!projectQuery.trim()||[p.title,p.sub,p.desc,p.cat,...p.stack].join(" ").toLowerCase().includes(projectQuery.trim().toLowerCase()))),[filter,projectQuery]);
  const markQuest=key=>setQuestMarks(prev=>prev.includes(key)?prev:[...prev,key]);
  const startReishiHunt=()=>{setReishiCount(0);setQuestSeconds(12);setReishiTarget({x:12+Math.random()*76,y:16+Math.random()*68});setQuestActive(true);};
- const collectReishi=()=>{setReishiCount(n=>{const next=n+1;if(next>=5){setQuestActive(false);markQuest("reishi");}else setReishiTarget({x:12+Math.random()*76,y:16+Math.random()*68});return next;});};
+ const collectReishi=()=>{const next=reishiCount+1;setReishiCount(next);if(next>=5){setQuestActive(false);markQuest("reishi");}else setReishiTarget({x:12+Math.random()*76,y:16+Math.random()*68});};
  const handleLogoTap=()=>{const now=Date.now();if(now-logoTapRef.current.time>1800)logoTapRef.current.count=0;logoTapRef.current.time=now;logoTapRef.current.count+=1;if(logoTapRef.current.count>=5){setSecretOpen(true);markQuest("kon");logoTapRef.current.count=0;}};
  useEffect(()=>{
   const track=scrollTrack.current;
