@@ -3754,7 +3754,7 @@ body.bankai-mode .ink-brush-canvas.is-fading{opacity:0}
 @keyframes modalRise{from{transform:translateY(18px) scale(.985);opacity:0}to{transform:translateY(0) scale(1);opacity:1}}
 .modal-topline{display:flex;align-items:center;justify-content:space-between;gap:14px;padding-bottom:15px;border-bottom:1px solid #ffffff20;color:#d9b779;font:9px var(--mono);letter-spacing:.14em}
 .modal-topline button{border:1px solid #5a4c42;background:transparent;color:#f3f0ec;padding:8px 10px;font:9px var(--mono);cursor:pointer}
-.modal-kanji{position:absolute;top:54px;right:38px;color:#e5c58b13;font:clamp(100px,20vw,170px/1) serif;pointer-events:none}
+.modal-kanji{position:absolute;top:54px;right:38px;color:#e5c58b13;font-size:clamp(100px,20vw,170px);line-height:1;font-family:serif;pointer-events:none}
 .field-notes-modal>.eyebrow{margin-top:35px}
 .field-notes-modal h2{position:relative;max-width:520px;margin:15px 0 8px;font:800 clamp(42px,8vw,76px)/.9 var(--display);letter-spacing:-.035em;text-transform:uppercase}
 .modal-subtitle{color:#d9b779;font:13px var(--mono);letter-spacing:.04em}
