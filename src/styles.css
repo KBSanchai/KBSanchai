@@ -3908,3 +3908,37 @@ body.bankai-mode .field-notes-image-bankai{opacity:.9}
 .garage-topline,.garage-bottomline{font-size:10px}
 @media(max-width:1100px) and (min-width:761px){.nav-links>a{font-size:10px!important;padding:0 10px}}
 @media(max-width:760px){.nav-links>a{font-size:12px!important;min-height:44px}.nav-links .nav-contact{font-size:11px!important}}
+
+/* BANKAI NAV PALETTE — override the default parchment navigation in Bankai mode */
+body.bankai-mode .nav-links{
+  background:linear-gradient(180deg,#1b1018,#0d090f)!important;
+  border-color:#a83b4a!important;
+  box-shadow:0 8px 28px #0009,0 0 18px #d8203530,inset 0 1px #ffd9dc20!important;
+}
+body.bankai-mode .nav-links>a{color:#e5c9c8!important}
+body.bankai-mode .nav-links>a:hover,
+body.bankai-mode .nav-links>a:focus-visible,
+body.bankai-mode .nav-links>a.is-active{
+  color:#fff4ed!important;
+  text-shadow:0 0 10px #ff536088;
+}
+body.bankai-mode .nav-links .nav-glide{
+  background:linear-gradient(135deg,#a92335,#581521)!important;
+  border-color:#ff7180!important;
+  box-shadow:0 0 18px #f0443570,inset 0 1px #ffffff30!important;
+}
+body.bankai-mode .nav-links .nav-contact{
+  color:#fff0e8!important;
+  background:linear-gradient(135deg,#69202b,#35121d)!important;
+  border-color:#d45a68!important;
+}
+body.bankai-mode .nav-links .nav-contact:hover,
+body.bankai-mode .nav-links .nav-contact.is-active{
+  background:linear-gradient(135deg,#a92335,#581521)!important;
+}
+@media(max-width:760px){
+  body.bankai-mode .nav-links{
+    background:linear-gradient(180deg,#1b1018,#0d090f)!important;
+    border-color:#a83b4a!important;
+  }
+}
