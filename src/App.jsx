@@ -147,11 +147,14 @@ function App(){
    moveTo(next);
   };
   const onResize=()=>{target=clampTarget(track.scrollLeft);};
+  const onNativeScroll=()=>{if(!raf)target=clampTarget(track.scrollLeft);};
   track.addEventListener("wheel",onWheel,{passive:false});
+  track.addEventListener("scroll",onNativeScroll,{passive:true});
   window.addEventListener("keydown",onKey);
   window.addEventListener("resize",onResize);
   return()=>{
    track.removeEventListener("wheel",onWheel);
+   track.removeEventListener("scroll",onNativeScroll);
    window.removeEventListener("keydown",onKey);
    window.removeEventListener("resize",onResize);
    if(raf)cancelAnimationFrame(raf);
