@@ -3135,3 +3135,71 @@ body.bankai-mode .skills-section .skill-row{
 body.bankai-mode .skills-section .skill-number .category-crest{
   filter:drop-shadow(0 0 5px #ff536044);
 }
+
+
+/* SKILLS DESKTOP OVERLAP FIX — number + crest must have their own full column */
+@media(min-width:1000px){
+  main#home>.skills-section .skills-list{
+    grid-template-columns:repeat(2,minmax(0,1fr))!important;
+    column-gap:clamp(24px,2.6vw,44px)!important;
+    align-items:stretch;
+  }
+  main#home>.skills-section .skill-row{
+    grid-template-columns:74px minmax(145px,190px) minmax(0,1fr)!important;
+    grid-template-areas:"index category tags";
+    gap:14px!important;
+    align-items:center!important;
+    min-width:0;
+    min-height:88px;
+    padding:18px 0!important;
+  }
+  main#home>.skills-section .skill-number{
+    grid-area:index;
+    width:74px!important;
+    min-width:74px;
+    display:flex!important;
+    align-items:center!important;
+    justify-content:flex-start!important;
+    gap:9px!important;
+    padding:0!important;
+    white-space:nowrap;
+    overflow:visible;
+  }
+  main#home>.skills-section .skill-number>span{
+    flex:0 0 22px;
+    width:22px;
+    margin:0;
+  }
+  main#home>.skills-section .skill-number .category-crest{
+    flex:0 0 27px;
+    width:27px;
+    height:27px;
+    margin:0;
+  }
+  main#home>.skills-section .skill-row h3{
+    grid-area:category;
+    min-width:0;
+    width:100%;
+    margin:0!important;
+    padding:0;
+    align-self:center;
+    line-height:1.35;
+    overflow-wrap:break-word;
+  }
+  main#home>.skills-section .skill-chips{
+    grid-area:tags;
+    min-width:0;
+    width:100%;
+    display:flex;
+    flex-wrap:wrap;
+    align-items:center;
+    justify-content:flex-start;
+    gap:7px;
+  }
+  main#home>.skills-section .skill-chips span{
+    min-height:32px;
+    padding:6px 9px;
+    white-space:nowrap;
+    line-height:1.2;
+  }
+}
