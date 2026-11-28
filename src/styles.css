@@ -3695,3 +3695,34 @@ body.bankai-mode .ink-brush-canvas.is-fading{opacity:0}
  html body,html body *{cursor:auto!important}
 }
 @media(prefers-reduced-motion:reduce){.kon-cursor{transition:none!important}}
+
+
+/* FRAMER-INSPIRED INTERACTION LAYER: GoldenDust, EyeTrack and editorial typography */
+.hero-copy h1{position:relative;isolation:isolate;text-wrap:balance}
+.gold-dust-canvas{position:absolute;inset:0;z-index:2;width:100%;height:100%;pointer-events:none;overflow:visible}
+.hero-copy h1 .outline,.hero-copy h1 .red-word{position:relative;z-index:1}
+.section-heading h2,.about-title h2,.honours-heading h2,.contact-inner h2{letter-spacing:-.045em;text-wrap:balance}
+.project-info h3{font-family:'Cormorant Garamond',serif;font-size:clamp(25px,2.3vw,34px);line-height:1.02;letter-spacing:-.025em}
+.project-description,.about-body,.timeline-content p,.section-heading p,.hero-intro{max-width:62ch;text-wrap:pretty}
+.project-description{line-height:1.85}
+.about-title{position:relative}
+.about-eye-track{--eye-tilt:0deg;position:relative;width:min(100%,300px);height:230px;margin:28px 0 0 4px;display:grid;place-items:center;isolation:isolate;color:#e8c58a}
+.eye-orbit{position:absolute;inset:13px 30px;border:1px solid #b58b583d;border-radius:50%}
+.eye-orbit:before,.eye-orbit:after{content:"";position:absolute;inset:12px -8px;border:1px dashed #c9a46a55;border-radius:50%;transform:rotate(58deg)}
+.eye-orbit:after{transform:rotate(-58deg)}
+.orbit-one{animation:eyeOrbit 24s linear infinite}
+.orbit-one span{position:absolute;font:8px var(--mono);letter-spacing:.15em;color:#d9b779;background:#0b0c10;padding:3px 5px}
+.orbit-one span:nth-child(1){top:-5px;left:45%}.orbit-one span:nth-child(2){right:-17px;top:48%}.orbit-one span:nth-child(3){bottom:-5px;left:38%}.orbit-one span:nth-child(4){left:-18px;top:48%}
+.orbit-two{inset:35px 52px;border-color:#f044355c;animation:eyeOrbit 16s linear infinite reverse}
+.eye-core{width:112px;height:112px;border:1px solid #d5ad6a88;border-radius:50%;display:grid;place-items:center;background:radial-gradient(circle,#d3a65b19,transparent 70%);box-shadow:0 0 36px #d3a65b12,inset 0 0 22px #d3a65b10;transform:rotate(var(--eye-tilt));transition:transform .18s ease-out}
+.eye-core svg{width:92px;overflow:visible;filter:drop-shadow(0 0 8px #e0b56b45)}
+.eye-pupil{transition:cx .12s ease-out,cy .12s ease-out}
+.eye-caption{position:absolute;bottom:0;left:0;right:0;text-align:center;color:#888078;font:8px var(--mono);letter-spacing:.13em}
+@keyframes eyeOrbit{to{transform:rotate(360deg)}}
+.book-opening{will-change:transform,opacity}.book-opening-cover{backface-visibility:hidden}
+.reveal{filter:blur(2px)}.reveal.is-visible{filter:blur(0)}
+.section-label.reveal.is-visible{transition-delay:.04s}
+.project-card.reveal{transition:opacity .75s cubic-bezier(.2,.7,.2,1),transform .75s cubic-bezier(.2,.7,.2,1),filter .75s ease,border-color .35s,box-shadow .35s}
+.project-card:hover{box-shadow:0 22px 55px #0008,0 0 28px #f0443510}
+@media(max-width:760px){.about-eye-track{width:260px;height:205px;margin:18px auto 0}.gold-dust-canvas{opacity:.7}.project-info h3{font-size:28px}}
+@media(prefers-reduced-motion:reduce){.eye-orbit,.orbit-two{animation:none!important}.reveal,.reveal.is-visible{filter:none;transition:none!important}.gold-dust-canvas{display:none!important}}
