@@ -2992,3 +2992,146 @@ body:not(.bankai-mode) .contact-links a:hover{color:#4b171b!important}
   body:not(.bankai-mode) .contact-bottom p{max-width:100%}
   body:not(.bankai-mode) .contact-links{flex:1 1 auto}
 }
+
+
+/* SKILLS GRID ALIGNMENT — reserve room for the index + crest before the title */
+.skills-section .skills-list{
+  display:grid;
+  grid-template-columns:repeat(2,minmax(0,1fr));
+  column-gap:clamp(24px,2.6vw,44px);
+  align-items:stretch;
+}
+.skills-section .skill-row{
+  display:grid;
+  grid-template-columns:64px minmax(0,230px) minmax(0,1fr);
+  gap:14px;
+  align-items:center;
+  align-content:center;
+  min-width:0;
+  width:100%;
+  min-height:88px;
+  padding:18px 0;
+}
+.skills-section .skill-number{
+  display:flex;
+  align-items:center;
+  justify-content:flex-start;
+  gap:10px;
+  min-width:0;
+  width:64px;
+  padding:0;
+  white-space:nowrap;
+  line-height:1;
+}
+.skills-section .skill-number>span{
+  flex:0 0 22px;
+  width:22px;
+  text-align:left;
+}
+.skills-section .skill-number .category-crest{
+  flex:0 0 27px;
+  width:27px;
+  height:27px;
+  display:block;
+}
+.skills-section .skill-row h3{
+  min-width:0;
+  margin:0;
+  padding:0;
+  align-self:center;
+  line-height:1.35;
+  overflow-wrap:normal;
+  word-break:normal;
+}
+.skills-section .skill-chips{
+  min-width:0;
+  width:100%;
+  display:flex;
+  flex-wrap:wrap;
+  align-items:center;
+  align-content:center;
+  justify-content:flex-start;
+  gap:7px;
+}
+.skills-section .skill-chips span{
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  min-height:34px;
+  padding:7px 11px;
+  line-height:1.2;
+  white-space:nowrap;
+  flex:0 0 auto;
+}
+
+/* Tablet: keep the same columns, but let the tag area wrap as needed */
+@media(min-width:561px) and (max-width:999px){
+  .skills-section .skills-list{
+    display:grid;
+    grid-template-columns:minmax(0,1fr);
+    column-gap:0;
+  }
+  .skills-section .skill-row{
+    grid-template-columns:64px minmax(150px,220px) minmax(0,1fr);
+    gap:14px;
+    min-height:82px;
+  }
+  .skills-section .skill-chips span{
+    min-height:32px;
+    padding:7px 9px;
+    font-size:9px;
+  }
+}
+
+/* Phone: number + title on line one, tags aligned beneath the title */
+@media(max-width:560px){
+  .skills-section .skills-list{
+    display:block;
+  }
+  .skills-section .skill-row{
+    grid-template-columns:52px minmax(0,1fr);
+    grid-template-areas:
+      "number title"
+      ". chips";
+    gap:8px 12px;
+    align-items:center;
+    min-height:0;
+    padding:20px 0;
+  }
+  .skills-section .skill-number{
+    grid-area:number;
+    width:52px;
+    gap:7px;
+  }
+  .skills-section .skill-number>span{
+    flex-basis:19px;
+    width:19px;
+    font-size:9px;
+  }
+  .skills-section .skill-number .category-crest{
+    flex-basis:24px;
+    width:24px;
+    height:24px;
+  }
+  .skills-section .skill-row h3{
+    grid-area:title;
+    font-size:11px;
+    line-height:1.4;
+  }
+  .skills-section .skill-chips{
+    grid-area:chips;
+    gap:7px;
+  }
+  .skills-section .skill-chips span{
+    min-height:32px;
+    padding:7px 9px;
+  }
+}
+
+/* BANKAI keeps the same precise grid; only the palette changes */
+body.bankai-mode .skills-section .skill-row{
+  border-color:#622a34;
+}
+body.bankai-mode .skills-section .skill-number .category-crest{
+  filter:drop-shadow(0 0 5px #ff536044);
+}
