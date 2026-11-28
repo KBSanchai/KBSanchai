@@ -103,30 +103,103 @@ function App(){
  useEffect(()=>{
   const track=scrollTrack.current;
   if(!track)return;
+  let target=track.scrollLeft;
+  let raf=0;
   const wide=()=>window.innerWidth>=1000;
-  const onWheel=e=>{
-   if(!wide()||e.ctrlKey||Math.abs(e.deltaY)<Math.abs(e.deltaX))return;
-   const panel=e.target.closest("main#home > .section, main#home > .contact-section");
-   if(panel&&panel.scrollHeight>panel.clientHeight+2){
-    const canScrollDown=e.deltaY>0&&panel.scrollTop+panel.clientHeight<panel.scrollHeight-1;
-    const canScrollUp=e.deltaY<0&&panel.scrollTop>1;
-    if(canScrollDown||canScrollUp)return;
+  const clampTarget=value=>Math.max(0,Math.min(value,track.scrollWidth-track.clientWidth));
+  const animate=()=>{
+   const distance=target-track.scrollLeft;
+   if(Math.abs(distance)<0.7){
+    track.scrollLeft=target;
+    raf=0;
+    return;
    }
+   track.scrollLeft+=distance*.19;
+   raf=requestAnimationFrame(animate);
+  };
+  const moveTo=value=>{
+   target=clampTarget(value);
+   if(!raf)raf=requestAnimationFrame(animate);
+  };
+  const onWheel=e=>{
+   if(!wide()||e.ctrlKey||e.metaKey)return;
+   if(e.altKey){
+    const panel=e.target.closest("main#home > .section, main#home > .contact-section");
+    if(panel){e.preventDefault();panel.scrollTop+=e.deltaY||e.deltaX;}
+    return;
+   }
+   const delta=Math.abs(e.deltaX)>Math.abs(e.deltaY)*.65?e.deltaX:e.deltaY;
+   if(!delta)return;
    e.preventDefault();
-   track.scrollLeft+=e.deltaY;
+   moveTo(target+delta*1.08);
   };
   const onKey=e=>{
-   if(!wide()||!["ArrowRight","ArrowLeft"].includes(e.key))return;
+   if(!wide())return;
    const tag=document.activeElement?.tagName;
    if(["A","BUTTON","INPUT","TEXTAREA","SELECT"].includes(tag))return;
+   let next=null;
+   if(e.key==="ArrowRight"||e.key==="PageDown")next=target+window.innerWidth*.72;
+   if(e.key==="ArrowLeft"||e.key==="PageUp")next=target-window.innerWidth*.72;
+   if(e.key==="Home")next=0;
+   if(e.key==="End")next=track.scrollWidth;
+   if(next===null)return;
    e.preventDefault();
-   track.scrollBy({left:(e.key==="ArrowRight"?1:-1)*window.innerWidth*.72,behavior:"smooth"});
+   moveTo(next);
   };
+  const onResize=()=>{target=clampTarget(track.scrollLeft);};
   track.addEventListener("wheel",onWheel,{passive:false});
   window.addEventListener("keydown",onKey);
+  window.addEventListener("resize",onResize);
   return()=>{
    track.removeEventListener("wheel",onWheel);
    window.removeEventListener("keydown",onKey);
+   window.removeEventListener("resize",onResize);
+   if(raf)cancelAnimationFrame(raf);
+  };
+ },[]);
+ useEffect(()=>{
+  const finePointer=window.matchMedia("(hover: hover) and (pointer: fine)");
+  const reducedMotion=window.matchMedia("(prefers-reduced-motion: reduce)");
+  if(!finePointer.matches||reducedMotion.matches)return;
+  const cursor=document.createElement("div");
+  cursor.className="fire-cursor";
+  cursor.setAttribute("aria-hidden","true");
+  document.body.appendChild(cursor);
+  let lastSpark=0;
+  const sparks=new Set();
+  const onMove=e=>{
+   cursor.style.transform="translate3d("+e.clientX+"px,"+e.clientY+"px,0) translate(-28%,-24%)";
+   const now=performance.now();
+   if(now-lastSpark<58)return;
+   lastSpark=now;
+   const spark=document.createElement("i");
+   spark.className="fire-cursor-spark";
+   spark.setAttribute("aria-hidden","true");
+   spark.style.left=e.clientX+"px";
+   spark.style.top=e.clientY+"px";
+   spark.style.setProperty("--spark-dx",(Math.random()*24-12).toFixed(1)+"px");
+   spark.style.setProperty("--spark-dy",(Math.random()*24-10).toFixed(1)+"px");
+   document.body.appendChild(spark);
+   sparks.add(spark);
+   window.setTimeout(()=>{spark.remove();sparks.delete(spark);},620);
+  };
+  const onDown=()=>cursor.classList.add("is-pressed");
+  const onUp=()=>cursor.classList.remove("is-pressed");
+  const onLeave=()=>cursor.classList.add("is-hidden");
+  const onEnter=()=>cursor.classList.remove("is-hidden");
+  window.addEventListener("pointermove",onMove,{passive:true});
+  window.addEventListener("pointerdown",onDown);
+  window.addEventListener("pointerup",onUp);
+  document.addEventListener("mouseleave",onLeave);
+  document.addEventListener("mouseenter",onEnter);
+  return()=>{
+   window.removeEventListener("pointermove",onMove);
+   window.removeEventListener("pointerdown",onDown);
+   window.removeEventListener("pointerup",onUp);
+   document.removeEventListener("mouseleave",onLeave);
+   document.removeEventListener("mouseenter",onEnter);
+   cursor.remove();
+   sparks.forEach(s=>s.remove());
   };
  },[]);
  useEffect(()=>{document.body.classList.toggle("bankai-mode",bankai);return()=>document.body.classList.remove("bankai-mode")},[bankai]);
