@@ -67,7 +67,7 @@ const bleachProjectArt={
 };
 const skillCrest={"LANGUAGES":"AI & ML","FRONTEND & BACKEND":"FULL-STACK","CLOUD, DEVOPS & DATABASES":"DEVOPS","AI & MACHINE LEARNING":"AI & ML","TOOLS":"FULL-STACK"};
 function App(){
- const [menu,setMenu]=useState(false),[filter,setFilter]=useState("ALL"),[progress,setProgress]=useState(0),[bankai,setBankai]=useState(false);
+ const [menu,setMenu]=useState(false),[filter,setFilter]=useState("ALL"),[progress,setProgress]=useState(0),[bankai,setBankai]=useState(false),[bankaiTransition,setBankaiTransition]=useState("");
  const scrollTrack=useRef(null);
  const visible=useMemo(()=>filter==="ALL"?projects:projects.filter(p=>p.cat===filter),[filter]);
  useEffect(()=>{
@@ -164,26 +164,44 @@ function App(){
   const cursor=document.createElement("div");
   cursor.className="fire-cursor";
   cursor.setAttribute("aria-hidden","true");
+  cursor.innerHTML='<span class="fire-cursor-tail"></span><svg class="fire-cursor-pointer" viewBox="0 0 32 42" aria-hidden="true"><path d="M3 2 L3 34 L11 25 L17 40 L22 38 L16 23 L29 23 Z" fill="#fffaf0" stroke="#21151a" stroke-width="1.8" stroke-linejoin="round"/></svg>';
   document.body.appendChild(cursor);
-  let lastSpark=0;
+  let targetX=0,targetY=0,currentX=0,currentY=0,lastSpark=0,raf=0;
   const sparks=new Set();
-  const onMove=e=>{
-   cursor.style.transform="translate3d("+e.clientX+"px,"+e.clientY+"px,0) translate(-28%,-24%)";
-   const now=performance.now();
-   if(now-lastSpark<58)return;
-   lastSpark=now;
+  const tick=()=>{
+   currentX+=(targetX-currentX)*.34;
+   currentY+=(targetY-currentY)*.34;
+   cursor.style.transform="translate3d("+currentX+"px,"+currentY+"px,0)";
+   if(Math.abs(targetX-currentX)>.25||Math.abs(targetY-currentY)>.25){
+    raf=requestAnimationFrame(tick);
+   }else raf=0;
+  };
+  const makeSpark=(x,y)=>{
+   if(sparks.size>=9)return;
    const spark=document.createElement("i");
    spark.className="fire-cursor-spark";
    spark.setAttribute("aria-hidden","true");
-   spark.style.left=e.clientX+"px";
-   spark.style.top=e.clientY+"px";
-   spark.style.setProperty("--spark-dx",(Math.random()*24-12).toFixed(1)+"px");
-   spark.style.setProperty("--spark-dy",(Math.random()*24-10).toFixed(1)+"px");
+   spark.style.left=x+"px";
+   spark.style.top=y+"px";
+   spark.style.setProperty("--spark-dx",(Math.random()*22-11).toFixed(1)+"px");
+   spark.style.setProperty("--spark-dy",(Math.random()*18-9).toFixed(1)+"px");
    document.body.appendChild(spark);
    sparks.add(spark);
-   window.setTimeout(()=>{spark.remove();sparks.delete(spark);},620);
+   window.setTimeout(()=>{spark.remove();sparks.delete(spark);},520);
   };
-  const onDown=()=>cursor.classList.add("is-pressed");
+  const onMove=e=>{
+   targetX=e.clientX;
+   targetY=e.clientY;
+   if(!raf)raf=requestAnimationFrame(tick);
+   const now=performance.now();
+   if(now-lastSpark>72){
+    lastSpark=now;
+    makeSpark(e.clientX+12,e.clientY+24);
+   }
+   const interactive=e.target.closest("a,button,[role='button'],.project-card,.filter");
+   cursor.classList.toggle("is-interactive",!!interactive);
+  };
+  const onDown=()=>{cursor.classList.add("is-pressed");for(let i=0;i<3;i++)makeSpark(currentX+10+i*3,currentY+18+i*3)};
   const onUp=()=>cursor.classList.remove("is-pressed");
   const onLeave=()=>cursor.classList.add("is-hidden");
   const onEnter=()=>cursor.classList.remove("is-hidden");
@@ -198,16 +216,32 @@ function App(){
    window.removeEventListener("pointerup",onUp);
    document.removeEventListener("mouseleave",onLeave);
    document.removeEventListener("mouseenter",onEnter);
+   if(raf)cancelAnimationFrame(raf);
    cursor.remove();
    sparks.forEach(s=>s.remove());
   };
  },[]);
  useEffect(()=>{document.body.classList.toggle("bankai-mode",bankai);return()=>document.body.classList.remove("bankai-mode")},[bankai]);
+ useEffect(()=>{
+  if(!bankaiTransition)return;
+  document.body.classList.add("bankai-transitioning");
+  const timer=window.setTimeout(()=>setBankaiTransition(""),1380);
+  return()=>{
+   window.clearTimeout(timer);
+   document.body.classList.remove("bankai-transitioning");
+  };
+ },[bankaiTransition]);
+ const toggleBankai=()=>{
+  const next=!bankai;
+  setBankaiTransition(next?"release":"restore");
+  setBankai(next);
+ };
  const close=()=>setMenu(false);
  return <>
 <div className="book-opening" aria-hidden="true"><div className="book-opening-cover book-opening-left"><span>巻物</span></div><div className="book-opening-cover book-opening-right"><span>01</span></div><div className="book-opening-seal">✦</div></div>
+  {bankaiTransition&&<div className={"bankai-transition-overlay "+bankaiTransition} aria-hidden="true"><div className="bankai-transition-wash"/><div className="bankai-transition-slash"/><div className="bankai-transition-emblem"><span>卍解</span><i/></div><p>{bankaiTransition==="release"?"BANKAI · RELEASE":"RELEASE SEALED"}</p></div>}
   <div className="scroll-progress" style={{width:progress+"%"}}/>
-  <header className="site-header"><a className="wordmark" href="#home" onClick={close}>SANCHAI<span>®</span></a><button className="menu-toggle" aria-expanded={menu} onClick={()=>setMenu(!menu)}>{menu?"CLOSE −":"MENU +"}</button><nav className={menu?"nav-links open":"nav-links"} aria-label="Main navigation">{[["KNOW ME","#about"],["WORK","#work"],["TECH STACK","#skills"],["JOURNEY","#journey"]].map(([t,h])=><a key={t} href={h} onClick={close}>{t}</a>)}<a className="nav-contact" href="#contact" onClick={close}>SET UP A MEET ↗</a></nav><button className={"bankai-toggle"+(bankai?" active":"")} type="button" aria-pressed={bankai} onClick={()=>setBankai(v=>!v)}><span className="bankai-sigil">✦</span>{bankai?"BANKAI ON":"BANKAI MODE"}</button></header>
+  <header className="site-header"><a className="wordmark" href="#home" onClick={close}>SANCHAI<span>®</span></a><button className="menu-toggle" aria-expanded={menu} onClick={()=>setMenu(!menu)}>{menu?"CLOSE −":"MENU +"}</button><nav className={menu?"nav-links open":"nav-links"} aria-label="Main navigation">{[["KNOW ME","#about"],["WORK","#work"],["TECH STACK","#skills"],["JOURNEY","#journey"]].map(([t,h])=><a key={t} href={h} onClick={close}>{t}</a>)}<a className="nav-contact" href="#contact" onClick={close}>SET UP A MEET ↗</a></nav><button className={"bankai-toggle"+(bankai?" active":"")} type="button" aria-pressed={bankai} onClick={toggleBankai}><span className="bankai-sigil">✦</span>{bankai?"BANKAI ON":"BANKAI MODE"}</button></header>
   <main id="home" ref={scrollTrack} tabIndex={0} aria-label="Portfolio handscroll">
    <section className="hero"><div className="hero-grain"/><div className="hero-meta"><span>VOLUME 01 / 2026</span><span>MANGA NOTES · SOFTWARE · AI / ML</span></div>
     <div className="hero-layout"><div className="hero-copy"><div className="eyebrow"><i/> COMPUTER SCIENCE · AI & MACHINE LEARNING</div><h1>TURNING<br/><span className="outline">IDEAS INTO</span><br/><span className="red-word">INTELLIGENCE.</span></h1><p className="hero-intro">I'm <strong>Sanchai K B</strong> — a Computer Science and Engineering student building at the intersection of artificial intelligence, software engineering and meaningful products.</p><div className="hero-actions"><a className="button button-red" href="#work">EXPLORE MY WORK <span>↘</span></a><a className="button button-ghost" href="mailto:kbsanchai12@gmail.com">LET'S CONNECT <span>↗</span></a></div><div className="hero-social"><a href={GH} target="_blank" rel="noreferrer">GITHUB ↗</a><a href="mailto:kbsanchai12@gmail.com">EMAIL ↗</a><a href="tel:+919150672408">PHONE ↗</a></div></div>
