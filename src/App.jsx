@@ -161,64 +161,108 @@ function App(){
   const finePointer=window.matchMedia("(hover: hover) and (pointer: fine)");
   const reducedMotion=window.matchMedia("(prefers-reduced-motion: reduce)");
   if(!finePointer.matches||reducedMotion.matches)return;
-  const cursor=document.createElement("div");
-  cursor.className="fire-cursor";
-  cursor.setAttribute("aria-hidden","true");
-  cursor.innerHTML='<span class="fire-cursor-tail"></span><svg class="fire-cursor-pointer" viewBox="0 0 32 42" aria-hidden="true"><path d="M3 2 L3 34 L11 25 L17 40 L22 38 L16 23 L29 23 Z" fill="#fffaf0" stroke="#21151a" stroke-width="1.8" stroke-linejoin="round"/></svg><svg class="fire-cursor-hand" viewBox="0 0 32 36" aria-hidden="true"><path d="M10 19V8.5c0-2.2 3.1-2.2 3.1 0v8.1-11c0-2.2 3.1-2.2 3.1 0v10.8-9.3c0-2.1 3.1-2.1 3.1 0v9.1-7.2c0-2.1 3.1-2.1 3.1 0v10.1c0 6.1-3.8 10.2-9.1 10.2h-1.2c-3.5 0-5.9-1.8-7-4.8L3 20.7c-.8-1.8 1.6-3.2 2.9-1.8L10 24z" fill="#fffaf0" stroke="#21151a" stroke-width="1.6" stroke-linejoin="round"/></svg>';
-  document.body.appendChild(cursor);
-  let targetX=0,targetY=0,currentX=0,currentY=0,lastSpark=0,raf=0;
-  const sparks=new Set();
-  const tick=()=>{
-   currentX+=(targetX-currentX)*.34;
-   currentY+=(targetY-currentY)*.34;
-   cursor.style.transform="translate3d("+currentX+"px,"+currentY+"px,0)";
-   if(Math.abs(targetX-currentX)>.25||Math.abs(targetY-currentY)>.25){
-    raf=requestAnimationFrame(tick);
-   }else raf=0;
+  const canvas=document.createElement("canvas");
+  canvas.className="ink-brush-canvas";
+  canvas.setAttribute("aria-hidden","true");
+  const ctx=canvas.getContext("2d",{alpha:true});
+  const brush=document.createElement("div");
+  brush.className="ink-brush-cursor";
+  brush.setAttribute("aria-hidden","true");
+  brush.innerHTML='<svg viewBox="0 0 240 214" role="presentation"><defs><linearGradient id="brushWood" x1="0" y1="1" x2="1" y2="0"><stop offset="0" stop-color="#181817"/><stop offset=".28" stop-color="#575653"/><stop offset=".55" stop-color="#292927"/><stop offset=".82" stop-color="#77746d"/><stop offset="1" stop-color="#20201f"/></linearGradient><linearGradient id="brushMetal" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#d7d5cc"/><stop offset=".2" stop-color="#6e6d69"/><stop offset=".42" stop-color="#e4e1d8"/><stop offset=".65" stop-color="#4c4b49"/><stop offset="1" stop-color="#b1aea6"/></linearGradient><linearGradient id="brushHair" x1="0" y1="0" x2=".5" y2="1"><stop offset="0" stop-color="#ddd9ce"/><stop offset=".34" stop-color="#7b7974"/><stop offset=".72" stop-color="#292927"/><stop offset="1" stop-color="#070707"/></linearGradient><filter id="brushShadow" x="-30%" y="-30%" width="160%" height="160%"><feGaussianBlur stdDeviation="2"/></filter></defs><path d="M20 207 C44 190 67 170 91 144 C122 111 158 76 193 41 C202 32 213 21 222 13" fill="none" stroke="#141414" stroke-opacity=".24" stroke-width="19" filter="url(#brushShadow)"/><path d="M79 151 C98 127 126 99 155 70 C179 46 199 25 216 12 C224 8 231 13 226 21 C211 39 191 61 170 82 C142 111 114 140 91 163 Z" fill="url(#brushWood)" stroke="#1c1b1a" stroke-width="2"/><path d="M95 145 C129 110 162 78 196 42 M105 147 C137 113 170 80 207 34 M118 132 C150 98 183 65 213 30" fill="none" stroke="#d0cdc3" stroke-opacity=".24" stroke-width="1.4"/><path d="M210 10 C217 1 230 2 235 11 C239 21 230 29 221 27 C212 25 208 17 210 10 Z" fill="none" stroke="#252422" stroke-width="5"/><path d="M212 10 C218 4 228 5 232 12" fill="none" stroke="#bbb8af" stroke-width="1.5"/><path d="M92 135 C102 121 111 111 123 100 L141 116 C129 129 117 142 104 156 Z" fill="url(#brushMetal)" stroke="#4a4946" stroke-width="1.6"/><path d="M101 125 L134 105 M96 138 L125 115 M106 151 L137 122" stroke="#e4e0d7" stroke-opacity=".52" stroke-width="2"/><path d="M77 149 C84 139 91 133 99 126 L111 139 C103 149 94 160 86 169 Z" fill="url(#brushMetal)" stroke="#353432" stroke-width="1.6"/><path d="M82 148 L105 130 M89 159 L111 139" stroke="#e4e0d7" stroke-opacity=".45" stroke-width="1.5"/><path d="M85 165 C67 176 39 194 14 213 C34 207 65 194 93 179 C105 172 111 163 111 154 L99 145 C95 153 91 160 85 165 Z" fill="url(#brushHair)" stroke="#282725" stroke-width="1.3"/><path d="M90 160 C66 176 39 197 14 213 M95 162 C69 180 43 199 18 211 M100 158 C78 177 50 196 24 207 M104 156 C84 173 59 191 32 202 M108 154 C89 170 68 185 42 197 M99 169 C78 185 57 198 36 207 M87 169 C65 185 44 200 23 210" fill="none" stroke="#e0ddd4" stroke-opacity=".58" stroke-width="1.2"/><path d="M14 213 C18 207 23 204 29 202 C25 208 19 212 14 213 Z" fill="#080808"/><path d="M72 174 L91 158" stroke="#f2eee4" stroke-opacity=".55" stroke-width="1.5"/></svg>';
+  document.body.appendChild(canvas);
+  document.body.appendChild(brush);
+  let previous=null,lastInk=0,clearTimer=0,fadeTimer=0,raf=0;
+  const dpr=Math.min(window.devicePixelRatio||1,2);
+  const resizeCanvas=()=>{
+   const w=window.innerWidth,h=window.innerHeight;
+   canvas.width=Math.round(w*dpr);
+   canvas.height=Math.round(h*dpr);
+   canvas.style.width=w+"px";
+   canvas.style.height=h+"px";
+   ctx.setTransform(dpr,0,0,dpr,0,0);
+   previous=null;
   };
-  const makeSpark=(x,y)=>{
-   if(sparks.size>=9)return;
-   const spark=document.createElement("i");
-   spark.className="fire-cursor-spark";
-   spark.setAttribute("aria-hidden","true");
-   spark.style.left=x+"px";
-   spark.style.top=y+"px";
-   spark.style.setProperty("--spark-dx",(Math.random()*22-11).toFixed(1)+"px");
-   spark.style.setProperty("--spark-dy",(Math.random()*18-9).toFixed(1)+"px");
-   document.body.appendChild(spark);
-   sparks.add(spark);
-   window.setTimeout(()=>{spark.remove();sparks.delete(spark);},520);
+  resizeCanvas();
+  const paint=(a,b)=>{
+   const dx=b.x-a.x,dy=b.y-a.y;
+   const distance=Math.hypot(dx,dy);
+   if(distance<1.1)return;
+   const speed=Math.min(28,distance);
+   const width=Math.max(3.5,Math.min(18,15.5-speed*.36));
+   const midX=(a.x+b.x)/2,midY=(a.y+b.y)/2;
+   ctx.save();
+   ctx.globalCompositeOperation="source-over";
+   ctx.lineCap="round";
+   ctx.lineJoin="round";
+   ctx.shadowColor="rgba(20,18,16,.23)";
+   ctx.shadowBlur=3;
+   ctx.strokeStyle="rgba(25,24,22,.17)";
+   ctx.lineWidth=width*1.9;
+   ctx.beginPath();ctx.moveTo(a.x,a.y);ctx.quadraticCurveTo(a.x,a.y,midX,midY);ctx.stroke();
+   ctx.shadowBlur=0;
+   ctx.strokeStyle="rgba(25,24,22,.46)";
+   ctx.lineWidth=width;
+   ctx.beginPath();ctx.moveTo(a.x,a.y);ctx.quadraticCurveTo(a.x,a.y,midX,midY);ctx.stroke();
+   ctx.strokeStyle="rgba(8,8,8,.20)";
+   ctx.lineWidth=Math.max(1.1,width*.24);
+   ctx.beginPath();ctx.moveTo(a.x+1.2,a.y-1.1);ctx.quadraticCurveTo(a.x+1.2,a.y-1.1,midX+1.2,midY-1.1);ctx.stroke();
+   ctx.restore();
+   if(distance>6&&performance.now()-lastInk>32){
+    lastInk=performance.now();
+    const splats=Math.min(4,Math.max(1,Math.round(distance/12)));
+    for(let i=0;i<splats;i++){
+     const t=Math.random();
+     const px=a.x+dx*t+(Math.random()-.5)*width*2.8;
+     const py=a.y+dy*t+(Math.random()-.5)*width*2.8;
+     const radius=Math.random()*2.6+.65;
+     ctx.beginPath();ctx.fillStyle="rgba(22,21,19,"+(Math.random()*.25+.12)+")";
+     ctx.ellipse(px,py,radius,radius*(.55+Math.random()),Math.random(),0,Math.PI*2);ctx.fill();
+    }
+   }
+  };
+  const positionBrush=(x,y)=>{
+   const w=brush.offsetWidth,h=brush.offsetHeight;
+   brush.style.transform="translate3d("+(x-w*.055)+"px,"+(y-h*.965)+"px,0)";
   };
   const onMove=e=>{
-   targetX=e.clientX;
-   targetY=e.clientY;
-   if(!raf)raf=requestAnimationFrame(tick);
-   const now=performance.now();
-   if(now-lastSpark>72){
-    lastSpark=now;
-    makeSpark(e.clientX+12,e.clientY+24);
-   }
-   const interactive=e.target.closest("a,button,[role='button'],.project-card,.filter");
-   cursor.classList.toggle("is-interactive",!!interactive);
+   if(e.pointerType==="touch")return;
+   positionBrush(e.clientX,e.clientY);
+   brush.classList.toggle("is-interactive",!!e.target.closest("a,button,[role='button'],.project-card,.filter"));
+   brush.classList.remove("is-hidden");
+   canvas.classList.remove("is-fading");
+   if(clearTimer)window.clearTimeout(clearTimer);
+   if(fadeTimer)window.clearTimeout(fadeTimer);
+   if(previous)paint(previous,{x:e.clientX,y:e.clientY});
+   previous={x:e.clientX,y:e.clientY};
+   clearTimer=window.setTimeout(()=>{
+    canvas.classList.add("is-fading");
+    fadeTimer=window.setTimeout(()=>{
+     ctx.clearRect(0,0,canvas.width/dpr,canvas.height/dpr);
+     canvas.classList.remove("is-fading");
+    },1750);
+   },4800);
   };
-  const onDown=()=>{cursor.classList.add("is-pressed");for(let i=0;i<3;i++)makeSpark(currentX+10+i*3,currentY+18+i*3)};
-  const onUp=()=>cursor.classList.remove("is-pressed");
-  const onLeave=()=>cursor.classList.add("is-hidden");
-  const onEnter=()=>cursor.classList.remove("is-hidden");
+  const onDown=()=>brush.classList.add("is-pressed");
+  const onUp=()=>brush.classList.remove("is-pressed");
+  const onLeave=()=>{brush.classList.add("is-hidden");previous=null;};
+  const onEnter=()=>brush.classList.remove("is-hidden");
   window.addEventListener("pointermove",onMove,{passive:true});
   window.addEventListener("pointerdown",onDown);
   window.addEventListener("pointerup",onUp);
+  window.addEventListener("resize",resizeCanvas);
   document.addEventListener("mouseleave",onLeave);
   document.addEventListener("mouseenter",onEnter);
   return()=>{
    window.removeEventListener("pointermove",onMove);
    window.removeEventListener("pointerdown",onDown);
    window.removeEventListener("pointerup",onUp);
+   window.removeEventListener("resize",resizeCanvas);
    document.removeEventListener("mouseleave",onLeave);
    document.removeEventListener("mouseenter",onEnter);
+   if(clearTimer)window.clearTimeout(clearTimer);
+   if(fadeTimer)window.clearTimeout(fadeTimer);
    if(raf)cancelAnimationFrame(raf);
-   cursor.remove();
-   sparks.forEach(s=>s.remove());
+   canvas.remove();brush.remove();
   };
  },[]);
  useEffect(()=>{document.body.classList.toggle("bankai-mode",bankai);return()=>document.body.classList.remove("bankai-mode")},[bankai]);
