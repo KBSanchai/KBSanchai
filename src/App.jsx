@@ -233,7 +233,7 @@ function App(){
   </main>
   <aside className="scroll-navigator" aria-label="Page navigation">
    <button type="button" className="scroll-nav-button scroll-nav-up" aria-label="Go to previous section" title="Previous section" onClick={()=>moveScroll(-1)}><span>↑</span></button>
-   <div className="scroll-nav-meter" aria-hidden="true"><span style={{height:Math.max(4,progress)+"%"}}/></div>
+   <div className="scroll-nav-meter" aria-hidden="true"><span style={{top:Math.min(100,Math.max(0,progress))+"%"}}/></div>
    <span className="scroll-nav-percent" aria-live="off">{Math.round(progress)}%</span>
    <button type="button" className="scroll-nav-button scroll-nav-down" aria-label="Go to next section" title="Next section" onClick={()=>moveScroll(1)}><span>↓</span></button>
    <small>SCROLL</small>
