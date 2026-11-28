@@ -3569,3 +3569,11 @@ body.bankai-mode .project-art img{
     transition:none!important;
   }
 }
+
+
+/* The custom fire pointer replaces the native pointer on every fine-pointer viewport */
+@media(hover:hover) and (pointer:fine){
+  html body,html body *:not(input):not(textarea):not([contenteditable="true"]){
+    cursor:none!important;
+  }
+}
