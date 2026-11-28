@@ -204,6 +204,14 @@ function App(){
  },[]);
  useEffect(()=>{document.body.classList.toggle("bankai-mode",bankai);return()=>document.body.classList.remove("bankai-mode")},[bankai]);
  const close=()=>setMenu(false);
+ const moveScroll=(direction)=>{
+  const track=scrollTrack.current;
+  if(window.innerWidth>=1000&&track){
+   track.scrollBy({left:direction*track.clientWidth*.72,behavior:"smooth"});
+  }else{
+   window.scrollBy({top:direction*window.innerHeight*.78,behavior:"smooth"});
+  }
+ };
  return <>
 <div className="book-opening" aria-hidden="true"><div className="book-opening-cover book-opening-left"><span>巻物</span></div><div className="book-opening-cover book-opening-right"><span>01</span></div><div className="book-opening-seal">✦</div></div>
   <div className="scroll-progress" style={{width:progress+"%"}}/>
@@ -223,6 +231,13 @@ function App(){
    <section className="contact-section" id="contact"><div className="contact-backdrop"><div className="contact-sun"/><div className="contact-kanji">終</div></div><div className="contact-inner"><div className="section-label reveal"><span>06 / YOUR MOVE</span><span>OPEN TO WHAT'S NEXT</span></div><p className="eyebrow reveal">HAVE A GOOD IDEA?</p><h2 className="reveal">LET'S MAKE<br/><em>IT REAL.</em></h2><div className="contact-bottom reveal"><p>Interested in AI, software engineering or building something useful together? I'd love to hear from you.</p><div className="contact-links"><a href="mailto:kbsanchai12@gmail.com">KBSANCHAI12@GMAIL.COM ↗</a><a href="tel:+919150672408">+91 91506 72408 ↗</a><a href={GH} target="_blank" rel="noreferrer">GITHUB PROFILE ↗</a></div></div></div></section>
   <footer className="site-footer"><a className="footer-logo" href="#home">SANCHAI<span>®</span></a><span>CHENNAI, INDIA · ENGLISH / TAMIL / HINDI</span><a href="#home">BACK TO TOP ↑</a><small>© {new Date().getFullYear()} SANCHAI K B · BUILT WITH CURIOSITY</small></footer>
   </main>
+  <aside className="scroll-navigator" aria-label="Page navigation">
+   <button type="button" className="scroll-nav-button scroll-nav-up" aria-label="Go to previous section" title="Previous section" onClick={()=>moveScroll(-1)}><span>↑</span></button>
+   <div className="scroll-nav-meter" aria-hidden="true"><span style={{height:Math.max(4,progress)+"%"}}/></div>
+   <span className="scroll-nav-percent" aria-live="off">{Math.round(progress)}%</span>
+   <button type="button" className="scroll-nav-button scroll-nav-down" aria-label="Go to next section" title="Next section" onClick={()=>moveScroll(1)}><span>↓</span></button>
+   <small>SCROLL</small>
+  </aside>
  </>;
 }
 export default App;
