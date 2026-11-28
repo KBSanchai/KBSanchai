@@ -198,11 +198,11 @@ function App(){
    ctx.shadowBlur=3;
    ctx.strokeStyle="rgba(25,24,22,.17)";
    ctx.lineWidth=width*1.9;
-   ctx.beginPath();ctx.moveTo(a.x,a.y);ctx.quadraticCurveTo(a.x,a.y,midX,midY);ctx.stroke();
+   ctx.beginPath();ctx.moveTo(a.x,a.y);ctx.quadraticCurveTo(midX,midY,b.x,b.y);ctx.stroke();
    ctx.shadowBlur=0;
    ctx.strokeStyle="rgba(25,24,22,.46)";
    ctx.lineWidth=width;
-   ctx.beginPath();ctx.moveTo(a.x,a.y);ctx.quadraticCurveTo(a.x,a.y,midX,midY);ctx.stroke();
+   ctx.beginPath();ctx.moveTo(a.x,a.y);ctx.quadraticCurveTo(midX,midY,b.x,b.y);ctx.stroke();
    ctx.strokeStyle="rgba(8,8,8,.20)";
    ctx.lineWidth=Math.max(1.1,width*.24);
    ctx.beginPath();ctx.moveTo(a.x+1.2,a.y-1.1);ctx.quadraticCurveTo(a.x+1.2,a.y-1.1,midX+1.2,midY-1.1);ctx.stroke();
