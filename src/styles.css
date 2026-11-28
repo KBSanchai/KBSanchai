@@ -3841,52 +3841,6 @@ body.bankai-mode .ink-brush-canvas.is-fading{opacity:0}
 .hero-ribbon-canvas{contain:strict}
 @media(hover:none),(pointer:coarse),(prefers-reduced-motion:reduce){.hero-ribbon-canvas{display:none!important}}
 
-/* SOUL SOCIETY ORBIT ARCHIVE — scroll-driven 3D project carousel */
-.orbit-viewport{position:relative;width:100%;overflow-x:auto;overflow-y:hidden;padding:32px max(5vw,34px) 42px;perspective:1400px;perspective-origin:50% 42%;scrollbar-width:thin;scrollbar-color:#a88b5d #171419;overscroll-behavior-x:contain;scroll-snap-type:x proximity}
-.orbit-viewport::-webkit-scrollbar{height:7px}.orbit-viewport::-webkit-scrollbar-track{background:#211c1d}.orbit-viewport::-webkit-scrollbar-thumb{background:#a88b5d;border:1px solid #211c1d;border-radius:9px}
-.orbit-track{display:flex;align-items:stretch;gap:clamp(18px,3vw,42px);width:max-content;min-width:100%;padding:18px max(7vw,42px) 28px;transform-style:preserve-3d}
-.orbit-card{flex:0 0 clamp(285px,31vw,390px);width:clamp(285px,31vw,390px);scroll-snap-align:center;transform-style:preserve-3d;transform:translateZ(var(--orbit-depth,0px)) rotateY(var(--orbit-rotate,0deg)) scale(var(--orbit-scale,1));opacity:var(--orbit-opacity,1);transition:transform .18s ease-out,opacity .18s ease-out,box-shadow .3s,border-color .3s;will-change:transform,opacity}
-.orbit-card:hover{transform:translateZ(125px) rotateY(0deg) scale(1.035);opacity:1;z-index:3}
-.orbit-instruction{display:flex;justify-content:space-between;gap:16px;margin:0 0 20px;color:#d9b779;font:9px var(--mono);letter-spacing:.15em}.orbit-instruction span{color:#82786f}
-.orbit-viewport:focus-visible{outline:1px solid #d9b779;outline-offset:4px}
-@media(max-width:999px){.orbit-viewport{overflow:visible;padding:8px 0 20px;perspective:none}.orbit-track{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));width:100%;gap:16px;padding:0;transform:none}.orbit-card{width:auto;min-width:0;flex:auto;transform:none!important;opacity:1!important;scroll-snap-align:none}.orbit-instruction{display:none}}
-@media(max-width:620px){.orbit-track{grid-template-columns:1fr;gap:18px}}
-@media(prefers-reduced-motion:reduce){.orbit-card{transition:none!important;transform:none!important;opacity:1!important}.orbit-viewport{scroll-behavior:auto}}
-
-/* FRAMER ORBIT PROJECT — pinned scroll sequence that resolves into a project grid */
-.orbit-story{position:relative;height:205vh;margin:10px 0 0}
-.orbit-stage{position:sticky;top:0;height:min(76vh,760px);min-height:520px;display:grid;place-items:center;perspective:1500px;perspective-origin:50% 45%;isolation:isolate}
-.orbit-stage:before{content:"";position:absolute;width:min(62vw,700px);aspect-ratio:1;border:1px solid #c9a46a20;border-radius:50%;box-shadow:0 0 0 32px #c9a46a08,0 0 0 90px #c9a46a05;pointer-events:none}
-.orbit-stage:after{content:"";position:absolute;inset:8% 14%;border:1px dashed #c9a46a16;border-radius:50%;transform:rotate(-12deg);pointer-events:none}
-.orbit-track{position:relative;width:100%;height:100%;transform-style:preserve-3d}
-.orbit-card{position:absolute;left:50%;top:50%;width:clamp(250px,27vw,340px);max-height:95%;overflow:hidden;transform:translate3d(calc(-50% + var(--orbit-x,0px)),calc(-50% + var(--orbit-y,0px)),var(--orbit-z,0px)) rotateY(var(--orbit-turn,0deg)) scale(var(--orbit-scale,.8));transform-style:preserve-3d;opacity:var(--orbit-alpha,.4);z-index:var(--orbit-order,1);transition:transform .55s cubic-bezier(.2,.7,.2,1),opacity .45s ease,box-shadow .35s,border-color .35s;will-change:transform,opacity}
-.orbit-card .project-art{height:clamp(125px,14vw,180px)}
-.orbit-card .project-info{padding:clamp(14px,1.6vw,21px)}
-.orbit-card .project-description{display:-webkit-box;-webkit-line-clamp:3;-webkit-box-orient:vertical;overflow:hidden;font-size:11px;line-height:1.6}
-.orbit-card .project-stack{gap:5px}
-.orbit-card .project-stack span{font-size:8px;padding:5px 7px}
-.orbit-card:hover{opacity:1;transform:translate3d(calc(-50% + var(--orbit-x,0px)),calc(-50% + var(--orbit-y,0px)),220px) rotateY(0) scale(1.04);z-index:500}
-.orbit-center-mark{position:absolute;z-index:0;display:grid;place-items:center;width:110px;height:110px;border:1px solid #c9a46a55;border-radius:50%;color:#d9b779;background:radial-gradient(circle,#d9b77918,transparent 72%);font:48px serif;box-shadow:0 0 55px #d9b77912;transition:opacity .35s,transform .5s}
-.orbit-stage.is-grid{position:relative;top:auto;height:auto;min-height:0;display:block;perspective:none;padding:22px 0 8px}
-.orbit-stage.is-grid:before,.orbit-stage.is-grid:after,.orbit-stage.is-grid .orbit-center-mark{opacity:0;transform:scale(.6)}
-.orbit-stage.is-grid .orbit-track{height:auto;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:15px;transform:none;perspective:none}
-.orbit-stage.is-grid .orbit-card{position:relative;left:auto;top:auto;width:auto;max-height:none;min-width:0;transform:none!important;opacity:1!important;z-index:auto!important}
-.orbit-stage.is-grid .orbit-card:hover{transform:translateY(-6px)!important}
-.orbit-stage.is-grid .orbit-card .project-description{display:block;overflow:visible}
-.orbit-instruction{display:flex;justify-content:space-between;gap:16px;margin:8px 0 20px;color:#d9b779;font:9px var(--mono);letter-spacing:.15em}
-.orbit-instruction span{color:#82786f}
-@media(max-width:999px){
- .orbit-story{height:auto;margin:10px 0 0}
- .orbit-stage,.orbit-stage.is-grid{position:relative;top:auto;height:auto;min-height:0;display:block;padding:0;perspective:none}
- .orbit-stage:before,.orbit-stage:after,.orbit-center-mark{display:none}
- .orbit-track,.orbit-stage.is-grid .orbit-track{height:auto;display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px;transform:none;padding:0}
- .orbit-card,.orbit-stage.is-grid .orbit-card{position:relative;left:auto;top:auto;width:auto;max-height:none;min-width:0;transform:none!important;opacity:1!important;z-index:auto!important}
- .orbit-card .project-description{display:block;overflow:visible}
- .orbit-instruction{display:none}
-}
-@media(max-width:620px){.orbit-track,.orbit-stage.is-grid .orbit-track{grid-template-columns:1fr;gap:18px}}
-@media(prefers-reduced-motion:reduce){.orbit-card,.orbit-center-mark{transition:none!important}.orbit-stage{perspective:none}.orbit-stage:not(.is-grid) .orbit-card{transform:none!important;opacity:1!important}}
-
 /* GLIDE NAVIGATION — compact pill with a sliding Soul Society highlight */
 .site-header{gap:clamp(12px,2vw,28px)}
 .nav-links{position:relative;isolation:isolate;gap:3px;padding:5px;border:1px solid #c6a46c38;border-radius:999px;background:linear-gradient(145deg,#17171cef,#0c0d11ed);box-shadow:0 8px 26px #0005,inset 0 1px #ffffff0b;white-space:nowrap}
