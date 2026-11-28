@@ -3900,3 +3900,44 @@ body.bankai-mode .ink-brush-canvas.is-fading{opacity:0}
 @media(max-width:760px){.site-header{gap:10px}.nav-links{border-radius:14px;white-space:normal}.nav-links .nav-glide{border-radius:9px}.nav-links>a{justify-content:flex-start;min-height:42px;padding:0 14px}.nav-links .nav-contact{margin:0}}
 @media(max-width:560px){.site-header{gap:8px}.nav-links{gap:9px;padding:14px}.nav-links .nav-glide{top:14px;left:14px;height:42px}}
 @media(prefers-reduced-motion:reduce){.nav-links .nav-glide{transition:none!important}}
+
+/* ALLOY ACCORDION — Bleach-inspired expandable project index */
+.orbit-story,.orbit-instruction{display:none!important}
+.alloy-work-accordion{position:relative;border-top:1px solid #b99a684d;margin:22px 0 34px}
+.alloy-work-item{position:relative;border-bottom:1px solid #b99a684d;overflow:hidden;transition:background .35s ease}
+.alloy-work-item.is-expanded{background:linear-gradient(100deg,#b9986810,transparent 72%)}
+.alloy-work-trigger{width:100%;min-height:82px;display:grid;grid-template-columns:64px minmax(190px,1.2fr) minmax(120px,.55fr) 42px;align-items:center;gap:16px;padding:14px 18px;border:0;background:transparent;color:inherit;text-align:left;cursor:pointer;transition:padding .35s ease}
+.alloy-work-trigger:hover{padding-left:26px}
+.alloy-work-number{font:11px var(--mono);color:#b48e55;letter-spacing:.12em}
+.alloy-work-title{font:clamp(19px,2.4vw,30px) var(--display);letter-spacing:.015em;color:var(--ink);transition:color .25s}
+.alloy-work-item.is-expanded .alloy-work-title{color:#9d2927}
+.alloy-work-category{font:9px var(--mono);letter-spacing:.12em;color:var(--muted)}
+.alloy-work-toggle{width:34px;height:34px;display:grid;place-items:center;border:1px solid #b99a6870;border-radius:50%;color:#a77b3d;font-size:18px;transition:transform .35s,background .35s,color .35s}
+.alloy-work-item.is-expanded .alloy-work-toggle{transform:rotate(180deg);background:#a32b2a;color:#f2e5c9;border-color:#a32b2a}
+.alloy-work-content{display:grid;grid-template-columns:minmax(240px,.88fr) minmax(280px,1.12fr);gap:clamp(24px,4vw,58px);padding:8px clamp(18px,4vw,64px) 34px 98px;animation:alloyReveal .45s cubic-bezier(.2,.7,.2,1) both}
+@keyframes alloyReveal{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:translateY(0)}}
+.alloy-work-art{position:relative;min-height:265px;overflow:hidden;display:grid;place-items:center;border:1px solid #b99a6845;background:radial-gradient(circle at 50% 42%,#c6a46a35,transparent 62%),linear-gradient(145deg,#242126,#0d0d12);box-shadow:8px 10px 0 #8d76531c}
+.alloy-work-art .project-art-orbit{position:absolute;width:72%;aspect-ratio:1;border:1px solid #d5b16a66;border-radius:50%;box-shadow:0 0 0 22px #c9a46a0b,0 0 0 48px #c9a46a08}
+.alloy-work-art .project-crest{position:absolute;left:22px;top:20px;color:#e1c48e}
+.alloy-work-art .project-art-mark{position:absolute;z-index:1;font:clamp(55px,8vw,100px) serif;color:#e8d3a6;text-shadow:0 0 30px #d7ae6b88}
+.alloy-work-art .project-art-no{position:absolute;right:18px;top:22px;color:#d4b477;font:9px var(--mono);letter-spacing:.14em}
+.alloy-work-art .bleach-project-character,.alloy-work-art .project-uploaded-art{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:.78;mix-blend-mode:screen}
+.alloy-work-art .project-uploaded-normal{opacity:.82}
+.alloy-work-art .project-uploaded-bankai{opacity:0}
+body.bankai-mode .alloy-work-art .project-uploaded-normal{opacity:0}
+body.bankai-mode .alloy-work-art .project-uploaded-bankai{opacity:.9}
+.alloy-work-details{align-self:center;min-width:0}
+.alloy-work-details h3{margin:13px 0 12px;font:clamp(22px,2.7vw,34px) var(--display);color:var(--ink);line-height:1.12}
+.alloy-work-details>p{max-width:620px;color:var(--muted);font-size:13px;line-height:1.85}
+.alloy-work-details .project-stack{margin-top:20px}
+.alloy-work-actions{display:flex;align-items:center;gap:22px;flex-wrap:wrap;margin-top:22px}
+.alloy-work-empty{padding:30px 18px;color:var(--muted);font:10px var(--mono);letter-spacing:.14em}
+@media(max-width:760px){
+ .alloy-work-trigger{min-height:72px;grid-template-columns:38px minmax(0,1fr) 34px;gap:10px;padding:12px 8px}
+ .alloy-work-title{font-size:21px}
+ .alloy-work-category{display:none}
+ .alloy-work-content{grid-template-columns:1fr;gap:20px;padding:4px 8px 26px}
+ .alloy-work-art{min-height:220px}
+ .alloy-work-details>p{font-size:12px}
+}
+@media(prefers-reduced-motion:reduce){.alloy-work-content{animation:none}.alloy-work-item,.alloy-work-trigger,.alloy-work-toggle{transition:none}}
