@@ -896,3 +896,362 @@ body.bankai-mode .hero-state-bankai{
 .project-art.project-art-supplied img.project-uploaded-bankai{opacity:0}
 body.bankai-mode .project-art.project-art-supplied img.project-uploaded-normal{opacity:0!important}
 body.bankai-mode .project-art.project-art-supplied img.project-uploaded-bankai{opacity:1!important}
+
+
+/* ==========================================================
+   BANKAI THEME RELEASE — switch the complete portfolio palette
+   ========================================================== */
+body.bankai-mode{
+  --paper:#0b0a0f;
+  --paper-bright:#151218;
+  --ink:#f7f0ed;
+  --ink-soft:#d8c9ca;
+  --muted:#c0b4b5;
+  --line:#51252c;
+  --red:#ff3545;
+  color:var(--ink);
+  background:#09070b;
+  color-scheme:dark;
+}
+body.bankai-mode:before{
+  z-index:0;
+  opacity:.8;
+  background:
+    radial-gradient(ellipse at 78% 18%,#d51f3430,transparent 36%),
+    radial-gradient(ellipse at 14% 70%,#6b142b26,transparent 38%),
+    repeating-linear-gradient(128deg,transparent 0 5px,#ff4b5b06 5px 6px);
+  mask-image:none;
+}
+body.bankai-mode ::selection{background:#ff3545;color:#fff}
+body.bankai-mode .scroll-progress{
+  background:#ff3545;
+  box-shadow:0 0 16px #ff354599;
+  border-color:#ff3545;
+}
+
+/* Navigation */
+body.bankai-mode .site-header{
+  background:#0b080df0;
+  border-bottom:2px solid #8f202f;
+  box-shadow:0 8px 28px #0008;
+  backdrop-filter:blur(16px);
+}
+body.bankai-mode.is-scrolled .site-header,
+.is-scrolled body.bankai-mode .site-header{
+  background:#09070cf5;
+  border-color:#ff3545;
+}
+body.bankai-mode .wordmark,
+body.bankai-mode .footer-logo{color:#fff5f1}
+body.bankai-mode .wordmark span,
+body.bankai-mode .footer-logo span{color:#ff3545}
+body.bankai-mode .nav-links{color:#e8dfe0}
+body.bankai-mode .nav-links a:hover{color:#ff5965}
+body.bankai-mode .nav-contact,
+body.bankai-mode .menu-toggle{
+  color:#fff!important;
+  background:#160d13;
+  border:2px solid #ff3545;
+  box-shadow:3px 3px 0 #7c1725;
+}
+body.bankai-mode .menu-toggle{border-color:#a72a37}
+
+/* Hero */
+body.bankai-mode .hero{background:#0b0a0f}
+body.bankai-mode .hero:before{
+  background:
+    radial-gradient(ellipse at 78% 42%,#e51e3b38,transparent 42%),
+    linear-gradient(105deg,#08070b 0%,#10080e 52%,#1b080f 100%);
+  opacity:1;
+}
+body.bankai-mode .hero-grain{opacity:.17;mix-blend-mode:screen}
+body.bankai-mode .hero-meta,
+body.bankai-mode .hero-bottom{
+  color:#decfd0;
+  border-color:#84303a;
+}
+body.bankai-mode .hero-meta{border-top-color:#ff3545;border-bottom-color:#84303a}
+body.bankai-mode .eyebrow,
+body.bankai-mode .section-label span:first-child{color:#ff5360}
+body.bankai-mode .eyebrow i{background:#ff3545;box-shadow:0 0 12px #ff3545}
+body.bankai-mode .hero-copy h1{
+  color:#fff5f2;
+  text-shadow:2px 2px 0 #7e182a;
+}
+body.bankai-mode .outline{-webkit-text-stroke:2px #ff5664}
+body.bankai-mode .red-word{color:#ff3545;text-shadow:2px 2px 0 #360b14}
+body.bankai-mode .hero-intro{color:#d0c3c4}
+body.bankai-mode .hero-intro strong{color:#fff7f4}
+body.bankai-mode .button{
+  background:#171017;
+  border-color:#87303d;
+  color:#fff2ef;
+  box-shadow:3px 3px 0 #6f1727;
+}
+body.bankai-mode .button:hover{
+  border-color:#ff3545;
+  box-shadow:5px 5px 0 #a31c31;
+}
+body.bankai-mode .button-red{
+  background:#d82035;
+  border-color:#ff5360;
+  color:white;
+}
+body.bankai-mode .button-ghost{background:#120c13;color:#fff2ef}
+body.bankai-mode .hero-social a,
+body.bankai-mode .about-links a{
+  color:#f5e9e8;
+  border-color:#ff3545;
+}
+body.bankai-mode .hero-scene{
+  background:#10080e!important;
+  border:3px solid #7b2432;
+  box-shadow:8px 8px 0 #3a111c,14px 14px 0 #ff354566!important;
+}
+body.bankai-mode .hero-state-stage{background:#10080e!important}
+body.bankai-mode .hero-state-image{
+  background:transparent!important;
+  filter:none!important;
+}
+body.bankai-mode .hero-bottom a{color:#ff5360}
+body.bankai-mode .hero-vertical{color:#d5bfc1}
+
+/* Marquee and every content section */
+body.bankai-mode .marquee{
+  background:#d82035;
+  color:#fff;
+  border-color:#570f1d;
+}
+body.bankai-mode .marquee b{color:#19090e}
+body.bankai-mode .section,
+body.bankai-mode .about-section,
+body.bankai-mode .projects-section,
+body.bankai-mode .skills-section,
+body.bankai-mode .journey-section,
+body.bankai-mode .honours-section{
+  background:#0b0a0f;
+  color:#f4ebea;
+}
+body.bankai-mode .section:before{
+  opacity:.12;
+  background:radial-gradient(#ff5360 .8px,transparent .95px) 0 0/7px 7px;
+}
+body.bankai-mode .section-label{
+  border-color:#6f3038;
+  color:#d6c5c6;
+}
+body.bankai-mode .section-label span:first-child{color:#ff5360}
+body.bankai-mode .section-heading h2,
+body.bankai-mode .about-title h2,
+body.bankai-mode .honours-heading h2,
+body.bankai-mode .contact-inner h2{
+  color:#fff4f1;
+  text-shadow:2px 2px 0 #631323;
+}
+body.bankai-mode .section-heading h2:after,
+body.bankai-mode .honours-heading h2:after{
+  background:#ff3545;
+  box-shadow:12px 5px 0 #f2dadd;
+}
+body.bankai-mode .section-heading p,
+body.bankai-mode .about-body,
+body.bankai-mode .about-content,
+body.bankai-mode .honours-content{
+  color:#c8babb;
+}
+body.bankai-mode .about-statement{color:#fff1ef}
+body.bankai-mode .about-statement em{color:#ff5664}
+body.bankai-mode .about-details>div,
+body.bankai-mode .stat-strip,
+body.bankai-mode .stat-strip div{
+  border-color:#622a34;
+}
+body.bankai-mode .about-details span,
+body.bankai-mode .about-details small,
+body.bankai-mode .stat-strip span{color:#bfaeaf}
+body.bankai-mode .about-details strong{color:#fff0ee}
+body.bankai-mode .stat-strip strong{color:#ff5360}
+body.bankai-mode .about-japanese{color:#ff5360}
+
+/* Project archive and image panels */
+body.bankai-mode .filter{
+  color:#f2e4e4;
+  background:#120d13;
+  border-color:#79303a;
+  box-shadow:3px 3px 0 #3c111d;
+}
+body.bankai-mode .filter:hover,
+body.bankai-mode .filter.active{
+  background:#d82035;
+  border-color:#ff5360;
+  color:#fff;
+  box-shadow:3px 3px 0 #6d1826;
+}
+body.bankai-mode .filter.active .category-crest{color:#fff}
+body.bankai-mode .project-card{
+  background:#151117;
+  border-color:#7a303b;
+  box-shadow:5px 5px 0 #3a111b;
+}
+body.bankai-mode .project-card:hover{
+  border-color:#ff5360;
+  box-shadow:8px 8px 0 #d82035;
+}
+body.bankai-mode .project-card:after{
+  background:linear-gradient(135deg,transparent 0 47%,#ff3545 48% 56%,#151117 57%);
+}
+body.bankai-mode .project-art{
+  background:
+    radial-gradient(ellipse at 75% 78%,#c91e3c58,transparent 50%),
+    radial-gradient(#f1dfe0 .75px,transparent .9px) 0 0/6px 6px,
+    linear-gradient(135deg,#21131b,#0d0a10 64%,#1a0c14);
+  border-bottom-color:#8b303c;
+}
+body.bankai-mode .project-art:before{
+  background:
+    linear-gradient(120deg,transparent 0 42%,#ff354550 42.2% 42.8%,transparent 43%),
+    radial-gradient(ellipse at 75% 76%,#e3223c55,transparent 55%);
+  opacity:.9;
+}
+body.bankai-mode .project-art:after{opacity:.4}
+body.bankai-mode .project-art.project-art-supplied{
+  background:#100b11;
+  border-bottom-color:#9b3442;
+  box-shadow:inset 0 0 0 1px #ff354566;
+}
+body.bankai-mode .project-art.project-art-supplied:before,
+body.bankai-mode .project-art.project-art-supplied:after{display:none}
+body.bankai-mode .project-art.project-art-supplied img.project-uploaded-art{
+  background:transparent!important;
+  filter:none!important;
+  -webkit-filter:none!important;
+}
+body.bankai-mode .project-art-no{
+  color:#fff;
+  background:#210d16;
+  border:1px solid #9f3745;
+  text-shadow:none;
+}
+body.bankai-mode .project-art-mark{color:#ff5360}
+body.bankai-mode .project-crest{color:#ff5360}
+body.bankai-mode .project-art-line{
+  background:linear-gradient(90deg,transparent,#ff3545 18%,#fff 52%,#ff3545 82%,transparent);
+  box-shadow:0 0 12px #ff3545a6;
+}
+body.bankai-mode .project-info{
+  background:#151117;
+  color:#f7eeee;
+}
+body.bankai-mode .project-meta{color:#ff5360}
+body.bankai-mode .project-meta span:last-child{color:#c7b5b7}
+body.bankai-mode .project-info h3{color:#fff4f2;text-shadow:1px 1px 0 #5d1724}
+body.bankai-mode .project-subtitle{color:#f1dfe0}
+body.bankai-mode .project-description{color:#c7b8ba}
+body.bankai-mode .project-stack span{
+  border-color:#71303a;
+  color:#eadcdd;
+  background:#21171f;
+}
+body.bankai-mode .project-link{color:#ff5a67;border-color:#ff3545}
+body.bankai-mode .project-private{color:#b9a9ab}
+body.bankai-mode .all-repos{color:#f3e9e8}
+body.bankai-mode .all-repos a{color:#ff5360}
+
+/* Skills, experience, certificates and achievements */
+body.bankai-mode .skills-list,
+body.bankai-mode .skill-row,
+body.bankai-mode .timeline,
+body.bankai-mode .timeline-item,
+body.bankai-mode .cert-list,
+body.bankai-mode .achievement-list,
+body.bankai-mode .cert-row,
+body.bankai-mode .achievement-row{border-color:#622a34}
+body.bankai-mode .skill-row{color:#f5e9e9}
+body.bankai-mode .skill-row:hover,
+body.bankai-mode .achievement-row:hover{background:#1b1018}
+body.bankai-mode .skill-number,
+body.bankai-mode .skill-row h3,
+body.bankai-mode .timeline-date,
+body.bankai-mode .cert-row time,
+body.bankai-mode .achievement-rank{color:#ff5360}
+body.bankai-mode .skill-chips span{
+  border-color:#74303b;
+  color:#eee0e0;
+  background:#1b121a;
+}
+body.bankai-mode .journey-section{background:#100d13}
+body.bankai-mode .timeline{border-left-color:#893341}
+body.bankai-mode .timeline-item:before{
+  background:#ff3545;
+  border-color:#f3d9dc;
+  box-shadow:0 0 0 4px #100d13,0 0 14px #ff354580;
+}
+body.bankai-mode .timeline-content,
+body.bankai-mode .education-block{
+  border-color:#77303a;
+  background:#19131b;
+  box-shadow:4px 4px 0 #3d1420;
+}
+body.bankai-mode .timeline-content>span{color:#bba9ab}
+body.bankai-mode .timeline-content h3,
+body.bankai-mode .timeline-content h4,
+body.bankai-mode .education-row strong,
+body.bankai-mode .cert-row strong,
+body.bankai-mode .achievement-row strong{color:#fff0ef}
+body.bankai-mode .timeline-content p,
+body.bankai-mode .timeline-content li,
+body.bankai-mode .honours-content{color:#c7b8ba}
+body.bankai-mode .timeline-symbol{color:#ff5360}
+body.bankai-mode .education-row{border-color:#63303a}
+body.bankai-mode .cert-row,
+body.bankai-mode .achievement-row{color:#eee1e1}
+
+/* Contact and footer */
+body.bankai-mode .contact-section{
+  background:linear-gradient(110deg,#240d18,#08070c 68%);
+  color:#fff3f1;
+  border-color:#a62c3b;
+}
+body.bankai-mode .contact-section:before{
+  background:radial-gradient(#ff5360 .8px,transparent .95px) 0 0/6px 6px;
+  opacity:.13;
+}
+body.bankai-mode .contact-sun{
+  background:radial-gradient(circle,#ff35452b 0 38%,#ff354510 39% 55%,transparent 56%);
+}
+body.bankai-mode .contact-kanji{color:#ff35451c}
+body.bankai-mode .contact-inner p,
+body.bankai-mode .contact-bottom p{color:#d9c9ca}
+body.bankai-mode .contact-links a{color:#fff;border-color:#ff5360}
+body.bankai-mode .contact-bottom{border-color:#8c3843}
+body.bankai-mode .site-footer{
+  background:#08070b;
+  color:#c2b2b4;
+  border-color:#692a35;
+}
+body.bankai-mode .site-footer small{color:#a99598;border-color:#572630}
+body.bankai-mode .site-footer>a:last-of-type{color:#ff5360}
+body.bankai-mode .bankai-toggle,
+body.bankai-mode .bankai-toggle.active{
+  background:#d82035;
+  color:#fff;
+  border-color:#ff5360;
+  box-shadow:3px 3px 0 #711726;
+}
+body.bankai-mode .bankai-sigil,
+body.bankai-mode .bankai-toggle.active .bankai-sigil{color:#fff}
+body.bankai-mode .nav-links.open{
+  background:#100b12;
+  border-color:#8f2838;
+  color:#f7e9e9;
+}
+body.bankai-mode .hero-state-stage{background:#10080e!important}
+@media(max-width:760px){
+  body.bankai-mode .site-header{background:#0b080df5}
+  body.bankai-mode .nav-links{background:#100b12;border-color:#8f2838;color:#f7e9e9}
+  body.bankai-mode .hero-scene{box-shadow:6px 6px 0 #3a111b,10px 10px 0 #ff354566!important}
+}
+@media(max-width:560px){
+  body.bankai-mode .hero{background:#0b0a0f}
+  body.bankai-mode .project-card{box-shadow:4px 4px 0 #3a111b}
+}
