@@ -3203,3 +3203,369 @@ body.bankai-mode .skills-section .skill-number .category-crest{
     line-height:1.2;
   }
 }
+
+
+/* ==========================================================
+   FIRE POINTER + CINEMATIC BANKAI RELEASE + MOBILE PERFORMANCE
+   Inspired by the reference video's precise interactive pointer,
+   paper-book transitions, ink cuts and restrained hand-drawn motion.
+   ========================================================== */
+
+/* The fire pointer keeps a precise tip; the embers trail behind it. */
+.fire-cursor{
+  width:42px!important;
+  height:48px!important;
+  top:0!important;
+  left:0!important;
+  transform-origin:0 0;
+  transition:opacity .14s ease,filter .22s ease;
+  filter:drop-shadow(0 2px 3px #4d1518aa) drop-shadow(0 0 11px #f45b2699);
+}
+.fire-cursor:before{
+  left:14px!important;
+  bottom:0!important;
+  width:21px!important;
+  height:30px!important;
+  border-radius:65% 35% 58% 42%/72% 48% 52% 28%;
+  background:linear-gradient(155deg,#fff7c2 0%,#ffc54e 22%,#ff6c22 58%,#cf2630 92%)!important;
+  transform-origin:50% 90%;
+  filter:drop-shadow(0 0 5px #ff812f99);
+}
+.fire-cursor:after{
+  left:19px!important;
+  bottom:5px!important;
+  width:10px!important;
+  height:17px!important;
+  background:linear-gradient(160deg,#fffde9 0%,#ffe6a0 44%,#ff9b33 100%)!important;
+}
+.fire-cursor-tail{
+  position:absolute;
+  left:11px;
+  top:19px;
+  width:25px;
+  height:25px;
+  border:1px solid #ffb34b;
+  border-radius:50%;
+  opacity:.24;
+  transform:scale(.62);
+  animation:fire-pointer-ring 1.05s ease-out infinite;
+}
+.fire-cursor-pointer,
+.fire-cursor-hand{
+  position:absolute;
+  z-index:3;
+  left:0;
+  top:0;
+  width:25px;
+  height:34px;
+  overflow:visible;
+  filter:drop-shadow(1px 2px 1px #24151a99);
+  transform-origin:2px 2px;
+  transition:opacity .14s ease,transform .14s ease;
+}
+.fire-cursor-hand{
+  left:-2px;
+  top:-1px;
+  width:30px;
+  height:34px;
+  opacity:0;
+  transform:scale(.8) translateY(3px);
+}
+.fire-cursor.is-interactive .fire-cursor-pointer{
+  opacity:0;
+  transform:scale(.78);
+}
+.fire-cursor.is-interactive .fire-cursor-hand{
+  opacity:1;
+  transform:scale(1);
+}
+.fire-cursor.is-interactive .fire-cursor-tail{
+  opacity:.55;
+  transform:scale(1);
+  animation-duration:.72s;
+}
+.fire-cursor.is-pressed:before{transform:scale(.88) rotate(10deg)}
+.fire-cursor.is-pressed .fire-cursor-pointer,
+.fire-cursor.is-pressed .fire-cursor-hand{transform:scale(.88)}
+.fire-cursor-spark{
+  width:4px!important;
+  height:4px!important;
+  background:radial-gradient(circle,#fffde7 0%,#ffd05a 35%,#ff6c2a 68%,transparent 100%)!important;
+  box-shadow:0 0 9px #ff732cbb,0 0 16px #ff2c2880!important;
+  animation:fire-spark-rise .52s cubic-bezier(.16,.7,.3,1) forwards!important;
+}
+@keyframes fire-pointer-ring{
+  0%{opacity:.38;transform:scale(.55)}
+  75%,100%{opacity:0;transform:scale(1.85)}
+}
+body.bankai-mode .fire-cursor{
+  filter:drop-shadow(0 0 7px #ff2639) drop-shadow(0 0 17px #ff6a23);
+}
+body.bankai-mode .fire-cursor:before{
+  background:linear-gradient(155deg,#fff9cc 0%,#ffd34e 17%,#ff4b27 55%,#ad102d 92%)!important;
+}
+body.bankai-mode .fire-cursor-tail{border-color:#ff5360}
+
+/* BANKAI release: ink floods the page, a blade of light cuts across, the seal resolves. */
+.bankai-transition-overlay{
+  position:fixed;
+  z-index:2147482000;
+  inset:0;
+  overflow:hidden;
+  pointer-events:none;
+  isolation:isolate;
+}
+.bankai-transition-wash{
+  position:absolute;
+  inset:-2%;
+  opacity:0;
+  background:
+    radial-gradient(circle at 50% 50%,#5b1223 0%,#210910 42%,#08070b 100%);
+}
+.bankai-transition-overlay.release .bankai-transition-wash{
+  animation:bankai-release-wash 1.34s cubic-bezier(.72,0,.18,1) both;
+}
+.bankai-transition-overlay.restore .bankai-transition-wash{
+  background:
+    radial-gradient(circle at 50% 50%,#fff7df 0%,#eee1c8 54%,#c9b89c 100%);
+  animation:bankai-restore-wash 1.12s cubic-bezier(.2,.72,.25,1) both;
+}
+@keyframes bankai-release-wash{
+  0%{opacity:0;clip-path:polygon(0 0,0 0,0 100%,0 100%)}
+  16%{opacity:1}
+  40%{clip-path:polygon(0 0,100% 0,100% 100%,0 100%);opacity:1}
+  68%{opacity:.98}
+  100%{opacity:0;clip-path:polygon(0 0,100% 0,100% 100%,0 100%)}
+}
+@keyframes bankai-restore-wash{
+  0%{opacity:0;clip-path:circle(0 at 50% 50%)}
+  28%{opacity:.96;clip-path:circle(100% at 50% 50%)}
+  58%{opacity:.85}
+  100%{opacity:0;clip-path:circle(120% at 50% 50%)}
+}
+.bankai-transition-slash{
+  position:absolute;
+  z-index:2;
+  left:-145%;
+  top:50%;
+  width:180%;
+  height:3px;
+  opacity:0;
+  transform:rotate(-17deg);
+  transform-origin:center;
+  background:linear-gradient(90deg,transparent 0%,#7d1424 35%,#fff3d6 48%,#ff4850 53%,#ffc16a 58%,transparent 100%);
+  box-shadow:0 0 10px #ff4a4a,0 0 32px #ff233d;
+}
+.bankai-transition-overlay.release .bankai-transition-slash{
+  animation:bankai-blade-cut .8s .15s cubic-bezier(.2,.7,.2,1) both;
+}
+.bankai-transition-overlay.restore .bankai-transition-slash{
+  height:2px;
+  background:linear-gradient(90deg,transparent,#a52831,#fff8e8,#a52831,transparent);
+  box-shadow:0 0 14px #a5283180;
+  animation:bankai-blade-return .72s .1s ease-out both;
+}
+@keyframes bankai-blade-cut{
+  0%{left:-145%;opacity:0}
+  18%{opacity:1}
+  65%{opacity:1}
+  100%{left:145%;opacity:0}
+}
+@keyframes bankai-blade-return{
+  0%{left:145%;opacity:0}
+  24%{opacity:.85}
+  100%{left:-145%;opacity:0}
+}
+.bankai-transition-emblem{
+  position:absolute;
+  z-index:3;
+  left:50%;
+  top:50%;
+  width:clamp(112px,16vw,190px);
+  aspect-ratio:1;
+  display:grid;
+  place-items:center;
+  transform:translate(-50%,-50%) scale(.4);
+  opacity:0;
+  color:#fff0d7;
+  border:1px solid #ffb26b88;
+  border-radius:50%;
+  background:radial-gradient(circle,#861d2caa 0%,#2d0a14a8 62%,transparent 72%);
+  box-shadow:0 0 32px #ff384a44,inset 0 0 24px #ff8d4430;
+}
+.bankai-transition-overlay.release .bankai-transition-emblem{
+  animation:bankai-seal-arrive .86s .25s cubic-bezier(.16,.82,.23,1) both;
+}
+.bankai-transition-overlay.restore .bankai-transition-emblem{
+  color:#87242a;
+  border-color:#9b313988;
+  background:radial-gradient(circle,#f8e9cdbb 0%,#d3b99466 62%,transparent 72%);
+  box-shadow:0 0 24px #a52d3222,inset 0 0 20px #8e202811;
+  animation:bankai-seal-return .75s .15s ease-out both;
+}
+.bankai-transition-emblem:before,
+.bankai-transition-emblem i{
+  content:"";
+  position:absolute;
+  inset:9px;
+  border:1px solid #f6c18a88;
+  border-radius:50%;
+}
+.bankai-transition-emblem:before{
+  inset:-9px;
+  border-style:dashed;
+  opacity:.65;
+}
+.bankai-transition-emblem i{
+  inset:18px;
+  border-color:#ff6a5b66;
+  animation:bankai-seal-spin 3.5s linear infinite;
+}
+.bankai-transition-emblem span{
+  position:relative;
+  z-index:2;
+  font:700 clamp(34px,5vw,58px)/1 serif;
+  letter-spacing:.08em;
+  text-shadow:0 0 12px #ff8a5b88;
+}
+@keyframes bankai-seal-arrive{
+  0%{opacity:0;transform:translate(-50%,-50%) scale(.4) rotate(-24deg);filter:blur(8px)}
+  55%{opacity:1;transform:translate(-50%,-50%) scale(1.08) rotate(5deg);filter:blur(0)}
+  100%{opacity:0;transform:translate(-50%,-50%) scale(1.28) rotate(0);filter:blur(2px)}
+}
+@keyframes bankai-seal-return{
+  0%{opacity:0;transform:translate(-50%,-50%) scale(1.2) rotate(18deg)}
+  35%{opacity:.95}
+  100%{opacity:0;transform:translate(-50%,-50%) scale(.72) rotate(0)}
+}
+@keyframes bankai-seal-spin{to{transform:rotate(360deg)}}
+.bankai-transition-overlay p{
+  position:absolute;
+  z-index:4;
+  top:calc(50% + clamp(85px,9vw,116px));
+  left:0;
+  right:0;
+  margin:0;
+  color:#f8ddbd;
+  text-align:center;
+  font:700 9px/1.4 var(--mono);
+  letter-spacing:.42em;
+  opacity:0;
+}
+.bankai-transition-overlay.release p{
+  animation:bankai-caption .74s .42s ease both;
+}
+.bankai-transition-overlay.restore p{
+  color:#7d282c;
+  animation:bankai-caption .65s .25s ease both;
+}
+@keyframes bankai-caption{
+  0%{opacity:0;letter-spacing:.8em;transform:translateY(8px)}
+  30%{opacity:1}
+  100%{opacity:0;letter-spacing:.42em;transform:translateY(0)}
+}
+
+/* Subtle paper/ink motion, without adding constant motion to every element */
+body:not(.bankai-mode) .project-card{
+  transition:transform .38s cubic-bezier(.2,.75,.2,1),box-shadow .38s,border-color .28s;
+}
+body:not(.bankai-mode) .project-card:hover{
+  transform:translateY(-5px) rotate(-.18deg);
+}
+body:not(.bankai-mode) .project-card:hover .project-art img{
+  transform:scale(1.035);
+}
+body:not(.bankai-mode) .project-art img{
+  transition:transform .55s cubic-bezier(.2,.7,.2,1),opacity .48s ease;
+}
+body:not(.bankai-mode) .nav-links a{
+  transition:color .2s ease,transform .2s ease;
+}
+body:not(.bankai-mode) .nav-links a:hover{transform:translateY(-2px)}
+body:not(.bankai-mode) .button,
+body:not(.bankai-mode) .filter{
+  transition:transform .2s ease,background .25s,border-color .25s,box-shadow .25s;
+}
+body:not(.bankai-mode) .button:active,
+body:not(.bankai-mode) .filter:active{transform:translateY(2px)}
+body.bankai-mode .project-card:hover{
+  transform:translateY(-4px);
+  box-shadow:8px 8px 0 #d82035,0 0 22px #ff35451b;
+}
+body.bankai-mode .project-art img{
+  transition:transform .5s ease,opacity .48s ease;
+}
+
+/* Mobile performance pass: retain the feel, reduce blur, drift and expensive paint */
+@media(max-width:999px){
+  .bankai-transition-overlay.release .bankai-transition-wash{
+    animation-duration:1.05s;
+  }
+  .bankai-transition-emblem{
+    width:clamp(104px,24vw,150px);
+  }
+  .bankai-transition-emblem span{font-size:clamp(32px,8vw,46px)}
+  .bankai-transition-overlay p{
+    top:calc(50% + 78px);
+    font-size:8px;
+    letter-spacing:.25em;
+  }
+  .site-header{backdrop-filter:none!important;-webkit-backdrop-filter:none!important}
+  .hero-scene{animation:none!important}
+  .hero-scene .hero-state-image{transform:none!important}
+  .project-card{contain:layout paint}
+  .project-art img,
+  .project-uploaded-art,
+  .bleach-project-character{
+    max-width:100%;
+    transform:none!important;
+  }
+  .project-card:hover,
+  .project-card:hover .project-info h3{transform:none!important}
+  .project-art:before,.project-art:after{opacity:.3}
+  .marquee>div{animation-duration:42s!important}
+  .section,.hero,.contact-section{scroll-margin-top:72px}
+}
+@media(max-width:760px){
+  .bankai-transition-overlay{z-index:2147482000}
+  .bankai-transition-slash{height:2px}
+  .bankai-transition-emblem:before{inset:-6px}
+  .bankai-transition-emblem i{inset:12px}
+  .book-opening-cover{box-shadow:none}
+  .book-opening-cover:after{opacity:.16}
+  .hero-copy>.eyebrow,.hero-copy>h1,.hero-copy>.hero-intro,
+  .hero-copy>.hero-actions,.hero-copy>.hero-social{animation-duration:.45s!important}
+  .projects-grid{row-gap:16px}
+  .project-art.project-art-supplied{min-height:230px}
+  .project-info{min-width:0}
+}
+@media(max-width:560px){
+  .bankai-transition-emblem{width:100px}
+  .bankai-transition-emblem span{font-size:30px}
+  .bankai-transition-overlay p{top:calc(50% + 65px);font-size:7px}
+  .bankai-transition-slash{width:240%;left:-190%}
+  .hero-scene{min-height:290px}
+  .project-art,.project-art.project-art-supplied{height:clamp(220px,68vw,270px);min-height:220px}
+  .project-info h3{overflow-wrap:anywhere}
+  .project-stack span{max-width:100%}
+  .nav-links{overscroll-behavior:contain}
+  .section{overflow-x:clip}
+  .contact-section,.journey-section,.honours-section{overflow-x:clip}
+}
+
+/* Keep the cursor and transitions fully accessible */
+@media(hover:none),(pointer:coarse){
+  .fire-cursor,.fire-cursor-spark{display:none!important}
+  html body,html body *{cursor:auto!important}
+}
+@media(prefers-reduced-motion:reduce){
+  .fire-cursor,.fire-cursor-spark{display:none!important}
+  .bankai-transition-overlay{display:none!important}
+  body:not(.bankai-mode) .project-card,
+  body:not(.bankai-mode) .project-art img,
+  body:not(.bankai-mode) .nav-links a,
+  body:not(.bankai-mode) .button,
+  body:not(.bankai-mode) .filter{
+    transition:none!important;
+  }
+}
