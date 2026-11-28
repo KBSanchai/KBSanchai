@@ -3854,3 +3854,35 @@ body.bankai-mode .ink-brush-canvas.is-fading{opacity:0}
 @media(max-width:760px){.site-header{gap:10px}.nav-links{border-radius:14px;white-space:normal}.nav-links .nav-glide{border-radius:9px}.nav-links>a{justify-content:flex-start;min-height:42px;padding:0 14px}.nav-links .nav-contact{margin:0}}
 @media(max-width:560px){.site-header{gap:8px}.nav-links{gap:9px;padding:14px}.nav-links .nav-glide{top:14px;left:14px;height:42px}}
 @media(prefers-reduced-motion:reduce){.nav-links .nav-glide{transition:none!important}}
+
+/* FIELD NOTES — project artwork paired with the selected project's summary */
+.field-notes-modal{width:min(100%,820px);padding:clamp(18px,3.5vw,36px);background:linear-gradient(145deg,#f5efdf,#e9dfca 70%,#f4ead6);color:#25201c;border:1px solid #b79a6b;box-shadow:0 28px 100px #0009}
+.field-notes-modal .modal-topline{color:#815b32;border-color:#bba782}
+.field-notes-modal .modal-topline button{border-color:#a58b68;color:#33291f}
+.field-notes-modal .field-notes-art{position:relative;height:clamp(190px,31vw,310px);margin:20px 0 24px;overflow:hidden;display:grid;place-items:center;border:1px solid #b89a69;background:radial-gradient(circle at 50% 45%,#d6b77d55,transparent 58%),linear-gradient(135deg,#242126,#0c0c11);isolation:isolate}
+.field-notes-modal .field-notes-art:after{content:"";position:absolute;inset:0;z-index:1;background:linear-gradient(180deg,#05050712 30%,#08080b88);pointer-events:none}
+.field-notes-art-mark{position:relative;z-index:0;font:clamp(70px,12vw,130px) serif;color:#f3dfb7;text-shadow:0 0 35px #d6ad6a88}
+.field-notes-image{position:absolute;inset:0;z-index:1;width:100%;height:100%;object-fit:cover;opacity:.84;mix-blend-mode:screen}
+.field-notes-image-bankai{opacity:0}
+body.bankai-mode .field-notes-image-normal{opacity:0}
+body.bankai-mode .field-notes-image-bankai{opacity:.9}
+.field-notes-art-caption{position:absolute;left:18px;bottom:14px;z-index:2;color:#ead6b3;font:9px var(--mono);letter-spacing:.15em}
+.field-notes-summary{position:relative}
+.field-notes-modal .field-notes-summary>.eyebrow{margin:0 0 12px;color:#9b6b37}
+.field-notes-modal .field-notes-summary h2{margin:0 0 10px;color:#29211b;font-size:clamp(34px,6vw,58px)}
+.field-notes-modal .modal-subtitle{color:#895d34}
+.field-notes-modal .modal-description{margin:16px 0 24px;color:#51483e;max-width:68ch}
+.field-notes-modal .modal-stack-label{color:#866c4b}
+.field-notes-modal .modal-stack span{border-color:#bda77f;color:#58452f;background:#fff9}
+.field-notes-modal .modal-footer{border-color:#c6b493;color:#705e48}
+.field-notes-modal .modal-footer .button{color:#fff}
+.field-notes-modal .modal-kanji{display:none}
+@media(max-width:600px){.field-notes-modal .field-notes-art{height:190px;margin:14px 0 20px}.field-notes-modal .modal-description{font-size:13px;line-height:1.75}}
+/* NAV COLOR REFRESH — warm parchment pill, ink labels, oxblood active glide */
+.nav-links{background:linear-gradient(180deg,#f7f0df,#e6d9bf)!important;border:1px solid #b99b6a!important;box-shadow:0 8px 24px #3b2a191f,inset 0 1px #fff!important;color:#49382a!important}
+.nav-links>a{color:#765b45!important}
+.nav-links>a:hover,.nav-links>a:focus-visible,.nav-links>a.is-active{color:#5a211f!important}
+.nav-links .nav-glide{background:linear-gradient(135deg,#7e302b,#54201f)!important;border:1px solid #a46e50!important;box-shadow:0 3px 12px #51201f35,inset 0 1px #ffffff2c!important}
+.nav-links .nav-contact{border-color:#b99b6a!important;background:#d7c5a4!important;color:#5b3026!important}
+.nav-links .nav-contact:hover,.nav-links .nav-contact.is-active{background:#c8ad82!important}
+@media(max-width:760px){.nav-links{background:linear-gradient(180deg,#f7f0df,#e6d9bf)!important}.nav-links .nav-glide{background:linear-gradient(135deg,#7e302b,#54201f)!important}}
