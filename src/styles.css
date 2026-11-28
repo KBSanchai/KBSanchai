@@ -3674,3 +3674,24 @@ body.bankai-mode .ink-brush-canvas.is-fading{opacity:0}
   .ink-brush-canvas,.ink-brush-cursor{display:none!important}
   html body,html body *{cursor:auto!important}
 }
+
+
+/* KON CURSOR — animated mascot pointer on desktop only */
+.kon-cursor{
+ position:fixed;z-index:2147483001;top:0;left:0;width:68px;height:auto;
+ display:block;pointer-events:none;opacity:0;transform:translate3d(-200px,-200px,0);
+ transform-origin:24% 76%;will-change:transform,opacity;
+ filter:drop-shadow(0 3px 4px #24150f55);
+ transition:opacity .14s ease,filter .16s ease;
+}
+.kon-cursor.is-visible{opacity:1}
+.kon-cursor.is-interactive{filter:drop-shadow(0 4px 6px #f0443566);}
+.kon-cursor.is-pressed{filter:drop-shadow(0 2px 2px #24150f66);}
+@media(hover:hover) and (pointer:fine){
+ html body,html body *:not(input):not(textarea):not([contenteditable="true"]){cursor:none!important}
+}
+@media(hover:none),(pointer:coarse){
+ .kon-cursor{display:none!important}
+ html body,html body *{cursor:auto!important}
+}
+@media(prefers-reduced-motion:reduce){.kon-cursor{transition:none!important}}
