@@ -3886,3 +3886,17 @@ body.bankai-mode .ink-brush-canvas.is-fading{opacity:0}
 }
 @media(max-width:620px){.orbit-track,.orbit-stage.is-grid .orbit-track{grid-template-columns:1fr;gap:18px}}
 @media(prefers-reduced-motion:reduce){.orbit-card,.orbit-center-mark{transition:none!important}.orbit-stage{perspective:none}.orbit-stage:not(.is-grid) .orbit-card{transform:none!important;opacity:1!important}}
+
+/* GLIDE NAVIGATION — compact pill with a sliding Soul Society highlight */
+.site-header{gap:clamp(12px,2vw,28px)}
+.nav-links{position:relative;isolation:isolate;gap:3px;padding:5px;border:1px solid #c6a46c38;border-radius:999px;background:linear-gradient(145deg,#17171cef,#0c0d11ed);box-shadow:0 8px 26px #0005,inset 0 1px #ffffff0b;white-space:nowrap}
+.nav-links .nav-glide{position:absolute;z-index:-1;left:5px;top:5px;height:calc(100% - 10px);border:1px solid #d4b47766;border-radius:999px;background:linear-gradient(135deg,#c9a46a2b,#8d29252b);box-shadow:0 0 18px #c9a46a16,inset 0 1px #f3d9a455;pointer-events:none;transition:transform .48s cubic-bezier(.22,1,.36,1),width .38s cubic-bezier(.22,1,.36,1),opacity .2s}
+.nav-links>a{position:relative;z-index:1;display:inline-flex;align-items:center;justify-content:center;min-height:37px;padding:0 clamp(11px,1.35vw,19px);border:0;border-radius:999px;color:#aaa39a;font-size:9px;letter-spacing:.1em;transition:color .22s}
+.nav-links>a:hover,.nav-links>a:focus-visible,.nav-links>a.is-active{color:#f2dfbd}
+.nav-links>a:focus-visible{outline:1px solid #e4c17d;outline-offset:2px}
+.nav-links .nav-contact{margin-left:3px;border:1px solid #c9a46a55;background:#c9a46a0c;color:#e7d2aa!important}
+.nav-links .nav-contact:hover,.nav-links .nav-contact.is-active{background:#c9a46a20}
+@media(max-width:1100px) and (min-width:761px){.site-header{padding-left:3vw;padding-right:3vw;gap:10px}.nav-links>a{padding:0 9px;font-size:8px}.bankai-toggle{padding:10px 11px;font-size:8px}.command-trigger{padding:8px 9px}}
+@media(max-width:760px){.site-header{gap:10px}.nav-links{border-radius:14px;white-space:normal}.nav-links .nav-glide{border-radius:9px}.nav-links>a{justify-content:flex-start;min-height:42px;padding:0 14px}.nav-links .nav-contact{margin:0}}
+@media(max-width:560px){.site-header{gap:8px}.nav-links{gap:9px;padding:14px}.nav-links .nav-glide{top:14px;left:14px;height:42px}}
+@media(prefers-reduced-motion:reduce){.nav-links .nav-glide{transition:none!important}}
