@@ -172,6 +172,12 @@ function App(){
   return()=>{active=false;cancelAnimationFrame(raf);ro.disconnect();window.removeEventListener("pointermove",move);heading.removeEventListener("pointerleave",leave);document.removeEventListener("visibilitychange",vis);canvas.remove();};
  },[]);
  useEffect(()=>{
+  const eye=document.querySelector(".about-eye-track");const pupil=eye?.querySelector(".eye-pupil");if(!eye||!pupil)return;
+  const move=e=>{const r=eye.getBoundingClientRect();const x=(e.clientX-(r.left+r.width/2))/(r.width/2);const y=(e.clientY-(r.top+r.height/2))/(r.height/2);const dx=Math.max(-1,Math.min(1,x))*7,dy=Math.max(-1,Math.min(1,y))*5;pupil.setAttribute("cx",String(60+dx));pupil.setAttribute("cy",String(36+dy));eye.style.setProperty("--eye-tilt",(x*4)+"deg");};
+  const reset=()=>{pupil.setAttribute("cx","60");pupil.setAttribute("cy","36");eye.style.setProperty("--eye-tilt","0deg");};
+  window.addEventListener("pointermove",move,{passive:true});eye.addEventListener("pointerleave",reset);return()=>{window.removeEventListener("pointermove",move);eye.removeEventListener("pointerleave",reset);};
+ },[]);
+ useEffect(()=>{
   const finePointer=window.matchMedia("(hover: hover) and (pointer: fine)");
   if(!finePointer.matches)return;
   const cursor=document.createElement("img");
